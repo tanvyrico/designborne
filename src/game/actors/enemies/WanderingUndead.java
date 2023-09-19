@@ -1,61 +1,72 @@
 package game.actors.enemies;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Status;
-import game.actors.behaviours.WanderBehaviour;
-import game.actions.AttackAction;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.items.consumables.HealingVial;
+import game.items.OldKey;
 
-import java.util.HashMap;
-import java.util.Map;
 
-public class WanderingUndead extends Actor {
-    private Map<Integer, Behaviour> behaviours = new HashMap<>();
+import java.util.Random;
 
+/**
+ * A class representing a Wandering Undead enemy in the game.
+ * Wandering Undead are hostile enemies that can attack Player actors and drop items upon defeat.
+ */
+public class WanderingUndead extends Enemy {
+    private final int intrinsicDamage = 30;
+
+    /**
+     * Constructor for the WanderingUndead class.
+     */
     public WanderingUndead() {
         super("Wandering Undead", 't', 100);
-        this.behaviours.put(999, new WanderBehaviour());
+        this.getIntrinsicWeapon();
+    }
+
+
+    /**
+     * Spawns a WanderingUndead enemy as a replacement for the defeated Wandering Undead.
+     *
+     * @return A new instance of the WanderingUndead enemy.
+     */
+    public WanderingUndead spawnEnemy() {
+        return new WanderingUndead();
     }
 
     /**
-     * At each turn, select a valid action to perform.
+     * Retrieves the intrinsic weapon used by the Wandering Undead.
      *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return the valid action that can be performed in that iteration or null if no valid action is found
+     * @return An IntrinsicWeapon representing the Wandering Undead's damage capability.
      */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if(action != null)
-                return action;
-        }
-        return new DoNothingAction();
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(intrinsicDamage, "whacks");
     }
 
     /**
-     * The wandering undead can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     * Handles the outcome when the Wandering Undead becomes unconscious.
+     * Drops an old key or healing items upon defeat with a random chance.
      *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return
+     * @param actor The actor that defeated the Wandering Undead.
+     * @param map   The GameMap where the Wandering Undead was defeated.
+     * @return A message describing the outcome of the Wandering Undead's defeat.
      */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new AttackAction(this, direction));
-        }
-        return actions;
-    }
+    public String unconscious(Actor actor, GameMap map) {
+        Random random = new Random();
+        Location location = map.locationOf(this);
+        map.removeActor(this);
 
+        if (random.nextDouble() <= 0.25) {
+            OldKey oldKey = new OldKey("Old key", '-', true);
+            location.addItem(oldKey);
+        }
+
+        if (random.nextDouble() <= 0.2) {
+            HealingVial healingVial = new HealingVial("Healing vial", 'a', true);
+            location.addItem(healingVial);
+        }
+
+        return this + " met their demise at the hands of " + actor;
+    }
 }
