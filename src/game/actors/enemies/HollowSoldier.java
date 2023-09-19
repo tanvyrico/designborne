@@ -35,9 +35,9 @@ public class HollowSoldier extends Enemy {
 
 
     /**
-     * Spawns a WanderingUndead enemy as a replacement for the defeated Hollow Soldier.
+     * Spawns a HollowSoldier.
      *
-     * @return A new instance of the WanderingUndead enemy.
+     * @return A new instance of the HollowSoldier enemy.
      */
     public HollowSoldier spawnEnemy() {
         return new HollowSoldier();
@@ -54,7 +54,7 @@ public class HollowSoldier extends Enemy {
 
     /**
      * Handles the outcome when the Hollow Soldier becomes unconscious.
-     * Drops healing items or refreshing items upon defeat with a random chance.
+     * Drops healing vial and refreshing flask upon defeat with a random chance.
      *
      * @param actor The actor that defeated the Hollow Soldier.
      * @param map   The GameMap where the Hollow Soldier was defeated.
@@ -66,12 +66,12 @@ public class HollowSoldier extends Enemy {
         map.removeActor(this);
 
         if (random.nextDouble() <= 0.2) {
-            HealingVial healingVial = new HealingVial("Healing vial", 'a', true);
+            HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
         }
 
         if (random.nextDouble() <= 0.3) {
-            RefreshingFlask refreshingFlask = new RefreshingFlask("Refreshing flask", 'u', true);
+            RefreshingFlask refreshingFlask = new RefreshingFlask();
             location.addItem(refreshingFlask);
         }
 

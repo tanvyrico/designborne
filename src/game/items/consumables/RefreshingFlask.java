@@ -13,12 +13,9 @@ public class RefreshingFlask extends ConsumableItem{
     /**
      * Constructor for the RefreshingFlask class.
      *
-     * @param name        The name of this item.
-     * @param displayChar The character to use to represent this item if it is on the ground.
-     * @param portable    True if and only if the item can be picked up.
      */
-    public RefreshingFlask(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
+    public RefreshingFlask(){
+        super("Refreshing flask", 'u', true);
         this.modifiedAttribute = BaseActorAttributes.STAMINA;
     }
 

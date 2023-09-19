@@ -93,6 +93,24 @@ public abstract class SkilledWeapon extends WeaponItem {
     }
 
     /**
+     * Performs a tick action for the skilled weapon, which handles the duration of its special skill, if active.
+     *
+     * @param currentLocation The current location of the actor wielding the skilled weapon.
+     * @param actor           The actor wielding the skilled weapon.
+     */
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        if (this.getSkillStatus()) {
+            int newRemainingTurns = getRemainingTurns() - 1;
+            setRemainingTurns(newRemainingTurns);
+
+            if (newRemainingTurns < 0) {
+                endSkill();
+            }
+        }
+    }
+
+    /**
      * Generates a list of allowable actions for an actor targeting a location with this skilled weapon.
      *
      * @param target   The actor being targeted.
