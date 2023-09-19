@@ -7,12 +7,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.enemies.HollowSoldier;
 import game.actors.Player;
 import game.actors.enemies.WanderingUndead;
-import game.grounds.Dirt;
-import game.grounds.Floor;
-import game.grounds.Puddle;
-import game.grounds.Wall;
+import game.grounds.*;
+import game.grounds.Void;
+import game.items.weapons.BroadSword;
 import game.utility.FancyMessage;
 
 /**
@@ -20,7 +20,7 @@ import game.utility.FancyMessage;
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
- *
+ * Lim Hung Xuan
  */
 public class Application {
 
@@ -29,7 +29,7 @@ public class Application {
         World world = new World(new Display());
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
-                new Wall(), new Floor(), new Puddle());
+                new Wall(), new Floor(), new Puddle(), new Void());
 
         List<String> map = Arrays.asList(
                 "...........................................................",
@@ -40,14 +40,36 @@ public class Application {
                 "..........................#_____#..........................",
                 "........~~................#_____#..........................",
                 ".........~~~..............###_###..........................",
-                "...~~~~~~~~................................................",
-                "....~~~~~.................................###..##..........",
-                "~~~~~~~...................................#___..#..........",
-                "~~~~~~....................................#..___#..........",
+                "...~~~~~~~~....+++.........................................",
+                "....~~~~~........+++++++..................###..##..........",
+                "~~~~~~~..............+++..................#___..#..........",
+                "~~~~~~.................++.................#..___#..........",
                 "~~~~~~~~~.................................#######..........");
 
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
+
+
+        List<String> burialGround = Arrays.asList(
+                "...........+++++++........~~~~~~++....~~",
+                "...........++++++.........~~~~~~+.....~~",
+                "............++++...........~~~~~......++",
+                "............+.+.............~~~.......++",
+                "..........++~~~.......................++",
+                ".........+++~~~....#######...........+++",
+                ".........++++~.....#_____#.........+++++",
+                "..........+++......#_____#........++++++",
+                "..........+++......###_###.......~~+++++",
+                "..........~~.....................~~...++",
+                "..........~~~..................++.......",
+                "...........~~....~~~~~.........++.......",
+                "......~~....++..~~~~~~~~~~~......~......",
+                "....+~~~~..++++++++~~~~~~~~~....~~~.....",
+                "....+~~~~..++++++++~~~..~~~~~..~~~~~....");
+
+        GameMap burialGroundMap = new GameMap(groundFactory, burialGround);
+        world.addGameMap(burialGroundMap);
+
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -58,10 +80,25 @@ public class Application {
             }
         }
 
-        gameMap.at(23, 10).addActor(new WanderingUndead());
-
-        Player player = new Player("The Abstracted One", '@', 150);
+        Player player = new Player("The Abstracted One", '@', 150, 200);
         world.addPlayer(player, gameMap.at(29, 5));
+
+        gameMap.at(29, 0).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
+        burialGroundMap.at(31, 5).setGround(new Gate(gameMap, gameMap.at(29,7), "The Abandoned Village"));
+
+        BroadSword broadSword = new BroadSword();
+        gameMap.at(29,6).addItem(broadSword);
+
+        WanderingUndead wanderingUndead = new WanderingUndead();
+        HollowSoldier hollowSoldier = new HollowSoldier();
+
+        gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead, 0.25));
+        gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead, 0.25));
+        gameMap.at(18, 7).setGround(new Graveyard(wanderingUndead, 0.25));
+
+        burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier, 0.1));
+        burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier, 0.1));
+        burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier, 0.1));
 
         world.run();
     }
