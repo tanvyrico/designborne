@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.FollowBehaviour;
+import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
 
 
@@ -67,7 +68,7 @@ public class ForestKeeper extends Enemy {
             location.addItem(healingVial);
         }
 
-
+        location.addItem(new Runes(50));
         return this + " met their demise at the hands of " + actor;
     }
 

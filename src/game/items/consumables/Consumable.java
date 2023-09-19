@@ -13,6 +13,6 @@ public interface Consumable {
      * @param actor The actor consuming the item.
      * @return An integer value representing the effect or change applied to the actor.
      */
-    int consume(Actor actor);
+    void consume(Actor actor);
 }
 

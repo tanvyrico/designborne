@@ -57,6 +57,7 @@ public class Player extends Actor {
 
         display.println("Your health is: " + getAttribute(BaseActorAttributes.HEALTH));
         display.println("Your stamina is: " + getAttribute(BaseActorAttributes.STAMINA));
+        display.println("Your balance is: " + this.getBalance());
 
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)

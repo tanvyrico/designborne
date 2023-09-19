@@ -16,7 +16,7 @@ public class RefreshingFlask extends ConsumableItem{
      */
     public RefreshingFlask(){
         super("Refreshing flask", 'u', true);
-        this.modifiedAttribute = BaseActorAttributes.STAMINA;
+        setModifiedAttribute(BaseActorAttributes.STAMINA);
     }
 
     /**
@@ -39,18 +39,10 @@ public class RefreshingFlask extends ConsumableItem{
      * @return An integer value representing the amount of stamina restored.
      */
     @Override
-    public int consume(Actor actor) {
+    public void consume(Actor actor) {
         int buffedPoints = (int) (0.2 * actor.getAttributeMaximum(BaseActorAttributes.STAMINA));
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, buffedPoints);
-        return buffedPoints;
+        setBuffedPoints(buffedPoints);
     }
 
-    /**
-     * Retrieves the modified attribute associated with consuming this refreshing flask (STAMINA).
-     *
-     * @return The modified attribute.
-     */
-    public BaseActorAttributes getModifiedAttribute() {
-        return this.modifiedAttribute;
-    }
 }

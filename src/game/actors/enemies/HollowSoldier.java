@@ -1,19 +1,12 @@
 package game.actors.enemies;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actors.behaviours.AttackBehaviour;
+import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
-import game.Status;
 
 import java.util.Random;
 
@@ -74,6 +67,8 @@ public class HollowSoldier extends Enemy {
             RefreshingFlask refreshingFlask = new RefreshingFlask();
             location.addItem(refreshingFlask);
         }
+
+        location.addItem(new Runes(100));
 
         return this + " met their demise at the hands of " + actor;
     }

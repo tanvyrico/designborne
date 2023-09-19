@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.FollowBehaviour;
+import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
 
 import java.util.Random;
@@ -64,6 +65,8 @@ public class RedWolf extends Enemy{
             HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
         }
+
+        location.addItem(new Runes(25));
 
         return this + " met their demise at the hands of " + actor;
     }

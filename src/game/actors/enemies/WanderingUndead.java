@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
+import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
 import game.items.OldKey;
 
@@ -68,6 +69,7 @@ public class WanderingUndead extends Enemy {
             location.addItem(healingVial);
         }
 
+        location.addItem(new Runes(50));
 
         return this + " met their demise at the hands of " + actor;
     }

@@ -16,7 +16,7 @@ public class HealingVial extends ConsumableItem{
      */
     public HealingVial(){
         super("Healing vial", 'a', true);
-        this.modifiedAttribute = BaseActorAttributes.HEALTH;
+        setModifiedAttribute(BaseActorAttributes.HEALTH);
     }
 
     /**
@@ -39,9 +39,9 @@ public class HealingVial extends ConsumableItem{
      * @return An integer value representing the amount of health restored.
      */
     @Override
-    public int consume(Actor actor) {
+    public void consume(Actor actor) {
         int buffedPoints = (int) (0.1 * actor.getAttributeMaximum(BaseActorAttributes.HEALTH));
         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, buffedPoints);
-        return buffedPoints;
+        setBuffedPoints(buffedPoints);
     }
 }

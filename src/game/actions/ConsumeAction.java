@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+import game.Ability;
 import game.items.consumables.ConsumableItem;
 
 /**
@@ -32,10 +33,13 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        int buffedPoints = this.consumable.consume(actor);
         actor.removeItemFromInventory(this.consumable);
+
+        if(this.consumable.hasCapability(Ability.INCREASE_BALANCE)){
+            return actor + " consumes " + this.consumable + " and " + this.consumable + " increases " + actor + " balance by " + this.consumable.getBuffedPoints();
+        }
         return actor + " consumes " + this.consumable + " and " + this.consumable + " restores the " +
-                this.consumable.getModifiedAttribute() + " of " + actor + " by " + buffedPoints + " points.";
+                this.consumable.getModifiedAttribute() + " of " + actor + " by " + this.consumable.getBuffedPoints() + " points.";
     }
 
     /**
