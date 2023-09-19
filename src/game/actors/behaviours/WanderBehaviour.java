@@ -11,10 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.Behaviour;
 
 /**
- * Created by:
- * @author Riordan D. Alfredo
- * Modified by:
- *
+ * A behavior representing an actor's ability to wander randomly to adjacent locations.
  */
 public class WanderBehaviour implements Behaviour {
 
@@ -24,9 +21,9 @@ public class WanderBehaviour implements Behaviour {
      * Returns a MoveAction to wander to a random location, if possible.
      * If no movement is possible, returns null.
      *
-     * @param actor the Actor enacting the behaviour
-     * @param map the map that actor is currently on
-     * @return an Action, or null if no MoveAction is possible
+     * @param actor The actor enacting the behavior.
+     * @param map   The map that the actor is currently on.
+     * @return An Action representing movement to a random location, or null if no MoveAction is possible.
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
@@ -41,10 +38,8 @@ public class WanderBehaviour implements Behaviour {
 
         if (!actions.isEmpty()) {
             return actions.get(random.nextInt(actions.size()));
-        }
-        else {
+        } else {
             return null;
         }
-
     }
 }
