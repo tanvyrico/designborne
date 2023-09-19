@@ -8,4 +8,7 @@ package game;
  */
 public enum Status {
     HOSTILE_TO_ENEMY,
+    FRIENDLY_TO_ENEMY,
+    FOCUS_SKILL
+
 }
