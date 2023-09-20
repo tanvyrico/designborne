@@ -26,4 +26,5 @@ public class Bloodberry extends Item implements Consumable{
         actionList.add(consumeAction);
         return actionList;
     }
+
 }
