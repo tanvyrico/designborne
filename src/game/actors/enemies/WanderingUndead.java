@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
+import game.actors.behaviours.AttackBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
 import game.items.OldKey;
@@ -24,6 +25,7 @@ public class WanderingUndead extends Enemy {
      */
     public WanderingUndead() {
         super("Wandering Undead", 't', 100);
+        addBehaviour(0,new AttackBehaviour());
         this.getIntrinsicWeapon();
     }
 

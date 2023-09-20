@@ -133,6 +133,10 @@ public class Application {
         ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf, 0.15));
         ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf, 0.15));
 
+        //testing follow behaviour
+        gameMap.at(29,10).addActor(new RedWolf());
+
+
         world.run();
     }
 }

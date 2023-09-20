@@ -54,6 +54,10 @@ public class Application {
         rocket.addSampleAction(new MoveActorAction(mars.at(7, 2), "to Mars!"));
         gameMap.at(1, 1).addItem(rocket);
 
+
+
+
+
         Item spaceSuit = new MartianItem("space suit", '[', true);
         spaceSuit.addCapability(DemoCapabilities.SPACETRAVELLER);
         gameMap.at(0, 1).addItem(spaceSuit);
@@ -64,9 +68,10 @@ public class Application {
         Actor player = new Player("The Player", '@', 100);
         world.addPlayer(player, gameMap.at(2, 3));
 
+
         Bug bug = new Bug();
         bug.addItemToInventory(new MartianItem("rock", '*', true));
-        bug.behaviours.add(new SpitBehaviour(player));
+//        bug.behaviours.add(new SpitBehaviour(player));
         bug.behaviours.add(new FollowBehaviour(player));
         gameMap.at(0, 2).addActor(bug);
 

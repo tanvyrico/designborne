@@ -48,24 +48,20 @@ public abstract class Enemy extends Actor {
      * @return The valid action to be performed during this turn.
      */
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Exit exit : map.locationOf(this).getExits()) {
-            Location destination = exit.getDestination();
-            if (destination.containsAnActor()) {
-                if (!destination.getActor().hasAttribute(Status.FRIENDLY_TO_ENEMY)) {
-                    AttackBehaviour attackBehaviour = new AttackBehaviour();
-                    if (attackBehaviour.getAction(this, map) != null) {
-                        return attackBehaviour.getAction(this, map);
-                    }
-                }
+
+        int currentPriority = Integer.MAX_VALUE;
+        Action currentAction = null ;
+        for (Integer key : getBehaviours().keySet()) {
+            Action action = getBehaviours().get(key).getAction(this,map);
+            if (key < currentPriority & action != null){
+                currentPriority = key;
+                currentAction = action;
             }
         }
 
-        for (Behaviour behaviour : getBehaviours().values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null)
-                return action;
+        if (currentAction != null){
+            return currentAction;
         }
-
         return new DoNothingAction();
     }
 
@@ -78,6 +74,10 @@ public abstract class Enemy extends Actor {
      * @param map        The current GameMap.
      * @return An ActionList containing allowable actions for the enemy.
      */
+
+    public void addBehaviour(Integer priority,Behaviour behaviour){
+        this.behaviours.put(priority,behaviour);
+    }
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();

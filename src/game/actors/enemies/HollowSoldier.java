@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actors.behaviours.AttackBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
@@ -23,6 +24,7 @@ public class HollowSoldier extends Enemy {
     public HollowSoldier() {
         super("Hollow Soldier", '&', 200);
         this.getIntrinsicWeapon();
+        addBehaviour(0,new AttackBehaviour());
     }
 
 

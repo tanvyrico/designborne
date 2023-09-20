@@ -7,29 +7,42 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Behaviour;
+import game.Status;
 
 public class FollowBehaviour implements Behaviour {
 
-    private final Actor target;
-    public FollowBehaviour(Actor subject) {
-        this.target = subject;
+    private Actor target ;
+    public FollowBehaviour() {
+        this.target = null;
     }
 
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        if(!map.contains(target) || !map.contains(actor))
-            return null;
-
         Location here = map.locationOf(actor);
-        Location there = map.locationOf(target);
 
-        int currentDistance = distance(here, there);
-        for (Exit exit : here.getExits()) {
-            Location destination = exit.getDestination();
-            if (destination.canActorEnter(actor)) {
-                int newDistance = distance(destination, there);
-                if (newDistance < currentDistance) {
-                    return new MoveActorAction(destination, exit.getName());
+        if (target == null){
+            for (Exit exit : here.getExits() ){
+                Location destination = exit.getDestination();
+                if (destination.containsAnActor()){
+                    if (destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
+                        target = destination.getActor();
+                    }
+                }
+            }
+        }
+
+        if (target != null){
+            if(!map.contains(target) || !map.contains(actor))
+                return  null;
+            Location there = map.locationOf(target);
+            int currentDistance = distance(here, there);
+            for (Exit exit : here.getExits()) {
+                Location destination = exit.getDestination();
+                if (destination.canActorEnter(actor)) {
+                    int newDistance = distance(destination, there);
+                    if (newDistance < currentDistance) {
+                        return new MoveActorAction(destination, exit.getName());
+                    }
                 }
             }
         }
