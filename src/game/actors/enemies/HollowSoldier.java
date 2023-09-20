@@ -23,6 +23,7 @@ public class HollowSoldier extends Enemy {
     public HollowSoldier() {
         super("Hollow Soldier", '&', 200);
         this.getIntrinsicWeapon();
+        this.addBalance(100);
     }
 
 
@@ -68,7 +69,7 @@ public class HollowSoldier extends Enemy {
             location.addItem(refreshingFlask);
         }
 
-        location.addItem(new Runes(100));
+        location.addItem(new Runes(this.getBalance()));
 
         return this + " met their demise at the hands of " + actor;
     }

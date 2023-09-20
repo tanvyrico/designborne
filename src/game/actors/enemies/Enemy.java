@@ -66,16 +66,6 @@ public abstract class Enemy extends Actor {
         return new DoNothingAction();
     }
 
-    /**
-     * Returns a list of allowable actions for the enemy.
-     * The wandering undead can be attacked by any actor that has the HOSTILE_TO_ENEMY capability.
-     *
-     * @param otherActor The actor that might be performing an attack.
-     * @param direction  A string representing the direction of the other actor.
-     * @param map        The current GameMap.
-     * @return An ActionList containing allowable actions for the enemy.
-     */
-
     public void addBehaviour(Integer priority,Behaviour behaviour){
         this.behaviours.put(priority,behaviour);
     }

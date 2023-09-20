@@ -25,6 +25,7 @@ public class WanderingUndead extends Enemy {
     public WanderingUndead() {
         super("Wandering Undead", 't', 100);
         this.getIntrinsicWeapon();
+        this.addBalance(50);
     }
 
 
@@ -69,7 +70,7 @@ public class WanderingUndead extends Enemy {
             location.addItem(healingVial);
         }
 
-        location.addItem(new Runes(50));
+        location.addItem(new Runes(this.getBalance()));
 
         return this + " met their demise at the hands of " + actor;
     }

@@ -30,6 +30,7 @@ public class ForestKeeper extends Enemy {
         super("Forest Keeper", '8', 125);
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
+        this.addBalance(50);
     }
 
     /**
@@ -69,7 +70,7 @@ public class ForestKeeper extends Enemy {
             location.addItem(healingVial);
         }
 
-        location.addItem(new Runes(50));
+        location.addItem(new Runes(this.getBalance()));
         return this + " met their demise at the hands of " + actor;
     }
 

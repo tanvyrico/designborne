@@ -28,6 +28,7 @@ public class RedWolf extends Enemy{
         super("Red Wolf", 'r', 25);
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
+        this.addBalance(25);
     }
 
 
@@ -67,7 +68,7 @@ public class RedWolf extends Enemy{
             location.addItem(healingVial);
         }
 
-        location.addItem(new Runes(25));
+        location.addItem(new Runes(this.getBalance()));
 
         return this + " met their demise at the hands of " + actor;
     }
