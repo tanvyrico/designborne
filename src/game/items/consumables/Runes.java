@@ -1,14 +1,14 @@
 package game.items.consumables;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import game.Ability;
 import game.actions.ConsumeAction;
 import game.actions.PickUpRunesAction;
-import game.items.consumables.ConsumableItem;
 
-public class Runes extends ConsumableItem {
+public class Runes extends Item implements Consumable {
     private int quantity;
     public Runes(int quantity) {
         super("Runes", '$', true);
@@ -27,8 +27,16 @@ public class Runes extends ConsumableItem {
     }
 
     @Override
-    public void consume(Actor actor) {
+    public String consume(Actor actor) {
         actor.addBalance(this.quantity);
-        setBuffedPoints(this.quantity);
+        actor.removeItemFromInventory(this);
+        return actor + " consumes " + this + " and " + this + " increases " + actor + " balance by " + this.quantity;
+    }
+
+    public ActionList allowableActions(Actor owner) {
+        ActionList actionList = new ActionList();
+        ConsumeAction consumeAction = new ConsumeAction(this);
+        actionList.add(consumeAction);
+        return actionList;
     }
 }

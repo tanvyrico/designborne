@@ -27,6 +27,7 @@ public class RedWolf extends Enemy{
     public RedWolf() {
         super("Red Wolf", 'r', 25);
         this.getIntrinsicWeapon();
+        this.addBehaviour(100, new FollowBehaviour());
     }
 
 
@@ -71,40 +72,7 @@ public class RedWolf extends Enemy{
         return this + " met their demise at the hands of " + actor;
     }
 
-    /**
-     * Determines the action to be performed by the enemy during its turn.
-     *
-     * @param actions    A collection of possible actions for the enemy.
-     * @param lastAction The action the enemy took last turn.
-     * @param map        The GameMap containing the enemy.
-     * @param display    The I/O object to which messages may be written.
-     * @return The valid action to be performed during this turn.
-     */
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Exit exit : map.locationOf(this).getExits()) {
-            Location destination = exit.getDestination();
-            if (destination.containsAnActor()) {
-                if (!destination.getActor().hasAttribute(Status.FRIENDLY_TO_ENEMY)) {
-                    AttackBehaviour attackBehaviour = new AttackBehaviour();
-                    if (attackBehaviour.getAction(this, map) != null) {
-                        return attackBehaviour.getAction(this, map);
-                    }
-                    FollowBehaviour followBehaviour = new FollowBehaviour(destination.getActor());
-                    if (followBehaviour.getAction(this, map) != null){
-                        return followBehaviour.getAction(this, map);
-                    }
-                }
-            }
-        }
 
-        for (Behaviour behaviour : getBehaviours().values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-
-        return new DoNothingAction();
-    }
 }
 
 
