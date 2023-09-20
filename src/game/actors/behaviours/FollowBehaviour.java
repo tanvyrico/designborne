@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Behaviour;
+import game.Status;
 
 public class FollowBehaviour implements Behaviour {
 
@@ -26,7 +27,7 @@ public class FollowBehaviour implements Behaviour {
         int currentDistance = distance(here, there);
         for (Exit exit : here.getExits()) {
             Location destination = exit.getDestination();
-            if (destination.canActorEnter(actor)) {
+            if (destination.canActorEnter(actor) && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
                 int newDistance = distance(destination, there);
                 if (newDistance < currentDistance) {
                     return new MoveActorAction(destination, exit.getName());

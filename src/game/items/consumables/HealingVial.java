@@ -19,18 +19,7 @@ public class HealingVial extends ConsumableItem{
         setModifiedAttribute(BaseActorAttributes.HEALTH);
     }
 
-    /**
-     * Generates a list of allowable actions for the owner of this healing vial, which includes a "Consume" action.
-     *
-     * @param owner The actor who owns this healing vial.
-     * @return An ActionList containing allowable actions for the owner.
-     */
-    public ActionList allowableActions(Actor owner) {
-        ActionList actionList = new ActionList();
-        ConsumeAction consumeAction = new ConsumeAction(this);
-        actionList.add(consumeAction);
-        return actionList;
-    }
+
 
     /**
      * Consumes the healing vial, increasing the actor's health and returning the amount of health restored.
@@ -43,5 +32,6 @@ public class HealingVial extends ConsumableItem{
         int buffedPoints = (int) (0.1 * actor.getAttributeMaximum(BaseActorAttributes.HEALTH));
         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, buffedPoints);
         setBuffedPoints(buffedPoints);
+        actor.removeItemFromInventory(this);
     }
 }

@@ -19,18 +19,6 @@ public class RefreshingFlask extends ConsumableItem{
         setModifiedAttribute(BaseActorAttributes.STAMINA);
     }
 
-    /**
-     * Generates a list of allowable actions for the owner of this refreshing flask, which includes a "Consume" action.
-     *
-     * @param owner The actor who owns this refreshing flask.
-     * @return An ActionList containing allowable actions for the owner.
-     */
-    public ActionList allowableActions(Actor owner) {
-        ActionList actionList = new ActionList();
-        ConsumeAction consumeAction = new ConsumeAction(this);
-        actionList.add(consumeAction);
-        return actionList;
-    }
 
     /**
      * Consumes the refreshing flask, increasing the actor's stamina and returning the amount of stamina restored.
@@ -43,6 +31,7 @@ public class RefreshingFlask extends ConsumableItem{
         int buffedPoints = (int) (0.2 * actor.getAttributeMaximum(BaseActorAttributes.STAMINA));
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, buffedPoints);
         setBuffedPoints(buffedPoints);
+        actor.removeItemFromInventory(this);
     }
 
 }

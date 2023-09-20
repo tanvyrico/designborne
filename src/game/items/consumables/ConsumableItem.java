@@ -1,7 +1,11 @@
 package game.items.consumables;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import game.actions.ConsumeAction;
+
 /**
  * An abstract class representing a consumable item that can be used by an actor. Extends the Item class.
  */
@@ -39,5 +43,12 @@ public abstract class ConsumableItem extends Item implements Consumable {
 
     public void setBuffedPoints(int buffedPoints){
         this.buffedPoints = buffedPoints;
+    }
+
+    public ActionList allowableActions(Actor owner) {
+        ActionList actionList = new ActionList();
+        ConsumeAction consumeAction = new ConsumeAction(this);
+        actionList.add(consumeAction);
+        return actionList;
     }
 }
