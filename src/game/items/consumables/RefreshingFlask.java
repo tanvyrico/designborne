@@ -22,8 +22,8 @@ import java.util.Random;
  */
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
-    private int purchasePrice = 25;
-    private int sellingPrice = 75;
+    private int sellingPrice = 25;
+    private int purchasePrice = 75;
 
     /**
      * Constructor for the RefreshingFlask class.
@@ -50,26 +50,26 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         return actionList;
     }
 
-    public String sell(Actor actor) {
+    public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            this.sellingPrice = (int) (this.sellingPrice * 0.8);
+            this.purchasePrice = (int) (this.purchasePrice * 0.8);
         }
-        if (actor.getBalance() >= this.sellingPrice){
-            actor.deductBalance(this.sellingPrice);
+        if (actor.getBalance() >= this.purchasePrice){
+            actor.deductBalance(this.purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
         }
         return "purchase failed!";
     }
 
-    public String purchase(Actor actor){
+    public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
             return actor + " sold " + this;
         }
-        actor.addBalance(purchasePrice);
+        actor.addBalance(sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }
@@ -77,7 +77,7 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
-            actionList.add(new PurchaseAction(this));
+            actionList.add(new SellAction(this));
         }
         return actionList;
     }

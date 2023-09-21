@@ -25,7 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuspiciousTraveller extends Actor {
-    private final List<Sellable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword()));
+    private final List<Purchasable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword()));
 
     /**
      * The constructor of the Actor class.
@@ -52,8 +52,8 @@ public class SuspiciousTraveller extends Actor {
             Location destination = exit.getDestination();
             if (destination.containsAnActor()) {
                 if (destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                    for (Sellable sellable : this.itemInventory) {
-                        actionList.add(new SellAction(sellable));
+                    for (Purchasable purchasable : this.itemInventory) {
+                        actionList.add(new PurchaseAction(purchasable));
                     }
 //                    for (Item item : otherActor.getItemInventory()) {
 //                        for (Action action : item.allowableActions(otherActor, destination)) {

@@ -18,8 +18,8 @@ import java.util.Random;
  * Class representing a Broadsword, a type of weapon that can perform a special "Focus" skill.
  */
 public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
-    private int purchasePrice = 100;
-    private int sellingPrice = 250;
+    private int sellingPrice = 100;
+    private int purchasePrice = 250;
 
     /**
      * Constructor for the BroadSword class.
@@ -49,18 +49,19 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
-            actionList.add(new PurchaseAction(this));
+            actionList.add(new SellAction(this));
         }
+
         return actionList;
     }
 
-    public String sell(Actor actor) {
+    public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.05) {
             return "purchase failed!";
         }
-        if (actor.getBalance() >= this.sellingPrice){
-            actor.deductBalance(this.sellingPrice);
+        if (actor.getBalance() >= this.purchasePrice){
+            actor.deductBalance(this.purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
         }
@@ -69,8 +70,8 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
 
 
     @Override
-    public String purchase(Actor actor) {
-        actor.addBalance(purchasePrice);
+    public String sell(Actor actor) {
+        actor.addBalance(sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }

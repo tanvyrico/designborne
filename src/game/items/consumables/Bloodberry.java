@@ -14,9 +14,9 @@ import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
 
-public class Bloodberry extends Item implements Consumable, Purchasable {
+public class Bloodberry extends Item implements Consumable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
-    private int purchasePrice = 10;
+    private int sellingPrice = 10;
 
     public Bloodberry() {
         super("Bloodberry", '*', true);
@@ -36,8 +36,8 @@ public class Bloodberry extends Item implements Consumable, Purchasable {
     }
 
     @Override
-    public String purchase(Actor actor) {
-        actor.addBalance(purchasePrice);
+    public String sell(Actor actor) {
+        actor.addBalance(sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }
@@ -45,7 +45,7 @@ public class Bloodberry extends Item implements Consumable, Purchasable {
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
-            actionList.add(new PurchaseAction(this));
+            actionList.add(new SellAction(this));
         }
         return actionList;
     }

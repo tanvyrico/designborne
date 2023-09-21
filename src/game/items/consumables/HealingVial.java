@@ -21,8 +21,8 @@ import java.util.Random;
  */
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
-    private int purchasePrice = 35;
-    private int sellingPrice = 100;
+    private int sellingPrice = 35;
+    private int purchasePrice = 100;
 
     /**
      * Constructor for the HealingVial class.
@@ -59,25 +59,25 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
     }
 
 
-    public String sell(Actor actor) {
+    public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.25) {
-            this.sellingPrice = (int) (this.sellingPrice * 1.5);
+            this.purchasePrice = (int) (this.purchasePrice * 1.5);
         }
-        if (actor.getBalance() >= this.sellingPrice){
-            actor.deductBalance(this.sellingPrice);
+        if (actor.getBalance() >= this.purchasePrice){
+            actor.deductBalance(this.purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
         }
         return "purchase failed!";
     }
 
-    public String purchase(Actor actor){
+    public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            this.purchasePrice = this.purchasePrice * 2;
+            this.sellingPrice = this.sellingPrice * 2;
         }
-        actor.addBalance(this.purchasePrice);
+        actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }
@@ -85,7 +85,7 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
-            actionList.add(new PurchaseAction(this));
+            actionList.add(new SellAction(this));
         }
         return actionList;
     }
