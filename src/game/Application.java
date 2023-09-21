@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.SuspiciousTraveller;
 import game.actors.enemies.ForestKeeper;
 import game.actors.enemies.HollowSoldier;
 import game.actors.Player;
@@ -103,7 +104,9 @@ public class Application {
         }
 
         Player player = new Player("The Abstracted One", '@', 1500000000, 200);
+        SuspiciousTraveller suspiciousTraveller = new SuspiciousTraveller("Suspicious traveller", 'ඞ', 100);
         world.addPlayer(player, gameMap.at(29, 5));
+        world.addPlayer(suspiciousTraveller, gameMap.at(30, 5));
 
         gameMap.at(30, 6).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
         burialGroundMap.at(31, 5).setGround(new Gate(ancientWoodsMap, gameMap.at(29,7), "The Ancient Woods"));

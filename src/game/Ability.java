@@ -6,6 +6,7 @@ package game;
  */
 public enum Ability {
     OPEN_GATE,
-    INCREASE_BALANCE
-
+    INCREASE_BALANCE,
+    PURCHASABLE,
+    SELLABLE
 }

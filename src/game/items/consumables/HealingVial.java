@@ -5,8 +5,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.Status;
 import game.actions.ConsumeAction;
+import game.actions.PurchaseAction;
+import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
 
@@ -26,6 +30,8 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
      */
     public HealingVial(){
         super("Healing vial", 'a', true);
+        this.addCapability(Ability.PURCHASABLE);
+        this.addCapability(Ability.SELLABLE);
     }
 
 
@@ -76,7 +82,11 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         return actor + " sold " + this;
     }
 
-    public Item getItem(Purchasable purchasable){
-        return this;
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = new ActionList();
+        if (target.hasCapability(Status.TRADER)) {
+            actionList.add(new PurchaseAction(this));
+        }
+        return actionList;
     }
 }

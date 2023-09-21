@@ -7,6 +7,7 @@ import game.items.Purchasable;
 
 public class PurchaseAction extends Action {
     private Purchasable purchasable;
+
     public PurchaseAction(Purchasable purchasable){
         this.purchasable = purchasable;
     }
@@ -19,6 +20,6 @@ public class PurchaseAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + this.purchasable;
+        return actor + " sells " + this.purchasable;
     }
 }

@@ -4,8 +4,11 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Ability;
 import game.actions.FocusAction;
 import game.Status;
+import game.actions.PurchaseAction;
+import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
 
@@ -14,7 +17,7 @@ import java.util.Random;
 /**
  * Class representing a Broadsword, a type of weapon that can perform a special "Focus" skill.
  */
-public class BroadSword extends SkilledWeapon {
+public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
     private int purchasePrice = 100;
     private int sellingPrice = 250;
 
@@ -24,6 +27,8 @@ public class BroadSword extends SkilledWeapon {
     public BroadSword() {
         super("Broadsword", '1', 110, "slashes", 80, 5, false);
         this.addCapability(Status.FOCUS_SKILL);
+        this.addCapability(Ability.PURCHASABLE);
+        this.addCapability(Ability.SELLABLE);
     }
 
 
@@ -38,6 +43,14 @@ public class BroadSword extends SkilledWeapon {
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
         actionList.add(new FocusAction(this));
+        return actionList;
+    }
+
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = new ActionList();
+        if (target.hasCapability(Status.TRADER)) {
+            actionList.add(new PurchaseAction(this));
+        }
         return actionList;
     }
 
@@ -61,4 +74,6 @@ public class BroadSword extends SkilledWeapon {
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }
+
+
 }

@@ -5,8 +5,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.Status;
+import game.actions.AttackAction;
 import game.actions.ConsumeAction;
+import game.actions.PurchaseAction;
+import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
 
@@ -25,6 +30,8 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
      */
     public RefreshingFlask() {
         super("Refreshing flask", 'u', true);
+        this.addCapability(Ability.PURCHASABLE);
+        this.addCapability(Ability.SELLABLE);
     }
 
     @Override
@@ -67,7 +74,11 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         return actor + " sold " + this;
     }
 
-    public Item getItem(Purchasable purchasable){
-        return this;
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = new ActionList();
+        if (target.hasCapability(Status.TRADER)) {
+            actionList.add(new PurchaseAction(this));
+        }
+        return actionList;
     }
 }

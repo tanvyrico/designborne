@@ -8,9 +8,12 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.PurchaseAction;
 import game.items.Sellable;
 import game.utility.FancyMessage;
 import game.Status;
@@ -45,6 +48,7 @@ public class Player extends Actor {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
         this.getIntrinsicWeapon();
+        this.addBalance(99999);
     }
 
     /**
@@ -112,18 +116,20 @@ public class Player extends Actor {
         return new IntrinsicWeapon(intrinsicDamage, "bonks", hitRate);
     }
 
-//    public List<Item> getItemInventory() {
-//        return Collections.unmodifiableList(itemInventory);
-//    }
+//    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 //
-//    public List<Sellable> getSellable(){
-//        List<Sellable> list = new ArrayList<>();
-//        for ( Item item: getItemInventory()){
-//            list.add(new wrapper(item))
+//        ActionList actionList = new ActionList();
+//
+//        if (otherActor.hasCapability(Status.TRADER)) {
+//            for (Item item : this.getItemInventory()) {
+//                actionList.add(item.allowableActions(this, map.locationOf(this)));
+//            }
 //        }
-
-
-    }
+//
+//
+//        return actionList;
+//    }
+}
 
 
 

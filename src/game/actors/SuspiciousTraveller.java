@@ -13,6 +13,7 @@ import game.Status;
 import game.actions.AttackAction;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
+import game.items.Purchasable;
 import game.items.Sellable;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
@@ -35,7 +36,8 @@ public class SuspiciousTraveller extends Actor {
      */
     public SuspiciousTraveller(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.addCapability(Status.SUSPICIOUS);
+        this.addCapability(Status.TRADER);
+        this.addBalance(9999999);
     }
 
 
@@ -50,17 +52,19 @@ public class SuspiciousTraveller extends Actor {
             Location destination = exit.getDestination();
             if (destination.containsAnActor()) {
                 if (destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                    for (int i = 1; i < itemInventory.size(); i++) {
-                        actionList.add(new SellAction(itemInventory.get(i)));
-
+                    for (Sellable sellable : this.itemInventory) {
+                        actionList.add(new SellAction(sellable));
                     }
-//                    for (int i = 1; i < otherActor.getItemInventory().size(); i++) {
-//                        actionList.add(new PurchaseAction(otherActor.getItemInventory().get(i)));
-//                    }
+//                    for (Item item : otherActor.getItemInventory()) {
+//                        for (Action action : item.allowableActions(otherActor, destination)) {
+//                            actionList.add(action);
+//                        }
+                    }
                 }
             }
-        }
+
         return actionList;
+
     }
 }
 
