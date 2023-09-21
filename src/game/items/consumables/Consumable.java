@@ -1,8 +1,7 @@
 package game.items.consumables;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+
 
 /**
  * An interface representing a consumable item that can be used by an actor.
