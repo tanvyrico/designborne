@@ -2,8 +2,13 @@ package game.actors.enemies;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
+import game.items.OldKey;
+import game.items.consumables.HealingVial;
+
+import java.util.Random;
 
 public class ForestKeeper extends Enemy {
     private final int intrinsicDamage = 25;
@@ -28,7 +33,15 @@ public class ForestKeeper extends Enemy {
     }
 
     public String unconscious(Actor actor, GameMap map) {
+        Random random = new Random();
+        Location location = map.locationOf(this);
         map.removeActor(this);
-        return this + " met their demise in the hand of " + actor;
+
+        if (random.nextDouble() <= 0.2) {
+            HealingVial healingVial = new HealingVial();
+            location.addItem(healingVial);
+        }
+
+        return this + " met their demise at the hands of " + actor;
     }
 }
