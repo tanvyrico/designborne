@@ -7,11 +7,18 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import game.Ability;
 import game.actions.ConsumeAction;
+import game.items.Purchasable;
+import game.items.Sellable;
+
+import java.util.Random;
+
 /**
  * Class representing a healing vial item that can be consumed by an actor to restore health.
  */
-public class HealingVial extends Item implements Consumable{
+public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
+    private int purchasePrice = 100;
+    private int sellingPrice = 35;
 
     /**
      * Constructor for the HealingVial class.
@@ -46,5 +53,26 @@ public class HealingVial extends Item implements Consumable{
     }
 
 
+    public String purchase(Actor actor) {
+        Random random = new Random();
+        if (random.nextDouble() <= 0.25) {
+            this.purchasePrice = (int) (this.purchasePrice * 1.5);
+        }
+        if (actor.getBalance() >= this.purchasePrice){
+            actor.deductBalance(this.purchasePrice);
+            actor.addItemToInventory(this);
+            return actor + " purchased " + this;
+        }
+        return "purchase failed!";
+    }
 
+    public String sell(Actor actor){
+        Random random = new Random();
+        if (random.nextDouble() <= 0.1) {
+            this.sellingPrice = (int) (this.sellingPrice * 2);
+        }
+        actor.addBalance(this.sellingPrice);
+        actor.removeItemFromInventory(this);
+        return actor + " sold " + this;
+    }
 }

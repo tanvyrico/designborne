@@ -1,0 +1,66 @@
+package game.actors;
+
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
+import game.actions.AttackAction;
+import game.actions.PurchaseAction;
+import game.actions.SellAction;
+import game.items.Sellable;
+import game.items.consumables.HealingVial;
+import game.items.consumables.RefreshingFlask;
+import game.items.weapons.BroadSword;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class SuspiciousTraveller extends Actor {
+    private final List<Sellable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword()));
+
+    /**
+     * The constructor of the Actor class.
+     *
+     * @param name        the name of the Actor
+     * @param displayChar the character that will represent the Actor in the display
+     * @param hitPoints   the Actor's starting hit points
+     */
+    public SuspiciousTraveller(String name, char displayChar, int hitPoints) {
+        super(name, displayChar, hitPoints);
+        this.addCapability(Status.SUSPICIOUS);
+    }
+
+
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        return new DoNothingAction();
+    }
+
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actionList = new ActionList();
+        for (Exit exit : map.locationOf(this).getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.containsAnActor()) {
+                if (destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                    for (int i = 1; i < itemInventory.size(); i++) {
+                        actionList.add(new SellAction(itemInventory.get(i)));
+
+                    }
+//                    for (int i = 1; i < otherActor.getItemInventory().size(); i++) {
+//                        actionList.add(new PurchaseAction(otherActor.getItemInventory().get(i)));
+//                    }
+                }
+            }
+        }
+        return actionList;
+    }
+}
+

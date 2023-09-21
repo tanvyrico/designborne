@@ -6,12 +6,14 @@ import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.items.Purchasable;
+import game.items.Sellable;
 
 /**
  * An abstract class representing a skilled weapon that extends the capabilities of a standard weapon.
  * Skilled weapons can have special skills and temporary effects when used.
  */
-public abstract class SkilledWeapon extends WeaponItem {
+public abstract class SkilledWeapon extends WeaponItem implements Purchasable, Sellable {
 
     private int remainingTurns;
     private boolean skillActivated;
@@ -123,6 +125,7 @@ public abstract class SkilledWeapon extends WeaponItem {
         actionList.add(new AttackAction(target, location.toString(), this));
         return actionList;
     }
+
 }
 
 

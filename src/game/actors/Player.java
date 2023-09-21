@@ -7,11 +7,17 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.items.Sellable;
 import game.utility.FancyMessage;
 import game.Status;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Class representing the Player.
@@ -24,6 +30,7 @@ public class Player extends Actor {
 
     private final int intrinsicDamage = 15;
     private final int hitRate = 80;
+
 
     /**
      * Constructor for the Player class.
@@ -104,6 +111,20 @@ public class Player extends Actor {
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(intrinsicDamage, "bonks", hitRate);
     }
-}
+
+//    public List<Item> getItemInventory() {
+//        return Collections.unmodifiableList(itemInventory);
+//    }
+//
+//    public List<Sellable> getSellable(){
+//        List<Sellable> list = new ArrayList<>();
+//        for ( Item item: getItemInventory()){
+//            list.add(new wrapper(item))
+//        }
+
+
+    }
+
+
 
 
