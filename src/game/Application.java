@@ -18,6 +18,7 @@ import game.grounds.spawners.Bush;
 import game.grounds.spawners.Graveyard;
 import game.grounds.spawners.Hut;
 import game.items.weapons.BroadSword;
+import game.items.weapons.GreatKnife;
 import game.utility.FancyMessage;
 
 /**
@@ -92,6 +93,30 @@ public class Application {
         GameMap ancientWoodsMap = new GameMap(groundFactory, ancientWoods);
         world.addGameMap(ancientWoodsMap);
 
+        List<String> Abxervyer = Arrays.asList(
+                "~~~~.......+++......~+++++..............",
+                "~~~~.......+++.......+++++..............",
+                "~~~++......+++........++++..............",
+                "~~~++......++...........+..............+",
+                "~~~~~~...........+.......~~~++........++",
+                "~~~~~~..........++++....~~~~++++......++",
+                "~~~~~~...........+++++++~~~~.++++.....++",
+                "~~~~~..............++++++~~...+++.....++",
+                "......................+++......++.....++",
+                ".......................+~~............++",
+                ".......................~~~~...........++",
+                "........................~~++...........+",
+                ".....++++...............+++++...........",
+                ".....++++~..............+++++...........",
+                "......+++~~.............++++...........~",
+                ".......++..++++.......................~~",
+                "...........+++++......................~~",
+                "...........++++++.....................~~",
+                "..........~~+++++......................~",
+                ".........~~~~++++..................~~..~");
+
+        GameMap AbxervyerMap = new GameMap(groundFactory, Abxervyer);
+        world.addGameMap(AbxervyerMap);
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -110,7 +135,9 @@ public class Application {
         ancientWoodsMap.at(30, 0).setGround(new Gate(gameMap, gameMap.at(28,6), "The Abandoned Village"));
 
         BroadSword broadSword = new BroadSword();
+        GreatKnife greatKnife = new GreatKnife();
         gameMap.at(29,6).addItem(broadSword);
+        gameMap.at(27,6).addItem(greatKnife);
 
         WanderingUndead wanderingUndead = new WanderingUndead();
         HollowSoldier hollowSoldier = new HollowSoldier();
