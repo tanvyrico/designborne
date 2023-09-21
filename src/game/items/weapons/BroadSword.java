@@ -32,4 +32,6 @@ public class BroadSword extends SkilledWeapon {
         actionList.add(new FocusAction(this));
         return actionList;
     }
+
+
 }
