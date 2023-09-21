@@ -104,7 +104,7 @@ public class Application {
         }
 
         Player player = new Player("The Abstracted One", '@', 1500000000, 200);
-        SuspiciousTraveller suspiciousTraveller = new SuspiciousTraveller("Suspicious traveller", 'ඞ', 100);
+        SuspiciousTraveller suspiciousTraveller = new SuspiciousTraveller();
         world.addPlayer(player, gameMap.at(29, 5));
         world.addPlayer(suspiciousTraveller, gameMap.at(30, 5));
 
@@ -120,21 +120,21 @@ public class Application {
         ForestKeeper forestKeeper = new ForestKeeper();
         RedWolf redWolf = new RedWolf();
 
-        gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead, 0.25));
-        gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead, 0.25));
-        gameMap.at(18, 7).setGround(new Graveyard(wanderingUndead, 0.25));
+        gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead));
+        gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead));
+        gameMap.at(18, 7).setGround(new Graveyard(wanderingUndead));
 
-        burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier, 0.1));
-        burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier, 0.1));
-        burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier, 0.1));
+        burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier));
+        burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier));
+        burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier));
 
-        ancientWoodsMap.at(27, 8).setGround(new Hut(forestKeeper, 0.15));
-        ancientWoodsMap.at(35, 3).setGround(new Hut(forestKeeper, 0.15));
-        ancientWoodsMap.at(18, 7).setGround(new Hut(forestKeeper, 0.15));
+        ancientWoodsMap.at(27, 8).setGround(new Hut(forestKeeper));
+        ancientWoodsMap.at(35, 3).setGround(new Hut(forestKeeper));
+        ancientWoodsMap.at(18, 7).setGround(new Hut(forestKeeper));
 
-        ancientWoodsMap.at(29, 10).setGround(new Bush(redWolf, 0.15));
-        ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf, 0.15));
-        ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf, 0.15));
+        ancientWoodsMap.at(29, 10).setGround(new Bush(redWolf));
+        ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf));
+        ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf));
 
         world.run();
     }

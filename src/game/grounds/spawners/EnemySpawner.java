@@ -8,18 +8,17 @@ import java.util.Random;
 
 public abstract class EnemySpawner extends Ground {
     private Enemy enemy;
-    private double spawnRate;
-    public EnemySpawner(Enemy enemy, double spawnRate){
+
+    public EnemySpawner(Enemy enemy){
         super('s');
         this.enemy = enemy;
-        this.spawnRate = spawnRate;
     }
 
     public void tick(Location location) {
         Random random = new Random();
         if (!location.containsAnActor()) {
             double randomValue = random.nextDouble();
-            if (randomValue <= this.spawnRate) {
+            if (randomValue <= enemy.getSpawnRate()) {
                 location.addActor(enemy.spawnEnemy());
             }
         }

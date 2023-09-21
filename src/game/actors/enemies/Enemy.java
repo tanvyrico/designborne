@@ -94,5 +94,6 @@ public abstract class Enemy extends Actor {
      */
     public abstract Enemy spawnEnemy();
 
+    public abstract double getSpawnRate();
 
 }

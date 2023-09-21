@@ -29,10 +29,6 @@ public class SuspiciousTraveller extends Actor {
 
     /**
      * The constructor of the Actor class.
-     *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
      */
     public SuspiciousTraveller() {
         super("Suspicious Traveller", 'ඞ', 1000);
