@@ -12,13 +12,9 @@ public class HealingVial extends ConsumableItem{
 
     /**
      * Constructor for the HealingVial class.
-     *
-     * @param name        The name of this item.
-     * @param displayChar The character to use to represent this item if it is on the ground.
-     * @param portable    True if and only if the item can be picked up.
      */
-    public HealingVial(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
+    public HealingVial() {
+        super("Healing vial", 'a', true);
         this.modifiedAttribute = BaseActorAttributes.HEALTH;
     }
 

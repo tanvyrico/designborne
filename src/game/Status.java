@@ -9,6 +9,8 @@ package game;
 public enum Status {
     HOSTILE_TO_ENEMY,
     FRIENDLY_TO_ENEMY,
-    FOCUS_SKILL
-
+    FOCUS_SKILL,
+    SPAWN_FROM_GRAVEYARD,
+    SPAWN_FROM_HUT,
+    SPAWN_FROM_BUSH
 }

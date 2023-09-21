@@ -2,6 +2,7 @@ package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Status;
 import game.actors.enemies.Enemy;
 
 import java.util.Random;
@@ -12,18 +13,15 @@ import java.util.Random;
 public class Graveyard extends Ground {
     private Random random = new Random();
     private Enemy enemy;
-    private double spawnRate;
 
     /**
      * Constructor for the Graveyard class.
      *
      * @param enemy     The type of enemy that can spawn in the graveyard.
-     * @param spawnRate The probability of an enemy spawning when the tick method is called.
      */
-    public Graveyard(Enemy enemy, double spawnRate) {
+    public Graveyard(Enemy enemy) {
         super('n');
         this.enemy = enemy;
-        this.spawnRate = spawnRate;
     }
 
     /**
@@ -34,7 +32,7 @@ public class Graveyard extends Ground {
     public void tick(Location location) {
         if (!location.containsAnActor()) {
             double randomValue = random.nextDouble();
-            if (randomValue <= this.spawnRate) {
+            if (enemy.hasCapability(Status.SPAWN_FROM_GRAVEYARD) && randomValue <= this.enemy.getSpawnRate()) {
                 location.addActor(enemy.spawnEnemy());
             }
         }

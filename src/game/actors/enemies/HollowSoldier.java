@@ -23,6 +23,7 @@ import java.util.Random;
  */
 public class HollowSoldier extends Enemy {
     private final int intrinsicDamage = 50;
+    private final double spawnRate = 0.1;
 
     /**
      * Constructor for the HollowSoldier class.
@@ -30,6 +31,7 @@ public class HollowSoldier extends Enemy {
     public HollowSoldier() {
         super("Hollow Soldier", '&', 200);
         this.getIntrinsicWeapon();
+        this.addCapability(Status.SPAWN_FROM_GRAVEYARD);
     }
 
 
@@ -41,6 +43,10 @@ public class HollowSoldier extends Enemy {
      */
     public HollowSoldier spawnEnemy() {
         return new HollowSoldier();
+    }
+
+    public double getSpawnRate(){
+        return this.spawnRate;
     }
 
     /**
@@ -66,12 +72,12 @@ public class HollowSoldier extends Enemy {
         map.removeActor(this);
 
         if (random.nextDouble() <= 0.2) {
-            HealingVial healingVial = new HealingVial("Healing vial", 'a', true);
+            HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
         }
 
         if (random.nextDouble() <= 0.3) {
-            RefreshingFlask refreshingFlask = new RefreshingFlask("Refreshing flask", 'u', true);
+            RefreshingFlask refreshingFlask = new RefreshingFlask();
             location.addItem(refreshingFlask);
         }
 

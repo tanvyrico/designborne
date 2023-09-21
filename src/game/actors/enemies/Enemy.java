@@ -101,4 +101,5 @@ public abstract class Enemy extends Actor {
      * @return A new instance of an enemy.
      */
     public abstract Enemy spawnEnemy();
+    public abstract double getSpawnRate();
 }

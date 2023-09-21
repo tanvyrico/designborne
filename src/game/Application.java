@@ -7,8 +7,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.enemies.ForestKeeper;
 import game.actors.enemies.HollowSoldier;
 import game.actors.Player;
+import game.actors.enemies.RedWolf;
 import game.actors.enemies.WanderingUndead;
 import game.grounds.*;
 import game.grounds.Void;
@@ -71,6 +73,24 @@ public class Application {
         world.addGameMap(burialGroundMap);
 
 
+        List<String> ancientWoods = Arrays.asList(
+                "....+++..............................+++++++++....~~~....~~~",
+                "+...+++..............................++++++++.....~~~.....~~",
+                "++...............#######..............++++.........~~.......",
+                "++...............#_____#...........................~~~......",
+                "+................#_____#............................~~......",
+                ".................###_###............~...............~~.....~",
+                "...............................~.+++~~..............~~....~~",
+                ".....................~........~~+++++...............~~~...~~",
+                "....................~~~.........++++............~~~~~~~...~~",
+                "....................~~~~.~~~~..........~........~~~~~~.....~",
+                "++++...............~~~~~~~~~~~........~~~.......~~~~~~......",
+                "+++++..............~~~~~~~~~~~........~~~........~~~~~......");
+
+        GameMap ancientWoodsMap = new GameMap(groundFactory, ancientWoods);
+        world.addGameMap(ancientWoodsMap);
+
+
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
@@ -86,19 +106,28 @@ public class Application {
         gameMap.at(29, 0).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
         burialGroundMap.at(31, 5).setGround(new Gate(gameMap, gameMap.at(29,7), "The Abandoned Village"));
 
+        burialGroundMap.at(25,5).setGround(new Gate(ancientWoodsMap, ancientWoodsMap.at(29,7), "The Ancient Woods"));
+        ancientWoodsMap.at(10,3).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
+
         BroadSword broadSword = new BroadSword();
         gameMap.at(29,6).addItem(broadSword);
 
         WanderingUndead wanderingUndead = new WanderingUndead();
         HollowSoldier hollowSoldier = new HollowSoldier();
+        ForestKeeper forestKeeper = new ForestKeeper();
+        RedWolf redWolf = new RedWolf();
 
-        gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead, 0.25));
-        gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead, 0.25));
-        gameMap.at(18, 7).setGround(new Graveyard(wanderingUndead, 0.25));
+        gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead));
+        gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead));
+        gameMap.at(18, 7).setGround(new Graveyard(wanderingUndead));
 
-        burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier, 0.1));
-        burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier, 0.1));
-        burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier, 0.1));
+        burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier));
+        burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier));
+        burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier));
+
+        ancientWoodsMap.at(27, 8).setGround(new Hut(forestKeeper));
+        ancientWoodsMap.at(35, 3).setGround(new Hut(forestKeeper));
+        ancientWoodsMap.at(18, 7).setGround(new Bush((redWolf)));
 
         world.run();
     }

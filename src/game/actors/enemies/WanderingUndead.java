@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Status;
 import game.items.consumables.HealingVial;
 import game.items.OldKey;
 
@@ -16,6 +17,7 @@ import java.util.Random;
  */
 public class WanderingUndead extends Enemy {
     private final int intrinsicDamage = 30;
+    private final double spawnRate = 0.25;
 
     /**
      * Constructor for the WanderingUndead class.
@@ -23,6 +25,7 @@ public class WanderingUndead extends Enemy {
     public WanderingUndead() {
         super("Wandering Undead", 't', 100);
         this.getIntrinsicWeapon();
+        this.addCapability(Status.SPAWN_FROM_GRAVEYARD);
     }
 
 
@@ -33,6 +36,10 @@ public class WanderingUndead extends Enemy {
      */
     public WanderingUndead spawnEnemy() {
         return new WanderingUndead();
+    }
+
+    public double getSpawnRate(){
+        return this.spawnRate;
     }
 
     /**
@@ -57,13 +64,14 @@ public class WanderingUndead extends Enemy {
         Location location = map.locationOf(this);
         map.removeActor(this);
 
-        if (random.nextDouble() <= 0.25) {
-            OldKey oldKey = new OldKey("Old key", '-', true);
+        //if (random.nextDouble() <= 0.25) {
+        if (random.nextDouble() <= 1) {
+            OldKey oldKey = new OldKey();
             location.addItem(oldKey);
         }
 
         if (random.nextDouble() <= 0.2) {
-            HealingVial healingVial = new HealingVial("Healing vial", 'a', true);
+            HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
         }
 
