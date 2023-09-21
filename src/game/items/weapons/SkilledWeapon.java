@@ -3,9 +3,13 @@ package game.items.weapons;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.PickUpAction;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Status;
+import game.actions.AOEAction;
 import game.actions.AttackAction;
+import game.actions.StabAndStepAction;
 
 /**
  * An abstract class representing a skilled weapon that extends the capabilities of a standard weapon.
@@ -16,6 +20,8 @@ public abstract class SkilledWeapon extends WeaponItem {
     private int remainingTurns;
     private boolean skillActivated;
     private int initialHitRate;
+
+    private Actor wielder = null;
 
     /**
      * Constructor for the SkilledWeapon class.
@@ -89,6 +95,7 @@ public abstract class SkilledWeapon extends WeaponItem {
      */
     public PickUpAction getPickUpAction(Actor actor) {
         this.endSkill();
+        this.wielder = actor;
         return new PickUpAction(this);
     }
 
@@ -120,7 +127,21 @@ public abstract class SkilledWeapon extends WeaponItem {
     @Override
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
-        actionList.add(new AttackAction(target, location.toString(), this));
+//        actionList.add(new AttackAction(target, location.toString(), this));
+        Location locationOfWielder = location.map().locationOf(wielder);
+        for (Exit exit: locationOfWielder.getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.containsAnActor() && !destination.getActor().hasCapability(Status.NON_HOSTILE)) {
+                AttackAction attackAction = new AttackAction(destination.getActor(), exit.getName(), this);
+                actionList.add(attackAction);
+                if (this.hasCapability(Status.STAB_AND_STEP)) {
+                    actionList.add(new StabAndStepAction(this, attackAction));
+                }
+                if (this.hasCapability(Status.AOE_POSSIBLE)) {
+                    actionList.add(new AOEAction(this, target,exit.getName()));
+                }
+            }
+        }
         return actionList;
     }
 }
