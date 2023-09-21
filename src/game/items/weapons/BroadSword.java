@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.actions.AttackAction;
 import game.actions.FocusAction;
 import game.Status;
 import game.actions.PurchaseAction;
@@ -39,7 +40,7 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
      * @param owner The actor who owns this BroadSword.
      * @return An ActionList containing allowable actions for the owner.
      */
-    @Override
+
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
         actionList.add(new FocusAction(this));
@@ -48,6 +49,9 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
+        if(target.hasCapability(Status.FRIENDLY_TO_ENEMY)) {
+            actionList.add(new AttackAction(target, location.toString(), this));
+        }
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
         }

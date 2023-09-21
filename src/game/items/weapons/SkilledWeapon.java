@@ -116,19 +116,6 @@ public abstract class SkilledWeapon extends WeaponItem {
         }
     }
 
-    /**
-     * Generates a list of allowable actions for an actor targeting a location with this skilled weapon.
-     *
-     * @param target   The actor being targeted.
-     * @param location The location being targeted.
-     * @return An ActionList containing allowable actions for the actor.
-     */
-    @Override
-    public ActionList allowableActions(Actor target, Location location) {
-        ActionList actionList = new ActionList();
-        actionList.add(new AttackAction(target, location.toString(), this));
-        return actionList;
-    }
 
 }
 

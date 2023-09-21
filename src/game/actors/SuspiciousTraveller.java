@@ -34,8 +34,8 @@ public class SuspiciousTraveller extends Actor {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public SuspiciousTraveller(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public SuspiciousTraveller() {
+        super("Suspicious Traveller", 'ඞ', 1000);
         this.addCapability(Status.TRADER);
         this.addBalance(9999999);
     }
