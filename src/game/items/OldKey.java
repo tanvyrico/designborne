@@ -7,7 +7,7 @@ import game.Ability;
  * A class representing an old key item that can be used to open gates.
  * The key has the capability to open gates with the Ability.OPEN_GATE capability.
  */
-public class OldKey extends Item {
+public class OldKey extends Item{
 
     /**
      * Constructor for the OldKey class.

@@ -2,6 +2,7 @@ package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
@@ -124,6 +125,10 @@ public abstract class SkilledWeapon extends WeaponItem implements Purchasable, S
         ActionList actionList = new ActionList();
         actionList.add(new AttackAction(target, location.toString(), this));
         return actionList;
+    }
+
+    public Item getItem(Purchasable purchasable){
+        return this;
     }
 
 }

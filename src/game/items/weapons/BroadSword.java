@@ -2,6 +2,7 @@ package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.FocusAction;
 import game.Status;
@@ -14,8 +15,8 @@ import java.util.Random;
  * Class representing a Broadsword, a type of weapon that can perform a special "Focus" skill.
  */
 public class BroadSword extends SkilledWeapon {
-    private int purchasePrice = 250;
-    private int sellingPrice = 100;
+    private int purchasePrice = 100;
+    private int sellingPrice = 250;
 
     /**
      * Constructor for the BroadSword class.
@@ -40,22 +41,23 @@ public class BroadSword extends SkilledWeapon {
         return actionList;
     }
 
-    public String purchase(Actor actor) {
+    public String sell(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.05) {
             return "purchase failed!";
         }
-        if (actor.getBalance() >= this.purchasePrice){
-            actor.deductBalance(this.purchasePrice);
+        if (actor.getBalance() >= this.sellingPrice){
+            actor.deductBalance(this.sellingPrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
         }
         return "purchase failed!";
     }
 
+
     @Override
-    public String sell(Actor actor) {
-        actor.addBalance(sellingPrice);
+    public String purchase(Actor actor) {
+        actor.addBalance(purchasePrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }
