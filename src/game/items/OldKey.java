@@ -12,12 +12,9 @@ public class OldKey extends Item {
     /**
      * Constructor for the OldKey class.
      *
-     * @param name        The name of this Item.
-     * @param displayChar The character to use to represent this item if it is on the ground.
-     * @param portable    True if and only if the Item can be picked up.
      */
-    public OldKey(String name, char displayChar, boolean portable) {
-        super(name, displayChar, portable);
+    public OldKey() {
+        super("Old key", '-', true);
         this.addCapability(Ability.OPEN_GATE);
     }
 }

@@ -18,23 +18,7 @@ public class BroadSword extends SkilledWeapon {
         this.addCapability(Status.FOCUS_SKILL);
     }
 
-    /**
-     * Performs a tick action for the BroadSword, which handles the duration of its special skill, if active.
-     *
-     * @param currentLocation The current location of the actor wielding the BroadSword.
-     * @param actor           The actor wielding the BroadSword.
-     */
-    @Override
-    public void tick(Location currentLocation, Actor actor) {
-        if (this.getSkillStatus()) {
-            int newRemainingTurns = getRemainingTurns() - 1;
-            setRemainingTurns(newRemainingTurns);
 
-            if (newRemainingTurns < 0) {
-                endSkill();
-            }
-        }
-    }
 
     /**
      * Generates a list of allowable actions for the owner of this BroadSword, which includes a "Focus" action.

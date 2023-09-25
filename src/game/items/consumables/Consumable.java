@@ -1,6 +1,9 @@
 package game.items.consumables;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import game.Ability;
 
 /**
  * An interface representing a consumable item that can be used by an actor.
@@ -13,6 +16,8 @@ public interface Consumable {
      * @param actor The actor consuming the item.
      * @return An integer value representing the effect or change applied to the actor.
      */
-    int consume(Actor actor);
+    void consume(Actor actor);
+
+//    ActionList allowableActions(Actor owner);
 }
 
