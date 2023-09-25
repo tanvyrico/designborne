@@ -1,13 +1,7 @@
 package game.items.weapons;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
-import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.FocusAction;
-import game.actions.StabAndStepAction;
 import game.items.Purchasable;
 import game.items.Sellable;
 
@@ -55,4 +49,5 @@ public class GreatKnife extends SkilledWeapon implements Purchasable, Sellable {
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }
+
 }

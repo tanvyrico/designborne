@@ -18,6 +18,7 @@ import game.items.Sellable;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
 import game.items.weapons.BroadSword;
+import game.items.weapons.GreatKnife;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,15 +26,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuspiciousTraveller extends Actor {
-    private final List<Purchasable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword()));
+    private final List<Purchasable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword(), new GreatKnife()));
 
-    /**
-     * The constructor of the Actor class.
-     *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
-     */
     public SuspiciousTraveller() {
         super("Suspicious Traveller", 'ඞ', 1000);
         this.addCapability(Status.TRADER);

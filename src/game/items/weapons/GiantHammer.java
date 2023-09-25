@@ -14,11 +14,11 @@ public class GiantHammer extends SkilledWeapon implements Sellable {
         addCapability(Status.AOE_POSSIBLE);
     }
 
-
     @Override
     public String sell(Actor actor) {
         actor.addBalance(sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
     }
+
 }
