@@ -20,6 +20,7 @@ import java.util.Random;
  */
 public class AOEAction extends Action {
 
+    private final float AREA_DAMAGE_MULTIPLIER = 0.5f;
 
     /**
      * An ArrayList that adds Actors that the Weapon User should attempt to hit.
@@ -29,7 +30,7 @@ public class AOEAction extends Action {
     /**
      * A weapon that will theoretically perform an AOE Attack if possible.
      */
-    private Weapon weapon;
+    private WeaponItem weapon;
     /**
      * The direction where the weapon will attack first.
      */
@@ -52,12 +53,10 @@ public class AOEAction extends Action {
      */
 
     public AOEAction(WeaponItem weaponItem, Actor target, String direction) {
-        if (weaponItem.hasCapability(Status.AOE_POSSIBLE)) {
-            System.out.println("aoe");
             this.weapon = weaponItem;
             this.target = target;
             this.direction = direction;
-        }
+
     }
 
     /**
@@ -69,49 +68,29 @@ public class AOEAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        int staminaNeeded = (int) (actor.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.25);
+        int staminaNeeded = (int) (actor.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.05);
         String result = "";
         Location user = map.locationOf(actor);
-        if (actor.getAttribute(BaseActorAttributes.STAMINA)< staminaNeeded){
-            return "No Stamina To Do AOE";
-        }
+        if (actor.getAttribute(BaseActorAttributes.STAMINA) >= staminaNeeded){
+            actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, staminaNeeded);
+            result += new AttackAction(target,direction,weapon).execute(actor,map);
 
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, staminaNeeded);
-        result += "\n" + new AttackAction(target,direction,weapon).execute(actor,map);
-//        if (!target.isConscious()) {
-//            result += "\n" + target.unconscious(actor, map);
-//        }
-
-        for (Exit exit: user.getExits()) {
-            Location destination = exit.getDestination();
-            if (destination.containsAnActor()) {
-                Actor foundActor = destination.getActor();
-                if (foundActor != target && !foundActor.hasCapability(Status.NON_HOSTILE)) {
-                    enemyActorsHitable.add(foundActor);
+            this.weapon.updateDamageMultiplier(AREA_DAMAGE_MULTIPLIER);
+            for (Exit exit: user.getExits()) {
+                Location destination = exit.getDestination();
+                if (destination.containsAnActor()) {
+                    Actor foundActor = destination.getActor();
+                    if  (foundActor != target && (!foundActor.hasCapability(Status.HOSTILE_TO_ENEMY) && (foundActor.hasCapability(Status.FRIENDLY_TO_ENEMY)))){
+                        result += "\n"+new AttackAction(foundActor,direction,weapon).execute(actor,map);
+                    }
                 }
             }
+            this.weapon.updateDamageMultiplier(1f);
         }
-
-        for (Actor eachHostile: enemyActorsHitable) {
-            boolean hitCheck = true;
-            if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
-                System.out.println(actor + " misses " + eachHostile + ".");
-                hitCheck = false;
-            }
-
-            if (hitCheck == true) {
-                int damage = weapon.damage() / 2;
-                result += "\n" + actor + " " + weapon.verb() + " " + eachHostile + " for " + damage + " damage.";
-                eachHostile.hurt(damage);
-//                if (!eachHostile.isConscious()) {
-//                    result += "\n" + eachHostile.unconscious(eachHostile, map);
-//                }
-            }
+        else {
+            result += "Stamina is not enough to do Great Slam";
         }
-
-
-
-        return actor + " has performed an Area of Effect Attack!" + "\n" + result;
+        return result;
     }
 
     /**
@@ -122,10 +101,11 @@ public class AOEAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        System.out.println("prin desc");
-        return actor + " attacks " + target + " and then other " +
-                " enemies with their unique/weapon's special skill in the direction of " +
-                direction + " first.";
+        return actor +" activates the skill of Giant Hammer on " +target + " at " + direction;
+
+//        return actor + " attacks " + target + " and then other " +
+//                " enemies with their unique/weapon's special skill in the direction of " +
+//                direction + " first.";
     }
 }
 

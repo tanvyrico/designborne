@@ -46,7 +46,7 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
-        if(target.hasCapability(Status.FRIENDLY_TO_ENEMY)) {
+        if(!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))) {
             actionList.add(new AttackAction(target, location.toString(), this));
             actionList.add(new AOEAction(this,target,location.toString()));
         }

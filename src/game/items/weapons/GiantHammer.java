@@ -14,7 +14,6 @@ public class GiantHammer extends SkilledWeapon{
      */
     public GiantHammer() {
         super("Giant Hammer",'P', 160, "slams",90,0, false);
-        addCapability(Status.AOE_POSSIBLE);
     }
 
     /**
@@ -29,12 +28,11 @@ public class GiantHammer extends SkilledWeapon{
      */
     public ActionList allowableActions(Actor target, Location location){
         ActionList actionList = new ActionList();
-        if (target.hasCapability(Status.FRIENDLY_TO_ENEMY)){
+        if (!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))){
             actionList.add(new AOEAction(this,target,location.toString()));
         }
 
         return actionList;
     }
-
 
 }

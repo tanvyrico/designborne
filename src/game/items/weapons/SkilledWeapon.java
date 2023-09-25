@@ -118,41 +118,11 @@ public abstract class SkilledWeapon extends WeaponItem {
         }
     }
 
-    /**
-     * Generates a list of allowable actions for an actor targeting a location with this skilled weapon.
-     *
-     * @param target   The actor being targeted.
-     * @param location The location being targeted.
-     * @return An ActionList containing allowable actions for the actor.
-     */
-//    @Override
-//    public ActionList allowableActions(Actor target, Location location) {
-//        System.out.println("a");
-//        ActionList actionList = new ActionList();
-////        actionList.add(new AttackAction(target, location.toString(), this));
-//        Location locationOfWielder = location.map().locationOf(wielder);
-//        for (Exit exit: locationOfWielder.getExits()) {
-//            System.out.println("bbb");
-//            Location destination = exit.getDestination();
-//            if (destination.containsAnActor() && !destination.getActor().hasCapability(Status.NON_HOSTILE)) {
-//                AttackAction attackAction = new AttackAction(destination.getActor(), exit.getName(), this);
-//                actionList.add(attackAction);
-//                if (this.hasCapability(Status.STAB_AND_STEP)) {
-//                    actionList.add(new StabAndStepAction(this, attackAction));
-//                }
-//                if (this.hasCapability(Status.AOE_POSSIBLE)) {
-//
-//                    actionList.add(new AOEAction(this, target,exit.getName()));
-//                }
-//            }
-//        }
-//        return actionList;
-//    }
 
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
-        if(target.hasCapability(Status.FRIENDLY_TO_ENEMY)) {
+        if(!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))) {
             actionList.add(new AttackAction(target, location.toString(), this));
         }
 

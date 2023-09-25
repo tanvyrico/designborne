@@ -25,8 +25,8 @@ public class GreatKnife extends SkilledWeapon{
 
     public ActionList allowableActions(Actor target, Location location){
         ActionList actionList = new ActionList();
-        if (target.hasCapability(Status.FRIENDLY_TO_ENEMY)){
-            actionList.add(new StabAndStepAction(this, new AttackAction(target, location.toString(), this)));
+        if (!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))){
+            actionList.add(new StabAndStepAction(this,target,location.toString()));
         }
 
         return actionList;
