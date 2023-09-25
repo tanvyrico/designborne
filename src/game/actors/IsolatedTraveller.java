@@ -5,16 +5,12 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
-import game.actions.AttackAction;
 import game.actions.PurchaseAction;
-import game.actions.SellAction;
 import game.items.Purchasable;
-import game.items.Sellable;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
 import game.items.weapons.BroadSword;
@@ -22,14 +18,13 @@ import game.items.weapons.GreatKnife;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class SuspiciousTraveller extends Actor {
+public class IsolatedTraveller extends Actor {
     private final List<Purchasable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword(), new GreatKnife()));
 
-    public SuspiciousTraveller() {
-        super("Suspicious Traveller", 'ඞ', 1000);
+    public IsolatedTraveller() {
+        super("Isolated Traveller", 'ඞ', 2147483647);
         this.addCapability(Status.TRADER);
         this.addBalance(9999999);
     }
