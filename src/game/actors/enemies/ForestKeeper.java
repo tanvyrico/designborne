@@ -31,6 +31,7 @@ public class ForestKeeper extends Enemy {
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
         this.addBalance(50);
+        this.setSpawnRate(0.15);
     }
 
     /**

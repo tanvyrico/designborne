@@ -24,6 +24,7 @@ import java.util.Map;
  */
 public abstract class Enemy extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    private double spawnRate;
 
     /**
      * Constructor for the Enemy class.
@@ -93,6 +94,11 @@ public abstract class Enemy extends Actor {
      * @return A new instance of an enemy.
      */
     public abstract Enemy spawnEnemy();
-
+    public double getSpawnRate(){
+        return this.spawnRate;
+    }
+    public void setSpawnRate(double spawnRate){
+        this.spawnRate = spawnRate;
+    }
 
 }

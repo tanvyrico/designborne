@@ -29,6 +29,7 @@ public class RedWolf extends Enemy{
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
         this.addBalance(25);
+        this.setSpawnRate(0.3);
     }
 
 
