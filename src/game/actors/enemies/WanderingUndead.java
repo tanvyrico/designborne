@@ -55,25 +55,25 @@ public class WanderingUndead extends Enemy {
      * @param map   The GameMap where the Wandering Undead was defeated.
      * @return A message describing the outcome of the Wandering Undead's defeat.
      */
-    public String unconscious(Actor actor, GameMap map) {
-        Random random = new Random();
-        Location location = map.locationOf(this);
-        map.removeActor(this);
-
-        if (random.nextDouble() <= 0.25) {
-            OldKey oldKey = new OldKey();
-            location.addItem(oldKey);
-        }
-
-        if (random.nextDouble() <= 0.2) {
-            HealingVial healingVial = new HealingVial();
-            location.addItem(healingVial);
-        }
-
-        location.addItem(new Runes(this.getBalance()));
-
-        return this + " met their demise at the hands of " + actor;
-    }
+//    public String unconscious(Actor actor, GameMap map) {
+//        Random random = new Random();
+//        Location location = map.locationOf(this);
+//        map.removeActor(this);
+//
+//        if (random.nextDouble() <= 0.25) {
+//            OldKey oldKey = new OldKey();
+//            location.addItem(oldKey);
+//        }
+//
+//        if (random.nextDouble() <= 0.2) {
+//            HealingVial healingVial = new HealingVial();
+//            location.addItem(healingVial);
+//        }
+//
+//        location.addItem(new Runes(this.getBalance()));
+//
+//        return this + " met their demise at the hands of " + actor;
+//    }
 
 
 }

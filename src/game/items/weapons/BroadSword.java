@@ -2,13 +2,22 @@ package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.FocusAction;
+import game.Ability;
+import game.actions.*;
 import game.Status;
+import game.items.Purchasable;
+import game.items.Sellable;
+
+import java.util.Random;
+
 /**
  * Class representing a Broadsword, a type of weapon that can perform a special "Focus" skill.
  */
-public class BroadSword extends SkilledWeapon {
+public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
+    private int sellingPrice = 100;
+    private int purchasePrice = 250;
 
     /**
      * Constructor for the BroadSword class.
@@ -16,6 +25,8 @@ public class BroadSword extends SkilledWeapon {
     public BroadSword() {
         super("Broadsword", '1', 110, "slashes", 80, 5, false);
         this.addCapability(Status.FOCUS_SKILL);
+        this.addCapability(Ability.PURCHASABLE);
+        this.addCapability(Ability.SELLABLE);
     }
 
 
@@ -26,12 +37,47 @@ public class BroadSword extends SkilledWeapon {
      * @param owner The actor who owns this BroadSword.
      * @return An ActionList containing allowable actions for the owner.
      */
-    @Override
+
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
         actionList.add(new FocusAction(this));
         return actionList;
     }
 
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = new ActionList();
+        if(target.hasCapability(Status.FRIENDLY_TO_ENEMY)) {
+            actionList.add(new AttackAction(target, location.toString(), this));
+            actionList.add(new AOEAction(this,target,location.toString()));
+        }
+        if (target.hasCapability(Status.TRADER)) {
+            actionList.add(new SellAction(this));
+        }
+
+        return actionList;
+    }
+
+    public String purchase(Actor actor) {
+        Random random = new Random();
+        if (random.nextDouble() <= 0.05) {
+            return "purchase failed!";
+        }
+        if (actor.getBalance() >= this.purchasePrice){
+            actor.deductBalance(this.purchasePrice);
+            actor.addItemToInventory(this);
+            return actor + " purchased " + this;
+        }
+        return "purchase failed!";
+    }
+
+
+    @Override
+    public String sell(Actor actor) {
+        actor.addBalance(sellingPrice);
+        actor.removeItemFromInventory(this);
+        return actor + " sold " + this;
+    }
+
 
 }
+

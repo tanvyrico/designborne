@@ -8,6 +8,9 @@ public enum Ability {
     OPEN_GATE,
     INCREASE_BALANCE,
     VOID_INVINCIBILITY,
+    PURCHASABLE,
+    SELLABLE
+
 
 
 }

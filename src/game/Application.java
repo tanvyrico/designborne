@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.SuspiciousTraveller;
 import game.actors.enemies.ForestKeeper;
 import game.actors.enemies.HollowSoldier;
 import game.actors.Player;
@@ -18,6 +19,7 @@ import game.grounds.spawners.Bush;
 import game.grounds.spawners.Graveyard;
 import game.grounds.spawners.Hut;
 import game.items.weapons.BroadSword;
+import game.items.weapons.GiantHammer;
 import game.items.weapons.GreatKnife;
 import game.utility.FancyMessage;
 
@@ -121,14 +123,17 @@ public class Application {
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
-                Thread.sleep(200);
+                Thread.sleep(1);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }
 
         Player player = new Player("The Abstracted One", '@', 1500000000, 200);
-        world.addPlayer(player, gameMap.at(29, 5));
+//        world.addPlayer(player, gameMap.at(29, 5));
+        world.addPlayer(player, gameMap.at(45, 5));
+        gameMap.at(45,6).addItem(new BroadSword());
+
 
         gameMap.at(30, 6).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
         burialGroundMap.at(31, 5).setGround(new Gate(ancientWoodsMap, gameMap.at(29,7), "The Ancient Woods"));
@@ -137,28 +142,33 @@ public class Application {
         BroadSword broadSword = new BroadSword();
         GreatKnife greatKnife = new GreatKnife();
         gameMap.at(29,6).addItem(broadSword);
-        gameMap.at(27,6).addItem(greatKnife);
+//        gameMap.at(28,5).addItem(greatKnife);
+        gameMap.at(45,4).addItem(new GiantHammer());
+        gameMap.at(44,4).addActor(new WanderingUndead());
+        gameMap.at(44,5).addActor(new WanderingUndead());
+//        gameMap.at(44,3).addActor(new WanderingUndead());
 
         WanderingUndead wanderingUndead = new WanderingUndead();
         HollowSoldier hollowSoldier = new HollowSoldier();
         ForestKeeper forestKeeper = new ForestKeeper();
         RedWolf redWolf = new RedWolf();
 
-        gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead, 0.25));
-        gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead, 0.25));
-        gameMap.at(18, 7).setGround(new Graveyard(wanderingUndead, 0.25));
-
-        burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier, 0.1));
-        burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier, 0.1));
-        burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier, 0.1));
-
-        ancientWoodsMap.at(27, 8).setGround(new Hut(forestKeeper, 0.15));
-        ancientWoodsMap.at(35, 3).setGround(new Hut(forestKeeper, 0.15));
-        ancientWoodsMap.at(18, 7).setGround(new Hut(forestKeeper, 0.15));
-
-        ancientWoodsMap.at(29, 10).setGround(new Bush(redWolf, 0.15));
-        ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf, 0.15));
-        ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf, 0.15));
+//        gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead, 0.25));
+//        gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead, 0.25));
+//        gameMap.at(18, 7).setGround(new Graveyard(wanderingUndead, 0.25));
+//        gameMap.at(30,5).addActor(new SuspiciousTraveller());
+//
+//        burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier, 0.1));
+//        burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier, 0.1));
+//        burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier, 0.1));
+//
+//        ancientWoodsMap.at(27, 8).setGround(new Hut(forestKeeper, 0.15));
+//        ancientWoodsMap.at(35, 3).setGround(new Hut(forestKeeper, 0.15));
+//        ancientWoodsMap.at(18, 7).setGround(new Hut(forestKeeper, 0.15));
+//
+//        ancientWoodsMap.at(29, 10).setGround(new Bush(redWolf, 0.15));
+//        ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf, 0.15));
+//        ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf, 0.15));
 
         world.run();
     }

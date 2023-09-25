@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Status;
 import game.actions.AOEAction;
 import game.actions.AttackAction;
+import game.actions.SellAction;
 import game.actions.StabAndStepAction;
 
 /**
@@ -124,24 +125,37 @@ public abstract class SkilledWeapon extends WeaponItem {
      * @param location The location being targeted.
      * @return An ActionList containing allowable actions for the actor.
      */
-    @Override
+//    @Override
+//    public ActionList allowableActions(Actor target, Location location) {
+//        System.out.println("a");
+//        ActionList actionList = new ActionList();
+////        actionList.add(new AttackAction(target, location.toString(), this));
+//        Location locationOfWielder = location.map().locationOf(wielder);
+//        for (Exit exit: locationOfWielder.getExits()) {
+//            System.out.println("bbb");
+//            Location destination = exit.getDestination();
+//            if (destination.containsAnActor() && !destination.getActor().hasCapability(Status.NON_HOSTILE)) {
+//                AttackAction attackAction = new AttackAction(destination.getActor(), exit.getName(), this);
+//                actionList.add(attackAction);
+//                if (this.hasCapability(Status.STAB_AND_STEP)) {
+//                    actionList.add(new StabAndStepAction(this, attackAction));
+//                }
+//                if (this.hasCapability(Status.AOE_POSSIBLE)) {
+//
+//                    actionList.add(new AOEAction(this, target,exit.getName()));
+//                }
+//            }
+//        }
+//        return actionList;
+//    }
+
+
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
-//        actionList.add(new AttackAction(target, location.toString(), this));
-        Location locationOfWielder = location.map().locationOf(wielder);
-        for (Exit exit: locationOfWielder.getExits()) {
-            Location destination = exit.getDestination();
-            if (destination.containsAnActor() && !destination.getActor().hasCapability(Status.NON_HOSTILE)) {
-                AttackAction attackAction = new AttackAction(destination.getActor(), exit.getName(), this);
-                actionList.add(attackAction);
-                if (this.hasCapability(Status.STAB_AND_STEP)) {
-                    actionList.add(new StabAndStepAction(this, attackAction));
-                }
-                if (this.hasCapability(Status.AOE_POSSIBLE)) {
-                    actionList.add(new AOEAction(this, target,exit.getName()));
-                }
-            }
+        if(target.hasCapability(Status.FRIENDLY_TO_ENEMY)) {
+            actionList.add(new AttackAction(target, location.toString(), this));
         }
+
         return actionList;
     }
 }

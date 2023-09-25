@@ -10,6 +10,8 @@ public enum Status {
     HOSTILE_TO_ENEMY,
     FRIENDLY_TO_ENEMY,
     FOCUS_SKILL,
+
+    TRADER,
     STAB_AND_STEP,
     NON_HOSTILE,
     AOE_POSSIBLE,

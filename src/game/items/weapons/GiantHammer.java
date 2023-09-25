@@ -1,6 +1,12 @@
 package game.items.weapons;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
+import game.actions.AOEAction;
+import game.actions.AttackAction;
+import game.actions.SellAction;
 
 public class GiantHammer extends SkilledWeapon{
     /**
@@ -9,6 +15,25 @@ public class GiantHammer extends SkilledWeapon{
     public GiantHammer() {
         super("Giant Hammer",'P', 160, "slams",90,0, false);
         addCapability(Status.AOE_POSSIBLE);
+    }
+
+    /**
+     * List of allowable actions that the item allows its owner do to other actor.
+     * Example #1: a weapon can return an attacking action to the other actor.
+     * Example #2: if the weapon has a special ability, it can return an action to use the special ability.
+     * Example #3: a food can return an action to feed the other actor.
+     *
+     * @param otherActor the other actor
+     * @param location the location of the other actor
+     * @return an unmodifiable list of Actions
+     */
+    public ActionList allowableActions(Actor target, Location location){
+        ActionList actionList = new ActionList();
+        if (target.hasCapability(Status.FRIENDLY_TO_ENEMY)){
+            actionList.add(new AOEAction(this,target,location.toString()));
+        }
+
+        return actionList;
     }
 
 

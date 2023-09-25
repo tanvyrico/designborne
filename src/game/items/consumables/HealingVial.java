@@ -5,13 +5,24 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
+import game.Status;
 import game.actions.ConsumeAction;
+import game.actions.PurchaseAction;
+import game.actions.SellAction;
+import game.items.Purchasable;
+import game.items.Sellable;
+
+import java.util.Random;
+
 /**
  * Class representing a healing vial item that can be consumed by an actor to restore health.
  */
-public class HealingVial extends Item implements Consumable{
+public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
+    private int sellingPrice = 35;
+    private int purchasePrice = 100;
 
     /**
      * Constructor for the HealingVial class.
@@ -19,6 +30,8 @@ public class HealingVial extends Item implements Consumable{
      */
     public HealingVial(){
         super("Healing vial", 'a', true);
+        this.addCapability(Ability.PURCHASABLE);
+        this.addCapability(Ability.SELLABLE);
     }
 
 
@@ -46,5 +59,35 @@ public class HealingVial extends Item implements Consumable{
     }
 
 
+    public String purchase(Actor actor) {
+        Random random = new Random();
+        if (random.nextDouble() <= 0.25) {
+            this.purchasePrice = (int) (this.purchasePrice * 1.5);
+        }
+        if (actor.getBalance() >= this.purchasePrice){
+            actor.deductBalance(this.purchasePrice);
+            actor.addItemToInventory(this);
+            return actor + " purchased " + this;
+        }
+        return "purchase failed!";
+    }
 
+    public String sell(Actor actor){
+        Random random = new Random();
+        if (random.nextDouble() <= 0.1) {
+            this.sellingPrice = this.sellingPrice * 2;
+        }
+        actor.addBalance(this.sellingPrice);
+        actor.removeItemFromInventory(this);
+        return actor + " sold " + this;
+    }
+
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = new ActionList();
+        if (target.hasCapability(Status.TRADER)) {
+            actionList.add(new SellAction(this));
+        }
+        return actionList;
+    }
 }
+

@@ -24,12 +24,20 @@ public class Void extends Ground {
      *
      * @param location The Location on the game map representing the void ground.
      */
+//    public void tick(Location location) {
+//        Actor actor = location.getActor();
+//        if (!actor.hasCapability(Ability.VOID_INVINCIBILITY)) {
+//            if (location.containsAnActor()) {
+//                actor.unconscious(location.map());
+//            }
+//        }
+//    }
+
     public void tick(Location location) {
         Actor actor = location.getActor();
-        if (!actor.hasCapability(Ability.VOID_INVINCIBILITY)) {
-            if (location.containsAnActor()) {
-                actor.unconscious(location.map());
-            }
+        if (location.containsAnActor()) {
+            actor.unconscious(location.map());
         }
     }
+
 }

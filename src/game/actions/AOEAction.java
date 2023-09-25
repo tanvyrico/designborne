@@ -53,6 +53,7 @@ public class AOEAction extends Action {
 
     public AOEAction(WeaponItem weaponItem, Actor target, String direction) {
         if (weaponItem.hasCapability(Status.AOE_POSSIBLE)) {
+            System.out.println("aoe");
             this.weapon = weaponItem;
             this.target = target;
             this.direction = direction;
@@ -77,9 +78,9 @@ public class AOEAction extends Action {
 
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, staminaNeeded);
         result += "\n" + new AttackAction(target,direction,weapon).execute(actor,map);
-        if (!target.isConscious()) {
-            result += "\n" + target.unconscious(actor, map);
-        }
+//        if (!target.isConscious()) {
+//            result += "\n" + target.unconscious(actor, map);
+//        }
 
         for (Exit exit: user.getExits()) {
             Location destination = exit.getDestination();
@@ -102,9 +103,9 @@ public class AOEAction extends Action {
                 int damage = weapon.damage() / 2;
                 result += "\n" + actor + " " + weapon.verb() + " " + eachHostile + " for " + damage + " damage.";
                 eachHostile.hurt(damage);
-                if (!eachHostile.isConscious()) {
-                    result += "\n" + eachHostile.unconscious(eachHostile, map);
-                }
+//                if (!eachHostile.isConscious()) {
+//                    result += "\n" + eachHostile.unconscious(eachHostile, map);
+//                }
             }
         }
 
@@ -121,6 +122,7 @@ public class AOEAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
+        System.out.println("prin desc");
         return actor + " attacks " + target + " and then other " +
                 " enemies with their unique/weapon's special skill in the direction of " +
                 direction + " first.";
