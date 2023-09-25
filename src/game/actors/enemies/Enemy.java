@@ -36,7 +36,7 @@ public abstract class Enemy extends Actor {
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.FRIENDLY_TO_ENEMY);
-        this.behaviours.put(0, new AttackBehaviour());
+        this.behaviours.put(1, new AttackBehaviour());
         this.behaviours.put(999, new WanderBehaviour());
     }
 

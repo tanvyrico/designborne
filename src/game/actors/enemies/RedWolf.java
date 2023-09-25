@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -15,11 +16,13 @@ import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
+import game.weather.AffectedByRainyWeather;
+import game.weather.AffectedBySunnyWeather;
 
 import java.util.Random;
 
-public class RedWolf extends Enemy{
-    private final int intrinsicDamage = 30;
+public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedByRainyWeather {
+    private int intrinsicDamage = 30;
 
     /**
      * Constructor for the RedWolf class.
@@ -74,6 +77,17 @@ public class RedWolf extends Enemy{
         return this + " met their demise at the hands of " + actor;
     }
 
+    public String sunnyWeatherModifications(){
+        this.intrinsicDamage = this.intrinsicDamage * 3;
+        this.setSpawnRate(this.getSpawnRate() / 1.5);
+        return "The red wolves are becoming more active. \n The red wolves are becoming more aggressive.";
+    }
+
+    @Override
+    public String rainyWeatherModifications() {
+        this.setSpawnRate(this.getSpawnRate() * 1.5);
+        return "The red wolves are becoming more active.";
+    }
 
 }
 

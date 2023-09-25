@@ -21,4 +21,5 @@ public class GiantHammer extends SkilledWeapon implements Sellable {
         return actor + " sold " + this;
     }
 
+
 }

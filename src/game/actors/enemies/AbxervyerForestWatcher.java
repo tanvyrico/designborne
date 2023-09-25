@@ -1,10 +1,15 @@
 package game.actors.enemies;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Ability;
+import game.actors.behaviours.FollowBehaviour;
 import game.grounds.Gate;
 import game.items.consumables.Runes;
 
@@ -20,8 +25,10 @@ public class AbxervyerForestWatcher extends Enemy {
 
      */
     public AbxervyerForestWatcher() {
-        super("Abxervyer the Forest Watcher", 'Y', 2000);
+        super("Abxervyer, The Forest Watcher", 'Y', 2000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
+        this.addBehaviour(100, new FollowBehaviour());
+        this.addCapability(Ability.CHANGE_WEATHER);
     }
 
     /**
@@ -59,10 +66,25 @@ public class AbxervyerForestWatcher extends Enemy {
 
         location.setGround(gate);
 
-
         location.addItem(new Runes(this.getBalance()));
         return this + " met their demise at the hands of " + actor;
     }
 
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
+        int currentPriority = Integer.MAX_VALUE;
+        Action currentAction = null ;
+        for (Integer key : getBehaviours().keySet()) {
+            Action action = getBehaviours().get(key).getAction(this,map);
+            if (key < currentPriority & action != null){
+                currentPriority = key;
+                currentAction = action;
+            }
+        }
+
+        if (currentAction != null){
+            return currentAction;
+        }
+        return new DoNothingAction();
+    }
 }

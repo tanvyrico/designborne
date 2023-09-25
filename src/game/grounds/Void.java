@@ -3,6 +3,7 @@ package game.grounds;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Ability;
 
 
 /**
@@ -25,7 +26,7 @@ public class Void extends Ground {
      */
     public void tick(Location location) {
         Actor actor = location.getActor();
-        if (location.containsAnActor()) {
+        if (location.containsAnActor() && ! actor.hasCapability(Ability.VOID_INVINCIBILITY)) {
             actor.unconscious(location.map());
         }
     }
