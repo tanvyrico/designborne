@@ -20,7 +20,7 @@ import java.util.Random;
  */
 public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
     private int sellingPrice = 100;
-    private int purchasePrice = 250;
+    private int purchasePrice;
 
     /**
      * Constructor for the BroadSword class.
@@ -60,6 +60,7 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
     }
 
     public String purchase(Actor actor) {
+        this.setPurchasePrice(actor);
         Random random = new Random();
         if (random.nextDouble() <= 0.05) {
             return "purchase failed!";
@@ -72,6 +73,11 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
         return "purchase failed!";
     }
 
+    public void setPurchasePrice(Actor actor) {
+        if (actor.hasCapability(Status.SUSPICIOUS)) {
+            this.purchasePrice = 250;
+        }
+    }
 
     @Override
     public String sell(Actor actor) {

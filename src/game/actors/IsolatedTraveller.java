@@ -26,6 +26,7 @@ public class IsolatedTraveller extends Actor {
     public IsolatedTraveller() {
         super("Isolated Traveller", 'ඞ', 2147483647);
         this.addCapability(Status.TRADER);
+        this.addCapability(Status.SUSPICIOUS);
         this.addBalance(9999999);
     }
 

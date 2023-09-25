@@ -22,7 +22,7 @@ import java.util.Random;
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
     private int sellingPrice = 35;
-    private int purchasePrice = 100;
+    private int purchasePrice;
 
     /**
      * Constructor for the HealingVial class.
@@ -60,6 +60,7 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
 
 
     public String purchase(Actor actor) {
+        this.setPurchasePrice(actor);
         Random random = new Random();
         if (random.nextDouble() <= 0.25) {
             this.purchasePrice = (int) (this.purchasePrice * 1.5);
@@ -70,6 +71,12 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             return actor + " purchased " + this;
         }
         return "purchase failed!";
+    }
+
+    public void setPurchasePrice(Actor actor) {
+        if (actor.hasCapability(Status.SUSPICIOUS)) {
+            this.purchasePrice = 100;
+        }
     }
 
     public String sell(Actor actor){

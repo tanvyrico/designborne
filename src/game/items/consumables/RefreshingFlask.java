@@ -23,7 +23,7 @@ import java.util.Random;
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
     private int sellingPrice = 25;
-    private int purchasePrice = 75;
+    private int purchasePrice;
 
     /**
      * Constructor for the RefreshingFlask class.
@@ -51,6 +51,7 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
     }
 
     public String purchase(Actor actor) {
+        this.setPurchasePrice(actor);
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
             this.purchasePrice = (int) (this.purchasePrice * 0.8);
@@ -61,6 +62,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
             return actor + " purchased " + this;
         }
         return "purchase failed!";
+    }
+
+    public void setPurchasePrice(Actor actor) {
+        if (actor.hasCapability(Status.SUSPICIOUS)) {
+            this.purchasePrice = 75;
+        }
     }
 
     public String sell(Actor actor){
