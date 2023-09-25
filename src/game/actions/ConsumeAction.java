@@ -6,21 +6,20 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 import game.Ability;
 import game.items.consumables.Consumable;
-import game.items.consumables.ConsumableItem;
 
 /**
  * A class representing an action where an actor consumes a consumable item.
  * This action allows an actor to consume a consumable item and gain the specified benefits.
  */
 public class ConsumeAction extends Action {
-    private ConsumableItem consumable;
+    private Consumable consumable;
 
     /**
      * Constructor for the ConsumeAction class.
      *
      * @param consumable The consumable item that the actor intends to consume.
      */
-    public ConsumeAction(ConsumableItem consumable) {
+    public ConsumeAction(Consumable consumable) {
         this.consumable = consumable;
     }
 
@@ -34,13 +33,7 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        this.consumable.consume(actor);
-
-        if(this.consumable.hasCapability(Ability.INCREASE_BALANCE)){
-            return actor + " consumes " + this.consumable + " and " + this.consumable + " increases " + actor + " balance by " + this.consumable.getBuffedPoints();
-        }
-        return actor + " consumes " + this.consumable + " and " + this.consumable + " restores the " +
-                this.consumable.getModifiedAttribute() + " of " + actor + " by " + this.consumable.getBuffedPoints() + " points.";
+        return this.consumable.consume(actor);
     }
 
     /**
