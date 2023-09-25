@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class Player extends Actor {
 
-    private final int intrinsicDamage = 15;
+    private final int intrinsicDamage = 15000;
     private final int hitRate = 80;
 
 
@@ -66,9 +66,10 @@ public class Player extends Actor {
             this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, (int) (this.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.01));
         }
 
-        display.println("Your health is: " + getAttribute(BaseActorAttributes.HEALTH));
-        display.println("Your stamina is: " + getAttribute(BaseActorAttributes.STAMINA));
-        display.println("Your balance is: " + this.getBalance());
+        display.println(this.name);
+        display.println("HP: " + getAttribute(BaseActorAttributes.HEALTH) + "/" + this.getAttributeMaximum(BaseActorAttributes.HEALTH));
+        display.println("Stamina: " + getAttribute(BaseActorAttributes.STAMINA) + "/" + this.getAttributeMaximum(BaseActorAttributes.STAMINA));
+        display.println("Runes: " + this.getBalance());
 
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
@@ -129,6 +130,8 @@ public class Player extends Actor {
 //
 //        return actionList;
 //    }
+
+
 }
 
 
