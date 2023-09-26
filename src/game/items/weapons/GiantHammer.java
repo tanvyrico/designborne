@@ -3,17 +3,18 @@ package game.items.weapons;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Status;
 import game.actions.AOEAction;
 import game.actions.AttackAction;
 import game.actions.SellAction;
 
-public class GiantHammer extends SkilledWeapon{
+public class GiantHammer extends WeaponItem {
     /**
      * Constructor for the SkilledWeapon class.
      */
     public GiantHammer() {
-        super("Giant Hammer",'P', 160, "slams",90,0, false);
+        super("Giant Hammer",'P', 160, "slams",90);
     }
 
     /**
@@ -29,6 +30,7 @@ public class GiantHammer extends SkilledWeapon{
     public ActionList allowableActions(Actor target, Location location){
         ActionList actionList = new ActionList();
         if (!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))){
+            actionList.add(new AttackAction(target, location.toString(), this));
             actionList.add(new AOEAction(this,target,location.toString()));
         }
 

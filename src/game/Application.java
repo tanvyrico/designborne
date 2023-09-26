@@ -143,7 +143,7 @@ public class Application {
         GreatKnife greatKnife = new GreatKnife();
         gameMap.at(29,6).addItem(broadSword);
 //        gameMap.at(28,5).addItem(greatKnife);
-        gameMap.at(45,4).addItem(new GreatKnife());
+        gameMap.at(45,4).addItem(new GiantHammer());
         gameMap.at(44,4).addActor(new WanderingUndead());
         gameMap.at(44,5).addActor(new WanderingUndead());
 //        gameMap.at(44,3).addActor(new WanderingUndead());

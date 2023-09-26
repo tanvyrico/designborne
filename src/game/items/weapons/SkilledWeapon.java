@@ -118,14 +118,11 @@ public abstract class SkilledWeapon extends WeaponItem {
         }
     }
 
-
-
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if(!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))) {
             actionList.add(new AttackAction(target, location.toString(), this));
         }
-
         return actionList;
     }
 }
