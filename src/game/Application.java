@@ -19,6 +19,7 @@ import game.grounds.spawners.Bush;
 import game.grounds.spawners.Graveyard;
 import game.grounds.spawners.Hut;
 import game.items.weapons.BroadSword;
+import game.items.weapons.GiantHammer;
 import game.utility.FancyMessage;
 
 /**
@@ -162,6 +163,19 @@ public class Application {
         ancientWoodsMap.at(29, 10).setGround(new Bush(redWolf));
         ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf));
         ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf));
+
+        AbxervyerMap.at(27, 8).setGround(new Hut(forestKeeper));
+        AbxervyerMap.at(35, 3).setGround(new Hut(forestKeeper));
+        AbxervyerMap.at(18, 7).setGround(new Hut(forestKeeper));
+
+        AbxervyerMap.at(29, 10).setGround(new Bush(redWolf));
+        AbxervyerMap.at(37, 5).setGround(new Bush(redWolf));
+        AbxervyerMap.at(20, 9).setGround(new Bush(redWolf));
+
+        GiantHammer giantHammer = new GiantHammer();
+        gameMap.at(20,10).addItem(giantHammer);
+
+
 
         world.run();
     }
