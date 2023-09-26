@@ -7,4 +7,5 @@ public interface FocusActionCapable {
     void increaseDamageMultiplierAndHitRate(float damageMultiplier,int hitRate);
 
     void resetWeaponStat();
+
 }
