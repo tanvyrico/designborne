@@ -12,6 +12,7 @@ import game.Ability;
 import game.actors.behaviours.FollowBehaviour;
 import game.grounds.Gate;
 import game.items.consumables.Runes;
+import game.utility.FancyMessage;
 
 
 public class AbxervyerForestWatcher extends Enemy {
@@ -26,6 +27,7 @@ public class AbxervyerForestWatcher extends Enemy {
      */
     public AbxervyerForestWatcher() {
         super("Abxervyer, The Forest Watcher", 'Y', 2000);
+        this.addBalance(5000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
         this.addBehaviour(100, new FollowBehaviour());
         this.addCapability(Ability.CHANGE_WEATHER);
@@ -60,13 +62,15 @@ public class AbxervyerForestWatcher extends Enemy {
      * @return A message describing the outcome of the Forest Keeper's defeat.
      */
     public String unconscious(Actor actor, GameMap map) {
+        Display display = new Display();
         Location location = map.locationOf(this);
-        Gate gate = new Gate(map, location, "Congrats You've Defeated The Abxervyer");
+        Gate gate = new Gate(map, location, "The Ancient Woods");
         map.removeActor(this);
 
         location.setGround(gate);
 
         location.addItem(new Runes(this.getBalance()));
+        display.println(FancyMessage.BOSS_FELLED);
         return this + " met their demise at the hands of " + actor;
     }
 
