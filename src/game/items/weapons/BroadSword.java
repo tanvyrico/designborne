@@ -2,13 +2,11 @@ package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Ability;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
 import game.Status;
-import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
@@ -59,25 +57,29 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
         return actionList;
     }
 
+    @Override
     public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.05) {
-            return "purchase failed!";
-        }
-        if (actor.getBalance() >= this.purchasePrice){
             actor.deductBalance(this.purchasePrice);
-            actor.addItemToInventory(this);
-            return actor + " purchased " + this;
+            return actor + " purchased but failed to get " + this;
+        }else{
+            if (actor.getBalance() >= this.purchasePrice){
+                actor.deductBalance(this.purchasePrice);
+                actor.addItemToInventory(this);
+                return actor + " purchased " + this + " at original price (" + this.sellingPrice +" runes)";
+            }else {
+                return "purchase failed!";
+            }
         }
-        return "purchase failed!";
     }
 
 
     @Override
     public String sell(Actor actor) {
-        actor.addBalance(sellingPrice);
+        actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+        return actor + " sold " + this + " at original price (" + this.sellingPrice +" runes)";
     }
 
 

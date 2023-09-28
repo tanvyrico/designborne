@@ -22,8 +22,8 @@ import java.util.Random;
  */
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
-    private int sellingPrice = 25;
-    private int purchasePrice = 75;
+    private final int sellingPrice = 25;
+    private final int purchasePrice = 75;
 
     /**
      * Constructor for the RefreshingFlask class.
@@ -53,25 +53,31 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
     public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            this.purchasePrice = (int) (this.purchasePrice * 0.8);
-        }
-        if (actor.getBalance() >= this.purchasePrice){
-            actor.deductBalance(this.purchasePrice);
+            int luckyPrice = (int) (this.purchasePrice * 0.8);
+            actor.deductBalance(luckyPrice);
             actor.addItemToInventory(this);
-            return actor + " purchased " + this;
+            return actor + " purchased " + this + " with 20% discount (" + luckyPrice + " runes)";
+        }else{
+            if (actor.getBalance() >= this.purchasePrice){
+                actor.deductBalance(this.purchasePrice);
+                actor.addItemToInventory(this);
+                return actor + " purchased " + this + " at original price (" + this.purchasePrice +" runes)";
+            }else{
+                return "purchase failed!";
+            }
         }
-        return "purchase failed!";
     }
 
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
-            return actor + " sold " + this;
+            return actor + " sold " + this + " without paid";
+        } else{
+            actor.addBalance(this.sellingPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at original price (" + this.sellingPrice +" runes)";
         }
-        actor.addBalance(sellingPrice);
-        actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
     }
 
     public ActionList allowableActions(Actor target, Location location) {

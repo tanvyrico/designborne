@@ -21,8 +21,8 @@ import java.util.Random;
  */
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
-    private int sellingPrice = 35;
-    private int purchasePrice = 100;
+    private final int sellingPrice = 35;
+    private final int purchasePrice = 100;
 
     /**
      * Constructor for the HealingVial class.
