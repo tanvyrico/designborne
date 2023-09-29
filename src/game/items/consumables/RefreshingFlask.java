@@ -53,26 +53,43 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
     public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            this.purchasePrice = (int) (this.purchasePrice * 0.8);
+            int luckyPrice = (int) (this.purchasePrice * 0.8);
+            actor.deductBalance(luckyPrice);
+            actor.addItemToInventory(this);
+            return actor + " purchased " + this + " with a 20% discount (" + luckyPrice + " runes)";
         }
         if (actor.getBalance() >= this.purchasePrice){
             actor.deductBalance(this.purchasePrice);
             actor.addItemToInventory(this);
-            return actor + " purchased " + this;
+            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice +" runes)";
         }
-        return "purchase failed!";
+        return actor + " failed to purchase " + this + " due to insufficient runes!";
     }
+
+    @Override
+    public int getPurchasePrice() {
+        return this.purchasePrice;
+    }
+
+
 
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
-            return actor + " sold " + this;
+            return actor + " sold " + this + " without being paid!";
         }
-        actor.addBalance(sellingPrice);
+        actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
     }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
+    }
+
+
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();

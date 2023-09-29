@@ -62,25 +62,46 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
     public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.25) {
-            this.purchasePrice = (int) (this.purchasePrice * 1.5);
+            int unluckyPrice = (int) (this.purchasePrice * 1.5);
+            actor.deductBalance(unluckyPrice);
+            actor.addItemToInventory(this);
+            return actor + " purchased " + this + " at a 50% higher price (" + unluckyPrice + " runes)";
         }
-        if (actor.getBalance() >= this.purchasePrice){
+        if (actor.getBalance() >= this.purchasePrice) {
             actor.deductBalance(this.purchasePrice);
             actor.addItemToInventory(this);
-            return actor + " purchased " + this;
+            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice + " runes)";
         }
-        return "purchase failed!";
+        return actor + " failed to purchase " + this + " due to insufficient runes!";
     }
+
+    @Override
+    public int getPurchasePrice() {
+        return this.purchasePrice;
+    }
+
 
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            this.sellingPrice = this.sellingPrice * 2;
+            int luckyPrice = this.sellingPrice * 2;
+            actor.addBalance(luckyPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at double its normal price (" + luckyPrice + " runes)";
         }
         actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
     }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
+    }
+
+
+
+
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();

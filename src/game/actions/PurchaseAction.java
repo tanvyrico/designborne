@@ -20,6 +20,6 @@ public class PurchaseAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " purchases " + this.purchasable;
+        return actor + " purchases " + this.purchasable + " for " + this.purchasable.getPurchasePrice() + " runes";
     }
 }

@@ -85,25 +85,41 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         return actionList;
     }
 
+    @Override
     public String purchase(Actor actor) {
         Random random = new Random();
         if (random.nextDouble() <= 0.05) {
-            return "purchase failed!";
+            actor.deductBalance(this.purchasePrice);
+            return actor + " paid " + this.purchasePrice + " runes but did not receive " + this;
         }
         if (actor.getBalance() >= this.purchasePrice){
             actor.deductBalance(this.purchasePrice);
             actor.addItemToInventory(this);
-            return actor + " purchased " + this;
+            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice +" runes)";
         }
-        return "purchase failed!";
+        return actor + " failed to purchase " + this + " due to insufficient runes!";
     }
 
     @Override
-    public String sell(Actor actor) {
-        actor.addBalance(sellingPrice);
-        actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+    public int getPurchasePrice() {
+        return this.purchasePrice;
     }
+
+
+
+    @Override
+    public String sell(Actor actor) {
+        actor.addBalance(this.sellingPrice);
+        actor.removeItemFromInventory(this);
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+    }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
+    }
+
+
 
 }
 

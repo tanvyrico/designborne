@@ -39,10 +39,15 @@ public class Bloodberry extends Item implements Consumable, Sellable {
     public String sell(Actor actor) {
         actor.addBalance(sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
     }
 
-    public ActionList allowableActions(Actor target, Location location) {
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
+    }
+
+        public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
