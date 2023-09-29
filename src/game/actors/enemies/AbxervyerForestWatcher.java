@@ -24,6 +24,11 @@ public class AbxervyerForestWatcher extends Enemy {
         this.addCapability(Ability.VOID_INVINCIBILITY);
     }
 
+    @Override
+    public double getSpawnRate(){
+        return 0.0;
+    }
+
     /**
      * Spawns a ForestKeeper.
      *
