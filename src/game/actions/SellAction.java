@@ -19,6 +19,6 @@ public class SellAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " sells " + this.sellable;
+        return actor + " sells " + this.sellable + " for " + this.sellable.getSellingPrice() + " runes";
     }
 }

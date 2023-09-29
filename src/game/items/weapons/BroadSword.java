@@ -62,16 +62,19 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
         Random random = new Random();
         if (random.nextDouble() <= 0.05) {
             actor.deductBalance(this.purchasePrice);
-            return actor + " purchased but failed to get " + this;
-        }else{
-            if (actor.getBalance() >= this.purchasePrice){
-                actor.deductBalance(this.purchasePrice);
-                actor.addItemToInventory(this);
-                return actor + " purchased " + this + " at original price (" + this.sellingPrice +" runes)";
-            }else {
-                return "purchase failed!";
-            }
+            return actor + " paid " + this.purchasePrice + " runes but did not receive " + this;
         }
+        if (actor.getBalance() >= this.purchasePrice){
+            actor.deductBalance(this.purchasePrice);
+            actor.addItemToInventory(this);
+            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice +" runes)";
+        }
+        return actor + " failed to purchase " + this + " due to insufficient runes!";
+    }
+
+    @Override
+    public int getPurchasePrice() {
+        return this.purchasePrice;
     }
 
 
@@ -79,7 +82,12 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
     public String sell(Actor actor) {
         actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this + " at original price (" + this.sellingPrice +" runes)";
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+    }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
     }
 
 

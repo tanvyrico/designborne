@@ -65,17 +65,21 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             int unluckyPrice = (int) (this.purchasePrice * 1.5);
             actor.deductBalance(unluckyPrice);
             actor.addItemToInventory(this);
-            return "Unfortunately, " + actor + " purchased " + this + " at a 50% higher price (" + unluckyPrice + " runes)";
-        } else{
-            if (actor.getBalance() >= this.purchasePrice) {
-            actor.deductBalance(this.purchasePrice);
-            actor.addItemToInventory(this);
-            return actor + " purchased " + this + " at its original price (" + this.purchasePrice + " runes)";
-            } else {
-                return "purchase failed!";
-            }
+            return actor + " purchased " + this + " at a 50% higher price (" + unluckyPrice + " runes)";
         }
+        if (actor.getBalance() >= this.purchasePrice) {
+        actor.deductBalance(this.purchasePrice);
+        actor.addItemToInventory(this);
+        return actor + " purchased " + this + " at its normal price (" + this.purchasePrice + " runes)";
+        }
+        return actor + " failed to purchase " + this + " due to insufficient runes!";
     }
+
+    @Override
+    public int getPurchasePrice() {
+        return this.purchasePrice;
+    }
+
 
     public String sell(Actor actor){
         Random random = new Random();
@@ -83,14 +87,18 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             int luckyPrice = this.sellingPrice * 2;
             actor.addBalance(luckyPrice);
             actor.removeItemFromInventory(this);
-            return "Luckily " + actor + " sold " + this + " at double the original price (" + luckyPrice + " runes)";
-        }else{
-            actor.addBalance(this.sellingPrice);
-            actor.removeItemFromInventory(this);
-            return actor + " sold " + this + " at original price (" + this.sellingPrice +" runes)";
+            return actor + " sold " + this + " at double its normal price (" + luckyPrice + " runes)";
         }
-
+        actor.addBalance(this.sellingPrice);
+        actor.removeItemFromInventory(this);
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
     }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
+    }
+
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
