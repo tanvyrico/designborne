@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.weapons.FocusActionCapable;
 import game.items.weapons.SkilledWeapon;
 
 /**
@@ -13,19 +14,21 @@ import game.items.weapons.SkilledWeapon;
  */
 public class FocusAction extends Action {
 
-    private float damageMultiplier = 0.1f;
+    private final float INCREASE_AMOUNT_MULTIPLIER = 0.1f;
 
-    private int hitRate = 90;
+    private final int NEW_HIT_RATE = 90;
 
-    private SkilledWeapon skilledWeapon;
+    private final int ACTIVATION_TURN = 5;
+
+    private FocusActionCapable weapon;
 
     /**
      * Constructor for the FocusAction class.
      *
      * @param skilledWeapon The skilled weapon for which the actor intends to activate the special ability.
      */
-    public FocusAction(SkilledWeapon skilledWeapon){
-        this.skilledWeapon = skilledWeapon;
+    public FocusAction(FocusActionCapable skilledWeapon){
+        this.weapon= skilledWeapon;
     }
 
     /**
@@ -39,15 +42,10 @@ public class FocusAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         int staminaNeeded = (int) (actor.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.2);
-
         if (actor.getAttribute(BaseActorAttributes.STAMINA) >= staminaNeeded){
-            skilledWeapon.setSkillStatus(true);
-            skilledWeapon.setRemainingTurns(5);
-            skilledWeapon.increaseDamageMultiplier(damageMultiplier);
-            skilledWeapon.updateHitRate(hitRate);
-
+            weapon.setSkillTurn(ACTIVATION_TURN);
+            weapon.increaseDamageMultiplierAndHitRate(INCREASE_AMOUNT_MULTIPLIER,NEW_HIT_RATE);
             actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, staminaNeeded);
-
             return actor + " takes a deep breath and focuses all their might!";
         }
 

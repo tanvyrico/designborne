@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Ability;
@@ -22,6 +23,8 @@ public abstract class SkilledWeapon extends WeaponItem {
     private int remainingTurns;
     private boolean skillActivated;
     private int initialHitRate;
+
+    private Actor wielder = null;
 
     /**
      * Constructor for the SkilledWeapon class.
@@ -95,6 +98,7 @@ public abstract class SkilledWeapon extends WeaponItem {
      */
     public PickUpAction getPickUpAction(Actor actor) {
         this.endSkill();
+        this.wielder = actor;
         return new PickUpAction(this);
     }
 
@@ -116,7 +120,13 @@ public abstract class SkilledWeapon extends WeaponItem {
         }
     }
 
-
+    public ActionList allowableActions(Actor target, Location location) {
+        ActionList actionList = new ActionList();
+        if(!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))) {
+            actionList.add(new AttackAction(target, location.toString(), this));
+        }
+        return actionList;
+    }
 }
 
 

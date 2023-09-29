@@ -33,6 +33,8 @@ public class SuspiciousTraveller extends Actor {
     public SuspiciousTraveller() {
         super("Suspicious Traveller", 'ඞ', 1000);
         this.addCapability(Status.TRADER);
+        this.addCapability(Status.HOSTILE_TO_ENEMY);
+        this.addCapability(Status.FRIENDLY_TO_ENEMY);
         this.addBalance(9999999);
     }
 
@@ -55,9 +57,9 @@ public class SuspiciousTraveller extends Actor {
 //                        for (Action action : item.allowableActions(otherActor, destination)) {
 //                            actionList.add(action);
 //                        }
-                    }
                 }
             }
+        }
 
         return actionList;
 
