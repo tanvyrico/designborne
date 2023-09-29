@@ -35,10 +35,17 @@ public class WanderingUndead extends Enemy {
      *
      * @return A new instance of the WanderingUndead enemy.
      */
+    @Override
     public WanderingUndead spawnEnemy() {
         return new WanderingUndead();
     }
 
+    /**
+     * Retrieves the spawn rate of the Wandering Undead.
+     *
+     * @return The spawn rate of the Wandering Undead.
+     */
+    @Override
     public double getSpawnRate(){return this.spawnRate;}
     /**
      * Retrieves the intrinsic weapon used by the Wandering Undead.

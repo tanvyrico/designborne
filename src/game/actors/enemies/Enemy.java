@@ -6,9 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.WanderBehaviour;
@@ -66,9 +64,24 @@ public abstract class Enemy extends Actor {
         return new DoNothingAction();
     }
 
+    /**
+     * Adds a behavior with a specified priority to the enemy's list of behaviors.
+     *
+     * @param priority  The priority of the behavior (lower values have higher priority).
+     * @param behaviour The behavior to be added.
+     */
     public void addBehaviour(Integer priority,Behaviour behaviour){
         this.behaviours.put(priority,behaviour);
     }
+
+    /**
+     * Overrides the allowableActions method to specify actions that can be taken by other actors when interacting with this enemy.
+     *
+     * @param otherActor The actor interacting with this enemy.
+     * @param direction  The direction from which the interaction is happening.
+     * @param map        The GameMap containing the enemy.
+     * @return A list of allowable actions for the interaction.
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
@@ -94,6 +107,11 @@ public abstract class Enemy extends Actor {
      */
     public abstract Enemy spawnEnemy();
 
+    /**
+     * Abstract method to get the spawn rate of this enemy.
+     *
+     * @return The spawn rate of the enemy.
+     */
     public abstract double getSpawnRate();
 
 }

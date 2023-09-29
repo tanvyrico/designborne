@@ -8,7 +8,10 @@ import game.Ability;
 import game.grounds.Gate;
 import game.items.consumables.Runes;
 
-
+/**
+ * A class representing Abxervyer the Forest Watcher, a powerful enemy in the game.
+ * This enemy has high health, an intrinsic weapon, and the ability to drop runes upon defeat.
+ */
 public class AbxervyerForestWatcher extends Enemy {
 
     private int intrinsicDamage = 80;
@@ -17,13 +20,17 @@ public class AbxervyerForestWatcher extends Enemy {
 
     /**
      * Constructor for the Enemy class.
-
      */
     public AbxervyerForestWatcher() {
         super("Abxervyer the Forest Watcher", 'Y', 2000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
     }
 
+    /**
+     * Gets the spawn rate for this enemy.
+     *
+     * @return The spawn rate of this enemy, which is always 0.
+     */
     @Override
     public double getSpawnRate(){
         return 0.0;
@@ -63,7 +70,6 @@ public class AbxervyerForestWatcher extends Enemy {
         map.removeActor(this);
 
         location.setGround(gate);
-
 
         location.addItem(new Runes(this.getBalance()));
         return this + " met their demise at the hands of " + actor;

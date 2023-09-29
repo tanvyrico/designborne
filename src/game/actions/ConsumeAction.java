@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-import game.Ability;
 import game.items.consumables.Consumable;
 
 /**
@@ -37,7 +36,7 @@ public class ConsumeAction extends Action {
     }
 
     /**
-     * Returns a description of the ConsumeAction for use in menus or UI.
+     * Returns a description of the ConsumeAction for use in menus.
      *
      * @param actor The actor for whom the description is generated.
      * @return A string describing the action for display in menus.

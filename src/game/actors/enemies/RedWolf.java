@@ -1,17 +1,9 @@
 package game.actors.enemies;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.Status;
-import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
@@ -39,10 +31,17 @@ public class RedWolf extends Enemy{
      *
      * @return A new instance of the RedWolf enemy.
      */
+    @Override
     public RedWolf spawnEnemy() {
         return new RedWolf();
     }
 
+    /**
+     * Retrieves the spawn rate of the Red Wolf.
+     *
+     * @return The spawn rate of the Red Wolf.
+     */
+    @Override
     public double getSpawnRate(){return this.spawnRate;}
 
     /**
@@ -76,8 +75,6 @@ public class RedWolf extends Enemy{
 
         return this + " met their demise at the hands of " + actor;
     }
-
-
 }
 
 

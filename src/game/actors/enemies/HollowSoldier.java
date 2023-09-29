@@ -32,10 +32,17 @@ public class HollowSoldier extends Enemy {
      *
      * @return A new instance of the HollowSoldier enemy.
      */
+    @Override
     public HollowSoldier spawnEnemy() {
         return new HollowSoldier();
     }
 
+    /**
+     * Retrieves the spawn rate of the Hollow Soldier.
+     *
+     * @return The spawn rate of the Hollow Soldier.
+     */
+    @Override
     public double getSpawnRate(){return this.spawnRate;}
 
     /**

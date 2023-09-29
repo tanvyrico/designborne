@@ -9,13 +9,28 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import game.Status;
 
+/**
+ * A behavior class representing the behavior of an actor following a target actor.
+ * This behavior is typically used for hostile actors to pursue a target with a specific capability.
+ */
 public class FollowBehaviour implements Behaviour {
 
     private Actor target ;
+
+    /**
+     * Constructs a FollowBehaviour instance with an initial target set to null.
+     */
     public FollowBehaviour() {
         this.target = null;
     }
 
+    /**
+     * Retrieves the action for an actor to follow the target actor based on their current position.
+     *
+     * @param actor The actor performing the behavior.
+     * @param map   The GameMap where the behavior occurs.
+     * @return An action for the actor to follow the target or null if no valid action can be taken.
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location here = map.locationOf(actor);
@@ -51,11 +66,11 @@ public class FollowBehaviour implements Behaviour {
     }
 
     /**
-     * Compute the Manhattan distance between two locations.
+     * Computes the Manhattan distance between two locations.
      *
-     * @param a the first location
-     * @param b the first location
-     * @return the number of steps between a and b if you only move in the four cardinal directions.
+     * @param a The first location.
+     * @param b The second location.
+     * @return The number of steps between location a and location b if movement is allowed in the four cardinal directions.
      */
     private int distance(Location a, Location b) {
         return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
