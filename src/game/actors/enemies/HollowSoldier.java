@@ -16,6 +16,7 @@ import java.util.Random;
  */
 public class HollowSoldier extends Enemy {
     private final int intrinsicDamage = 50;
+    private final double spawnRate = 0.1;
 
     /**
      * Constructor for the HollowSoldier class.
@@ -26,8 +27,6 @@ public class HollowSoldier extends Enemy {
         this.addBalance(100);
     }
 
-
-
     /**
      * Spawns a HollowSoldier.
      *
@@ -36,6 +35,8 @@ public class HollowSoldier extends Enemy {
     public HollowSoldier spawnEnemy() {
         return new HollowSoldier();
     }
+
+    public double getSpawnRate(){return this.spawnRate;}
 
     /**
      * Retrieves the intrinsic weapon used by the Hollow Soldier.

@@ -22,4 +22,3 @@ public class SellAction extends Action {
         return actor + " sells " + this.sellable + " for " + this.sellable.getSellingPrice() + " runes";
     }
 }
-

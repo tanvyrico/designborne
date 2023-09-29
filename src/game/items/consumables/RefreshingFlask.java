@@ -72,7 +72,6 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
     }
 
 
-
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.5) {
@@ -82,13 +81,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
-    }
+        }
 
     @Override
     public int getSellingPrice() {
         return this.sellingPrice;
     }
-
 
 
     public ActionList allowableActions(Actor target, Location location) {

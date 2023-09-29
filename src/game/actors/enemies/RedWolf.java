@@ -21,6 +21,8 @@ import java.util.Random;
 public class RedWolf extends Enemy{
     private final int intrinsicDamage = 30;
 
+    private final double spawnRate = 0.15;
+
     /**
      * Constructor for the RedWolf class.
      */
@@ -40,6 +42,8 @@ public class RedWolf extends Enemy{
     public RedWolf spawnEnemy() {
         return new RedWolf();
     }
+
+    public double getSpawnRate(){return this.spawnRate;}
 
     /**
      * Retrieves the intrinsic weapon used by the Red Wolf.

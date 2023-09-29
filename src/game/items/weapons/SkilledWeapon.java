@@ -2,15 +2,17 @@ package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Status;
-import game.actions.AOEAction;
+import game.Ability;
 import game.actions.AttackAction;
+import game.actions.PurchaseAction;
 import game.actions.SellAction;
-import game.actions.StabAndStepAction;
+import game.items.Purchasable;
+import game.items.Sellable;
 
 /**
  * An abstract class representing a skilled weapon that extends the capabilities of a standard weapon.

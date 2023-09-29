@@ -18,6 +18,7 @@ import java.util.Random;
  */
 public class WanderingUndead extends Enemy {
     private final int intrinsicDamage = 30;
+    private final double spawnRate = 0.25;
 
     /**
      * Constructor for the WanderingUndead class.
@@ -38,6 +39,7 @@ public class WanderingUndead extends Enemy {
         return new WanderingUndead();
     }
 
+    public double getSpawnRate(){return this.spawnRate;}
     /**
      * Retrieves the intrinsic weapon used by the Wandering Undead.
      *

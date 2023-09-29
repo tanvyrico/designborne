@@ -100,9 +100,6 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
     }
 
 
-
-
-
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
