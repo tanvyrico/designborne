@@ -2,10 +2,16 @@ package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.Ability;
 import game.actions.AttackAction;
+import game.actions.PurchaseAction;
+import game.actions.SellAction;
+import game.items.Purchasable;
+import game.items.Sellable;
 
 /**
  * An abstract class representing a skilled weapon that extends the capabilities of a standard weapon.
@@ -110,19 +116,7 @@ public abstract class SkilledWeapon extends WeaponItem {
         }
     }
 
-    /**
-     * Generates a list of allowable actions for an actor targeting a location with this skilled weapon.
-     *
-     * @param target   The actor being targeted.
-     * @param location The location being targeted.
-     * @return An ActionList containing allowable actions for the actor.
-     */
-    @Override
-    public ActionList allowableActions(Actor target, Location location) {
-        ActionList actionList = new ActionList();
-        actionList.add(new AttackAction(target, location.toString(), this));
-        return actionList;
-    }
+
 }
 
 

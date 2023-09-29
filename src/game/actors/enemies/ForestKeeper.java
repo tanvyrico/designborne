@@ -22,6 +22,7 @@ import java.util.Random;
 public class ForestKeeper extends Enemy {
     private final int intrinsicDamage = 25;
 
+    private final double spawnRate = 0.15;
 
     /**
      * Constructor for the ForestKeeper class.
@@ -42,6 +43,8 @@ public class ForestKeeper extends Enemy {
     public Enemy spawnEnemy() {
         return new ForestKeeper();
     }
+
+    public double getSpawnRate(){return this.spawnRate;}
 
     /**
      * Retrieves the intrinsic weapon used by the Forest Keeper.
