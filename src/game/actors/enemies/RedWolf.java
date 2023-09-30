@@ -89,6 +89,18 @@ public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedBy
         return "The red wolves are becoming more active.";
     }
 
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
+
+        if (map.locationOf(this).getGround().hasCapability(Status.SUNNY)){
+            display.println(sunnyWeatherModifications());
+
+        }else if (map.locationOf(this).getGround().hasCapability(Status.RAINY)){
+            display.println(rainyWeatherModifications());
+        }
+        return super.playTurn(actions,lastAction,map,display);
+    }
+
+
 }
 
 

@@ -1,11 +1,15 @@
 package game.actors.enemies;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Status;
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
@@ -86,5 +90,15 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
         this.setSpawnRate(this.getSpawnRate() / 2);
         return healedMessage + "The forest keepers are becoming less active.";
     }
+
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
+        if (map.locationOf(this).getGround().hasCapability(Status.SUNNY)){
+            display.println(sunnyWeatherModifications());
+        }else if (map.locationOf(this).getGround().hasCapability(Status.RAINY)){
+            display.println(rainyWeatherModifications());
+        }
+        return super.playTurn(actions,lastAction,map,display);
+}
+
 
 }
