@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Ability;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
@@ -18,16 +19,19 @@ import java.util.Random;
 /**
  * Class representing a Broadsword, a type of weapon that can perform a special "Focus" skill.
  */
-public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
+public class BroadSword extends WeaponItem implements Purchasable, Sellable, FocusActionCapable {
     private int sellingPrice = 100;
-    private int purchasePrice;
+
+    private int specialSkillTurn = 0;
+
+    private int initialHitRate;
 
     /**
      * Constructor for the BroadSword class.
      */
     public BroadSword() {
-        super("Broadsword", '1', 110, "slashes", 80, 5, false);
-        this.addCapability(Status.FOCUS_SKILL);
+        super("Broadsword", '1', 110, "slashes", 80);
+        this.initialHitRate = 80;
         this.addCapability(Ability.PURCHASABLE);
         this.addCapability(Ability.SELLABLE);
     }
@@ -49,7 +53,7 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
-        if(target.hasCapability(Status.FRIENDLY_TO_ENEMY)) {
+        if(!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))) {
             actionList.add(new AttackAction(target, location.toString(), this));
         }
         if (target.hasCapability(Status.TRADER)) {
@@ -59,32 +63,65 @@ public class BroadSword extends SkilledWeapon implements Purchasable, Sellable {
         return actionList;
     }
 
-    public String purchase(Actor actor) {
-        this.setPurchasePrice(actor);
-        Random random = new Random();
-        if (random.nextDouble() <= 0.05) {
-            return "purchase failed!";
-        }
-        if (actor.getBalance() >= this.purchasePrice){
-            actor.deductBalance(this.purchasePrice);
-            actor.addItemToInventory(this);
-            return actor + " purchased " + this;
-        }
-        return "purchase failed!";
+    public void setSkillTurn(int turn){
+        this.specialSkillTurn = turn;
     }
 
-    public void setPurchasePrice(Actor actor) {
-        if (actor.hasCapability(Status.SUSPICIOUS)) {
-            this.purchasePrice = 250;
+    public void increaseDamageMultiplierAndHitRate(float damageMultiplier,int hitRate){
+        this.increaseDamageMultiplier(damageMultiplier);
+        this.updateHitRate(hitRate);
+    }
+
+    public void decrementSkillTurn(){
+        this.specialSkillTurn -= 1;
+    }
+
+    public void resetWeaponStat(){
+        this.updateHitRate(initialHitRate);
+        this.updateDamageMultiplier(1f);
+    }
+
+    public void tick(Location currentLocation, Actor actor) {
+        decrementSkillTurn();
+        if ( this.specialSkillTurn == 0){
+            resetWeaponStat();
         }
+    }
+    @Override
+    public String purchase(Actor actor,Actor seller) {
+        Random random = new Random();
+        int purchasePrice = getPurchasePrice(seller);
+
+        if (actor.getBalance() >= purchasePrice){
+            actor.deductBalance(purchasePrice);
+            if (random.nextDouble() <= 0.05){
+                return actor + " paid " + getPurchasePrice(seller) + " runes but did not receive " + this;
+            }else {
+                actor.addItemToInventory(this);
+                return actor + " purchased " + this + " for " + purchasePrice+" runes)";
+            }
+        }
+        return actor + " failed to purchase " + this + " due to insufficient runes!";
+    }
+
+    @Override
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)) {
+            return  250;
+        }
+        return 0;
     }
 
     @Override
     public String sell(Actor actor) {
-        actor.addBalance(sellingPrice);
+        actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
     }
 
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
+    }
 
 }

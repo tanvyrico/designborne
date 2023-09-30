@@ -8,18 +8,22 @@ import game.items.Purchasable;
 public class PurchaseAction extends Action {
     private Purchasable purchasable;
 
-    public PurchaseAction(Purchasable purchasable){
+    private Actor seller;
+
+    public PurchaseAction(Purchasable purchasable,Actor seller){
         this.purchasable = purchasable;
+        this.seller = seller;
     }
 
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        return this.purchasable.purchase(actor);
+        return this.purchasable.purchase(actor,seller);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " purchases " + this.purchasable;
+        return actor + " purchases " + this.purchasable + " for " + purchasable.getPurchasePrice(seller) + " runes";
     }
 }
+

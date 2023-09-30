@@ -22,7 +22,7 @@ import java.util.Random;
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
     private int sellingPrice = 35;
-    private int purchasePrice;
+
 
     /**
      * Constructor for the HealingVial class.
@@ -59,34 +59,65 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
     }
 
 
-    public String purchase(Actor actor) {
-        this.setPurchasePrice(actor);
+//    public String purchase(Actor actor, Actor seller) {
+//        Random random = new Random();
+//        if (random.nextDouble() <= 0.25) {
+//            int unluckyPrice = (int) (getPurchasePrice(seller) * 1.5);
+//            if(actor.getBalance() >= unluckyPrice){
+//                actor.deductBalance(unluckyPrice);
+//                actor.addItemToInventory(this);
+//                return actor + " purchased " + this + " at a 50% higher price (" + unluckyPrice + " runes)";
+//            }else{
+//                return actor + " failed to purchase " + this + " at a 50% higher price ("+ unluckyPrice + "runes)";
+//            }
+//
+//        }
+//        if (actor.getBalance() >= getPurchasePrice(seller)) {
+//            actor.deductBalance(getPurchasePrice(seller));
+//            actor.addItemToInventory(this);
+//            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice + " runes)";
+//        }
+//        return actor + " failed to purchase " + this + " due to insufficient runes!";
+//    }
+
+    public String purchase(Actor actor, Actor seller) {
         Random random = new Random();
+        int purchasePrice = getPurchasePrice(seller);
         if (random.nextDouble() <= 0.25) {
-            this.purchasePrice = (int) (this.purchasePrice * 1.5);
+            purchasePrice = (int) (getPurchasePrice(seller) * 1.5);
         }
-        if (actor.getBalance() >= this.purchasePrice){
-            actor.deductBalance(this.purchasePrice);
+        if (actor.getBalance() >= purchasePrice) {
+            actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
-            return actor + " purchased " + this;
+            return actor + " purchased " + this + " for " + purchasePrice + " Runes)";
         }
-        return "purchase failed!";
+        return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
     }
 
-    public void setPurchasePrice(Actor actor) {
-        if (actor.hasCapability(Status.SUSPICIOUS)) {
-            this.purchasePrice = 100;
+    @Override
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)) {
+            return 100;
         }
+        return 0;
     }
 
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            this.sellingPrice = this.sellingPrice * 2;
+            int luckyPrice = this.sellingPrice * 2;
+            actor.addBalance(luckyPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at double its normal price (" + luckyPrice + " runes)";
         }
         actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+    }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
     }
 
     public ActionList allowableActions(Actor target, Location location) {
@@ -96,4 +127,5 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         }
         return actionList;
     }
+
 }

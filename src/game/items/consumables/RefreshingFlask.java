@@ -23,7 +23,6 @@ import java.util.Random;
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
     private int sellingPrice = 25;
-    private int purchasePrice;
 
     /**
      * Constructor for the RefreshingFlask class.
@@ -50,35 +49,43 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         return actionList;
     }
 
-    public String purchase(Actor actor) {
-        this.setPurchasePrice(actor);
+    public String purchase(Actor actor, Actor seller) {
+        int purchasePrice = getPurchasePrice(seller);
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            this.purchasePrice = (int) (this.purchasePrice * 0.8);
+            purchasePrice = (int) (purchasePrice * 0.8);
         }
-        if (actor.getBalance() >= this.purchasePrice){
-            actor.deductBalance(this.purchasePrice);
+        if (actor.getBalance() >= purchasePrice){
+            actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
         }
-        return "purchase failed!";
+        return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
     }
 
-    public void setPurchasePrice(Actor actor) {
-        if (actor.hasCapability(Status.SUSPICIOUS)) {
-            this.purchasePrice = 75;
+
+    @Override
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)){
+            return 75;
         }
+        return 0;
     }
 
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
-            return actor + " sold " + this;
+            return actor + " sold " + this + " without being paid!";
         }
-        actor.addBalance(sellingPrice);
+        actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this;
+        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+    }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
     }
 
     public ActionList allowableActions(Actor target, Location location) {
@@ -88,4 +95,5 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         }
         return actionList;
     }
+
 }
