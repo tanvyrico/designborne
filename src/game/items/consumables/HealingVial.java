@@ -67,8 +67,10 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this + " for " + purchasePrice + " Runes)";
+        }else {
+            return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
         }
-        return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
+
     }
 
     @Override
@@ -86,10 +88,12 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.addBalance(luckyPrice);
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " at double its normal price (" + luckyPrice + " runes)";
+        }else {
+            actor.addBalance(this.sellingPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
         }
-        actor.addBalance(this.sellingPrice);
-        actor.removeItemFromInventory(this);
-        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+
     }
 
     @Override

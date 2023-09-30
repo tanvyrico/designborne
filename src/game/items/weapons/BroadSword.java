@@ -98,8 +98,9 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
                 actor.addItemToInventory(this);
                 return actor + " purchased " + this + " for " + purchasePrice+" runes)";
             }
+        }else {
+            return actor + " failed to purchase " + this + " due to insufficient runes!";
         }
-        return actor + " failed to purchase " + this + " due to insufficient runes!";
     }
 
     @Override

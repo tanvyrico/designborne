@@ -57,8 +57,10 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
             actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
+        }else{
+            return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
         }
-        return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
+
     }
 
 
@@ -75,10 +77,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " without being paid!";
+        }else {
+            actor.addBalance(this.sellingPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
         }
-        actor.addBalance(this.sellingPrice);
-        actor.removeItemFromInventory(this);
-        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+
     }
 
     @Override
