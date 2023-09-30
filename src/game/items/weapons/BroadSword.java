@@ -2,14 +2,12 @@ package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Ability;
+import game.capabilities.Ability;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
-import game.Status;
-import game.actions.PurchaseAction;
+import game.capabilities.Status;
 import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
@@ -88,7 +86,7 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         }
     }
     @Override
-    public String purchase(Actor actor,Actor seller) {
+    public String purchase(Actor actor, Actor seller) {
         Random random = new Random();
         int purchasePrice = getPurchasePrice(seller);
 

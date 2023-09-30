@@ -1,4 +1,4 @@
-package game.actors.enemies;
+package game.actors.npc.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -6,13 +6,11 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.WanderBehaviour;
-import game.Status;
+import game.capabilities.Status;
 
 
 import java.util.HashMap;

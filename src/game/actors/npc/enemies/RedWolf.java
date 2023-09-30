@@ -1,18 +1,13 @@
-package game.actors.enemies;
+package game.actors.npc.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.Status;
-import game.actors.behaviours.AttackBehaviour;
+import game.capabilities.Status;
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;

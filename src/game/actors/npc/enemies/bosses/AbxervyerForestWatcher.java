@@ -1,4 +1,4 @@
-package game.actors.enemies;
+package game.actors.npc.enemies.bosses;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -7,8 +7,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.Ability;
-import game.Status;
+import game.actors.npc.enemies.Enemy;
+import game.capabilities.Ability;
+import game.capabilities.Status;
 import game.actors.behaviours.FollowBehaviour;
 import game.grounds.Gate;
 import game.grounds.maps.WeatherMaps;
@@ -25,6 +26,7 @@ public class AbxervyerForestWatcher extends Enemy {
     private int hitRate = 25;
 
     private int turnCount = 0;
+    private int targetTurn = 3;
 
     private ArrayList<WeatherMaps> affectedWeatherMap;
 
@@ -78,8 +80,9 @@ public class AbxervyerForestWatcher extends Enemy {
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        turnCount += 1;
-        if (turnCount % 3 == 0) {
+        turnCount++;
+        if (turnCount == targetTurn) {
+            turnCount = 0;
             for (WeatherMaps weatherMap : affectedWeatherMap) {
                 Enum<Status> weather = weatherList.get(weatherIndex % weatherList.size());
                 weatherMap.setWeather(weather);

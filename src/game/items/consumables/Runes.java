@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
-import game.Ability;
+import game.capabilities.Ability;
 import game.actions.ConsumeAction;
 import game.actions.PickUpRunesAction;
 

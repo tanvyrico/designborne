@@ -9,8 +9,6 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Status;
-import game.items.weapons.SkilledWeapon;
 
 public class StabAndStepAction extends Action {
 

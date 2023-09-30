@@ -6,8 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Ability;
-import game.Status;
+import game.capabilities.Status;
 import game.actions.ConsumeAction;
 import game.items.consumables.Consumable;
 

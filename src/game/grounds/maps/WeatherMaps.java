@@ -3,7 +3,7 @@ package game.grounds.maps;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.GroundFactory;
-import game.Status;
+import game.capabilities.Status;
 
 import java.util.List;
 

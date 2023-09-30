@@ -1,4 +1,4 @@
-package game.actors;
+package game.actors.npc.merchants;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.capabilities.Status;
 import game.actions.PurchaseAction;
 import game.items.Purchasable;
 import game.items.consumables.HealingVial;
