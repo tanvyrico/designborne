@@ -9,12 +9,12 @@ package game;
 public enum Status {
     HOSTILE_TO_ENEMY,
     FRIENDLY_TO_ENEMY,
-    FOCUS_SKILL,
+
     TRADER,
     SUSPICIOUS,
-    AOE_POSSIBLE,
-    STAB_AND_STEP,
-    NON_HOSTILE
+    NON_HOSTILE,
+    SUNNY,
+    RAINY
 
 
 }
