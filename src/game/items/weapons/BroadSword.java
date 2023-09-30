@@ -18,7 +18,7 @@ import java.util.Random;
  * Class representing a Broadsword, a type of weapon that can perform a special "Focus" skill.
  */
 public class BroadSword extends WeaponItem implements Purchasable, Sellable, FocusActionCapable {
-    private int sellingPrice = 100;
+    private final int sellingPrice = 100;
 
     private int specialSkillTurn = 0;
 

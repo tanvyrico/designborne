@@ -20,7 +20,7 @@ import java.util.Random;
  */
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
-    private int sellingPrice = 25;
+    private final int sellingPrice = 25;
 
     /**
      * Constructor for the RefreshingFlask class.

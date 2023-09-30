@@ -13,7 +13,7 @@ import game.items.Sellable;
 
 public class Bloodberry extends Item implements Consumable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
-    private int sellingPrice = 10;
+    private final int sellingPrice = 10;
 
     public Bloodberry() {
         super("Bloodberry", '*', true);
