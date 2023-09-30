@@ -59,25 +59,26 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
     }
 
 
-    public String purchase(Actor actor) {
+    public String purchase(Actor actor, Actor seller) {
         Random random = new Random();
+        int purchasePrice = getPurchasePrice(seller);
         if (random.nextDouble() <= 0.25) {
-            int unluckyPrice = (int) (this.purchasePrice * 1.5);
-            actor.deductBalance(unluckyPrice);
-            actor.addItemToInventory(this);
-            return actor + " purchased " + this + " at a 50% higher price (" + unluckyPrice + " runes)";
+            purchasePrice = (int) (getPurchasePrice(seller) * 1.5);
         }
-        if (actor.getBalance() >= this.purchasePrice) {
-            actor.deductBalance(this.purchasePrice);
+        if (actor.getBalance() >= purchasePrice) {
+            actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
-            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice + " runes)";
+            return actor + " purchased " + this + " for " + purchasePrice + " Runes)";
         }
-        return actor + " failed to purchase " + this + " due to insufficient runes!";
+        return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
     }
 
     @Override
-    public int getPurchasePrice() {
-        return this.purchasePrice;
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)) {
+            return 100;
+        }
+        return 0;
     }
 
 

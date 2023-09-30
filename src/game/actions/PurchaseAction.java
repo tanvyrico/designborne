@@ -11,12 +11,15 @@ import game.items.Purchasable;
 public class PurchaseAction extends Action {
     private Purchasable purchasable;
 
+    private Actor seller;
+
     /**
      * Constructor for the PurchaseAction class.
      *
      * @param purchasable The purchasable item to be purchased.
      */
-    public PurchaseAction(Purchasable purchasable){
+    public PurchaseAction(Purchasable purchasable, Actor seller){
+        this.seller = seller;
         this.purchasable = purchasable;
     }
 
@@ -30,7 +33,7 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return this.purchasable.purchase(actor);
+        return this.purchasable.purchase(actor,seller);
     }
 
     /**
@@ -41,6 +44,6 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " purchases " + this.purchasable + " for " + this.purchasable.getPurchasePrice() + " runes";
+        return actor + " purchases " + this.purchasable + " for " + this.purchasable.getPurchasePrice(seller) + " runes";
     }
 }

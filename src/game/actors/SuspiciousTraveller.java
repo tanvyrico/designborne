@@ -74,7 +74,7 @@ public class SuspiciousTraveller extends Actor {
             if (destination.containsAnActor()) {
                 if (destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
                     for (Purchasable purchasable : this.itemInventory) {
-                        actionList.add(new PurchaseAction(purchasable));
+                        actionList.add(new PurchaseAction(purchasable,this));
                     }
 //                    for (Item item : otherActor.getItemInventory()) {
 //                        for (Action action : item.allowableActions(otherActor, destination)) {

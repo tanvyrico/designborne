@@ -8,11 +8,14 @@ import game.Status;
 import game.actions.AOEAction;
 import game.actions.AttackAction;
 import game.actions.SellAction;
+import game.items.Sellable;
 
-public class GiantHammer extends WeaponItem {
+public class GiantHammer extends WeaponItem implements Sellable {
     /**
      * Constructor for the SkilledWeapon class.
      */
+
+    private int sellingPrice = 250;
     public GiantHammer() {
         super("Giant Hammer",'P', 160, "slams",90);
     }
@@ -33,8 +36,19 @@ public class GiantHammer extends WeaponItem {
             actionList.add(new AttackAction(target, location.toString(), this));
             actionList.add(new AOEAction(this,target,location.toString()));
         }
-
         return actionList;
+    }
+
+    @Override
+    public String sell(Actor actor) {
+        actor.addBalance(sellingPrice);
+        actor.removeItemFromInventory(this);
+        return actor + " sold " + this;
+    }
+
+    @Override
+    public int getSellingPrice() {
+        return sellingPrice;
     }
 
 }

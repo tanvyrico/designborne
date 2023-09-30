@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Ability;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
@@ -54,6 +55,8 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
     }
 
 
+
+
     public void tick(Location currentLocation, Actor actor) {
         decrementSkillTurn();
         if ( this.specialSkillTurn == 0){
@@ -87,25 +90,30 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
     }
 
     @Override
-    public String purchase(Actor actor) {
+    public String purchase(Actor actor,Actor seller) {
         Random random = new Random();
-        if (random.nextDouble() <= 0.05) {
-            actor.deductBalance(this.purchasePrice);
-            return actor + " paid " + this.purchasePrice + " runes but did not receive " + this;
-        }
-        if (actor.getBalance() >= this.purchasePrice){
-            actor.deductBalance(this.purchasePrice);
-            actor.addItemToInventory(this);
-            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice +" runes)";
+        int purchasePrice = getPurchasePrice(seller);
+
+        if (actor.getBalance() >= purchasePrice){
+            actor.deductBalance(purchasePrice);
+            if (random.nextDouble() <= 0.05){
+                return actor + " paid " + getPurchasePrice(seller) + " runes but did not receive " + this;
+            }else {
+                actor.addItemToInventory(this);
+                return actor + " purchased " + this + " for " + purchasePrice+" runes)";
+            }
+
         }
         return actor + " failed to purchase " + this + " due to insufficient runes!";
     }
 
     @Override
-    public int getPurchasePrice() {
-        return this.purchasePrice;
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)) {
+            return  250;
+        }
+        return 0;
     }
-
 
 
     @Override

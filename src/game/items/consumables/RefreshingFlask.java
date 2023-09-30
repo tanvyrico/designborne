@@ -50,25 +50,26 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         return actionList;
     }
 
-    public String purchase(Actor actor) {
+    public String purchase(Actor actor, Actor seller) {
+        int purchasePrice = getPurchasePrice(seller);
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
-            int luckyPrice = (int) (this.purchasePrice * 0.8);
-            actor.deductBalance(luckyPrice);
-            actor.addItemToInventory(this);
-            return actor + " purchased " + this + " with a 20% discount (" + luckyPrice + " runes)";
+            purchasePrice = (int) (purchasePrice * 0.8);
         }
-        if (actor.getBalance() >= this.purchasePrice){
-            actor.deductBalance(this.purchasePrice);
+        if (actor.getBalance() >= purchasePrice){
+            actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
-            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice +" runes)";
+            return actor + " purchased " + this;
         }
-        return actor + " failed to purchase " + this + " due to insufficient runes!";
+        return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
     }
 
     @Override
-    public int getPurchasePrice() {
-        return this.purchasePrice;
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)){
+            return 75;
+        }
+        return 0;
     }
 
 
