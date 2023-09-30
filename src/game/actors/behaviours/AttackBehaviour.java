@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import game.actions.AttackAction;
-import game.Status;
+import game.capabilities.Status;
 
 /**
  * A behavior representing an actor's ability to attack hostile actors in adjacent locations.

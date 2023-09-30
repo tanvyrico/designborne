@@ -1,7 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
-import game.Ability;
+import game.capabilities.Ability;
 
 /**
  * A class representing an old key item that can be used to open gates.
