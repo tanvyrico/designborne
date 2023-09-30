@@ -87,4 +87,9 @@ public class AbxervyerForestWatcher extends Enemy {
         }
         return super.playTurn(actions, lastAction, map, display);
     }
+
+    @Override
+    public Enemy spawnEnemy() {
+        return null;
+    }
 }
