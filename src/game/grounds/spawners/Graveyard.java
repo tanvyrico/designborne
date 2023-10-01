@@ -1,6 +1,6 @@
 package game.grounds.spawners;
 
-import game.actors.npc.enemies.Enemy;
+import game.actors.npcs.enemies.Enemy;
 
 /**
  * Class representing a graveyard ground on the game map, where enemies can spawn.

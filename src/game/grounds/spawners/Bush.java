@@ -1,6 +1,6 @@
 package game.grounds.spawners;
 
-import game.actors.npc.enemies.Enemy;
+import game.actors.npcs.enemies.Enemy;
 
 public class Bush extends EnemySpawner {
 

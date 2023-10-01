@@ -18,7 +18,7 @@ game
 game.actions
 game.actors
 game.actors.behaviours
-game.actors.npc.enemies
+game.actors.npcs.enemies
 game.grounds
 game.items
 game.items.consumables

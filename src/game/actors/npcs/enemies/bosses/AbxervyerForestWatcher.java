@@ -1,4 +1,4 @@
-package game.actors.npc.enemies.bosses;
+package game.actors.npcs.enemies.bosses;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actors.npc.enemies.Enemy;
+import game.actors.npcs.enemies.Enemy;
 import game.capabilities.Ability;
 import game.capabilities.Status;
 import game.actors.behaviours.FollowBehaviour;
