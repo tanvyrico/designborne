@@ -1,10 +1,11 @@
-package game.actors.enemies;
+package game.actors.npcs.enemies.bosses;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.Ability;
+import game.capabilities.Ability;
+import game.actors.npcs.enemies.Enemy;
 import game.grounds.Gate;
 import game.items.consumables.Runes;
 

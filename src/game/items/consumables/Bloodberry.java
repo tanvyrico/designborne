@@ -6,12 +6,9 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
-import game.actions.AttackAction;
+import game.capabilities.Status;
 import game.actions.ConsumeAction;
-import game.actions.PurchaseAction;
 import game.actions.SellAction;
-import game.items.Purchasable;
 import game.items.Sellable;
 
 public class Bloodberry extends Item implements Consumable, Sellable {

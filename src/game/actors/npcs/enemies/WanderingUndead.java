@@ -1,16 +1,6 @@
-package game.actors.enemies;
+package game.actors.npcs.enemies;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-
-import game.items.consumables.Runes;
-import game.items.consumables.HealingVial;
-import game.items.OldKey;
-
-
-import java.util.Random;
 
 /**
  * A class representing a Wandering Undead enemy in the game.

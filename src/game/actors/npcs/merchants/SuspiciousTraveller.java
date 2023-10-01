@@ -1,27 +1,22 @@
-package game.actors;
+package game.actors.npcs.merchants;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
-import game.actions.AttackAction;
+import game.capabilities.Status;
 import game.actions.PurchaseAction;
-import game.actions.SellAction;
 import game.items.Purchasable;
-import game.items.Sellable;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
 import game.items.weapons.BroadSword;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**

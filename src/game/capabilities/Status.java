@@ -1,4 +1,4 @@
-package game;
+package game.capabilities;
 
 /**
  * Use this enum class to represent a status.

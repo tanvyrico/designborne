@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Behaviour;
-import game.Status;
+import game.capabilities.Status;
 
 /**
  * A behavior class representing the behavior of an actor following a target actor.

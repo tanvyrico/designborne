@@ -1,12 +1,10 @@
 package game.items.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Status;
+import game.capabilities.Status;
 import game.actions.*;
 import game.items.Purchasable;
 import game.items.Sellable;

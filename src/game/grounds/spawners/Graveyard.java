@@ -1,6 +1,6 @@
 package game.grounds.spawners;
 
-import game.actors.enemies.Enemy;
+import game.actors.npcs.enemies.Enemy;
 
 
 /**

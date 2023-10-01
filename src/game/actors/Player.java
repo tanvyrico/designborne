@@ -7,20 +7,11 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.PurchaseAction;
-import game.items.Sellable;
 import game.utility.FancyMessage;
-import game.Status;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import game.capabilities.Status;
 
 /**
  * Class representing the Player.

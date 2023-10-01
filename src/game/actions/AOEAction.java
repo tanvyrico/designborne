@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.Status;
+import game.capabilities.Status;
 
 import java.util.ArrayList;
 import java.util.Random;
