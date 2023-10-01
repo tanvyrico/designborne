@@ -6,10 +6,9 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Ability;
-import game.Status;
+import game.capabilities.Ability;
+import game.capabilities.Status;
 import game.actions.ConsumeAction;
-import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
@@ -21,7 +20,7 @@ import java.util.Random;
  */
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
-    private int sellingPrice = 35;
+    private final int sellingPrice = 35;
 
 
     /**
@@ -58,28 +57,6 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         return actionList;
     }
 
-
-//    public String purchase(Actor actor, Actor seller) {
-//        Random random = new Random();
-//        if (random.nextDouble() <= 0.25) {
-//            int unluckyPrice = (int) (getPurchasePrice(seller) * 1.5);
-//            if(actor.getBalance() >= unluckyPrice){
-//                actor.deductBalance(unluckyPrice);
-//                actor.addItemToInventory(this);
-//                return actor + " purchased " + this + " at a 50% higher price (" + unluckyPrice + " runes)";
-//            }else{
-//                return actor + " failed to purchase " + this + " at a 50% higher price ("+ unluckyPrice + "runes)";
-//            }
-//
-//        }
-//        if (actor.getBalance() >= getPurchasePrice(seller)) {
-//            actor.deductBalance(getPurchasePrice(seller));
-//            actor.addItemToInventory(this);
-//            return actor + " purchased " + this + " at its normal price (" + this.purchasePrice + " runes)";
-//        }
-//        return actor + " failed to purchase " + this + " due to insufficient runes!";
-//    }
-
     public String purchase(Actor actor, Actor seller) {
         Random random = new Random();
         int purchasePrice = getPurchasePrice(seller);
@@ -90,8 +67,10 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this + " for " + purchasePrice + " Runes)";
+        }else {
+            return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
         }
-        return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
+
     }
 
     @Override
@@ -109,10 +88,12 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.addBalance(luckyPrice);
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " at double its normal price (" + luckyPrice + " runes)";
+        }else {
+            actor.addBalance(this.sellingPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
         }
-        actor.addBalance(this.sellingPrice);
-        actor.removeItemFromInventory(this);
-        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+
     }
 
     @Override

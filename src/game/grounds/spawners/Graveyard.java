@@ -1,10 +1,6 @@
 package game.grounds.spawners;
 
-import edu.monash.fit2099.engine.positions.Location;
-import game.actors.enemies.Enemy;
-import game.grounds.spawners.EnemySpawner;
-
-import java.util.Random;
+import game.actors.npc.enemies.Enemy;
 
 /**
  * Class representing a graveyard ground on the game map, where enemies can spawn.

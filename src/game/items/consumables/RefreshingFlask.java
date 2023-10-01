@@ -6,11 +6,9 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Ability;
-import game.Status;
-import game.actions.AttackAction;
+import game.capabilities.Ability;
+import game.capabilities.Status;
 import game.actions.ConsumeAction;
-import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
@@ -22,7 +20,7 @@ import java.util.Random;
  */
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
-    private int sellingPrice = 25;
+    private final int sellingPrice = 25;
 
     /**
      * Constructor for the RefreshingFlask class.
@@ -59,8 +57,10 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
             actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
+        }else{
+            return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
         }
-        return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
+
     }
 
 
@@ -77,10 +77,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " without being paid!";
+        }else {
+            actor.addBalance(this.sellingPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
         }
-        actor.addBalance(this.sellingPrice);
-        actor.removeItemFromInventory(this);
-        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+
     }
 
     @Override

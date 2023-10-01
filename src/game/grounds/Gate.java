@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TravelAction;
 import game.actions.UnlockGateAction;
-import game.Status;
+import game.capabilities.Status;
 
 /**
  * Class representing a gate on the game map.
