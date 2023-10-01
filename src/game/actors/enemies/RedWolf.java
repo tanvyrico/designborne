@@ -100,7 +100,6 @@ public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedBy
         return super.playTurn(actions,lastAction,map,display);
     }
 
-
 }
 
 
