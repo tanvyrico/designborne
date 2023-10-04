@@ -13,6 +13,7 @@ public class PurchaseAction extends Action {
 
     private Actor seller;
 
+<<<<<<< HEAD
     /**
      * Constructor for the PurchaseAction class.
      *
@@ -20,7 +21,11 @@ public class PurchaseAction extends Action {
      */
     public PurchaseAction(Purchasable purchasable, Actor seller){
         this.seller = seller;
+=======
+    public PurchaseAction(Purchasable purchasable,Actor seller){
+>>>>>>> TASK_5_Branch
         this.purchasable = purchasable;
+        this.seller = seller;
     }
 
     /**
@@ -44,6 +49,11 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
+<<<<<<< HEAD
         return actor + " purchases " + this.purchasable + " for " + this.purchasable.getPurchasePrice(seller) + " runes";
+=======
+        return actor + " purchases " + this.purchasable + " for " + purchasable.getPurchasePrice(seller) + " runes";
+>>>>>>> TASK_5_Branch
     }
 }
+

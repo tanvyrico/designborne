@@ -20,8 +20,7 @@ import java.util.Random;
  */
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
-    private int sellingPrice = 25;
-    private int purchasePrice = 75;
+    private final int sellingPrice = 25;
 
     /**
      * Constructor for the RefreshingFlask class.
@@ -58,8 +57,23 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
             actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
+        }else{
+            return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
         }
+<<<<<<< HEAD
         return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
+=======
+
+    }
+
+
+    @Override
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)){
+            return 75;
+        }
+        return 0;
+>>>>>>> TASK_5_Branch
     }
 
     @Override
@@ -76,11 +90,21 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " without being paid!";
+<<<<<<< HEAD
         }
         actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
         }
+=======
+        }else {
+            actor.addBalance(this.sellingPrice);
+            actor.removeItemFromInventory(this);
+            return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+        }
+
+    }
+>>>>>>> TASK_5_Branch
 
     @Override
     public int getSellingPrice() {
@@ -95,6 +119,7 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         }
         return actionList;
     }
+
 }
 
 

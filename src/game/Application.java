@@ -7,7 +7,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+<<<<<<< HEAD
 import game.actors.npcs.merchants.SuspiciousTraveller;
+=======
+import game.actors.npcs.merchants.IsolatedTraveller;
+>>>>>>> TASK_5_Branch
 import game.actors.npcs.enemies.ForestKeeper;
 import game.actors.npcs.enemies.HollowSoldier;
 import game.actors.Player;
@@ -20,7 +24,10 @@ import game.grounds.spawners.Graveyard;
 import game.grounds.spawners.Hut;
 import game.items.weapons.BroadSword;
 import game.items.weapons.GiantHammer;
+<<<<<<< HEAD
 import game.items.weapons.GreatKnife;
+=======
+>>>>>>> TASK_5_Branch
 import game.utility.FancyMessage;
 
 /**
@@ -119,6 +126,11 @@ public class Application {
 
         GameMap AbxervyerMap = new GameMap(groundFactory, Abxervyer);
         world.addGameMap(AbxervyerMap);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> TASK_5_Branch
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -130,9 +142,14 @@ public class Application {
         }
 
         Player player = new Player("The Abstracted One", '@', 1500000000, 200);
+<<<<<<< HEAD
         SuspiciousTraveller suspiciousTraveller = new SuspiciousTraveller();
+=======
+        IsolatedTraveller isolatedTraveller = new IsolatedTraveller();
+>>>>>>> TASK_5_Branch
         world.addPlayer(player, gameMap.at(29, 5));
-        world.addPlayer(suspiciousTraveller, gameMap.at(30, 5));
+        gameMap.at(28, 5).addActor(new IsolatedTraveller());
+        ancientWoodsMap.at(20, 3).addActor(isolatedTraveller);
 
         gameMap.at(30, 6).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
         burialGroundMap.at(31, 5).setGround(new Gate(ancientWoodsMap, gameMap.at(29,7), "The Ancient Woods"));
@@ -159,6 +176,7 @@ public class Application {
         burialGroundMap.at(27, 8).setGround(new Graveyard(hollowSoldier));
         burialGroundMap.at(35, 3).setGround(new Graveyard(hollowSoldier));
         burialGroundMap.at(18, 7).setGround(new Graveyard(hollowSoldier));
+<<<<<<< HEAD
 
         ancientWoodsMap.at(27, 8).setGround(new Hut(forestKeeper));
         ancientWoodsMap.at(35, 3).setGround(new Hut(forestKeeper));
@@ -167,6 +185,29 @@ public class Application {
         ancientWoodsMap.at(29, 10).setGround(new Bush(redWolf));
         ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf));
         ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf));
+=======
+
+        ancientWoodsMap.at(27, 8).setGround(new Hut(forestKeeper));
+        ancientWoodsMap.at(35, 3).setGround(new Hut(forestKeeper));
+        ancientWoodsMap.at(18, 7).setGround(new Hut(forestKeeper));
+
+        ancientWoodsMap.at(29, 10).setGround(new Bush(redWolf));
+        ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf));
+        ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf));
+
+        AbxervyerMap.at(27, 8).setGround(new Hut(forestKeeper));
+        AbxervyerMap.at(35, 3).setGround(new Hut(forestKeeper));
+        AbxervyerMap.at(18, 7).setGround(new Hut(forestKeeper));
+
+        AbxervyerMap.at(29, 10).setGround(new Bush(redWolf));
+        AbxervyerMap.at(37, 5).setGround(new Bush(redWolf));
+        AbxervyerMap.at(20, 9).setGround(new Bush(redWolf));
+
+        GiantHammer giantHammer = new GiantHammer();
+        gameMap.at(20,10).addItem(giantHammer);
+
+
+>>>>>>> TASK_5_Branch
 
         world.run();
     }

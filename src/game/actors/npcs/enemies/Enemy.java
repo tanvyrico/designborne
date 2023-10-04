@@ -22,6 +22,7 @@ import java.util.Map;
  */
 public abstract class Enemy extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    private double spawnRate;
 
     /**
      * Constructor for the Enemy class.
@@ -33,7 +34,7 @@ public abstract class Enemy extends Actor {
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.FRIENDLY_TO_ENEMY);
-        this.behaviours.put(0, new AttackBehaviour());
+        this.behaviours.put(1, new AttackBehaviour());
         this.behaviours.put(999, new WanderBehaviour());
     }
 
@@ -106,6 +107,7 @@ public abstract class Enemy extends Actor {
      * @return A new instance of an enemy.
      */
     public abstract Enemy spawnEnemy();
+<<<<<<< HEAD
 
     /**
      * Abstract method to get the spawn rate of this enemy.
@@ -113,5 +115,13 @@ public abstract class Enemy extends Actor {
      * @return The spawn rate of the enemy.
      */
     public abstract double getSpawnRate();
+=======
+    public double getSpawnRate(){
+        return this.spawnRate;
+    }
+    public void setSpawnRate(double spawnRate){
+        this.spawnRate = spawnRate;
+    }
+>>>>>>> TASK_5_Branch
 
 }

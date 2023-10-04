@@ -25,6 +25,7 @@ public class HollowSoldier extends Enemy {
         super("Hollow Soldier", '&', 200);
         this.getIntrinsicWeapon();
         this.addBalance(100);
+        this.setSpawnRate(0.1);
     }
 
     /**

@@ -1,12 +1,14 @@
 package game.items.weapons;
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+<<<<<<< HEAD
 import game.actions.AttackAction;
 import game.capabilities.Status;
+=======
+>>>>>>> TASK_5_Branch
 
 /**
  * An abstract class representing a skilled weapon that extends the capabilities of a standard weapon.

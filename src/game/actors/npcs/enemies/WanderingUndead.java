@@ -17,6 +17,7 @@ public class WanderingUndead extends Enemy {
         super("Wandering Undead", 't', 100);
         this.getIntrinsicWeapon();
         this.addBalance(50);
+        this.setSpawnRate(0.25);
     }
 
 

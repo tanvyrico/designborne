@@ -20,8 +20,8 @@ import java.util.Random;
  */
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
-    private int sellingPrice = 35;
-    private int purchasePrice = 100;
+    private final int sellingPrice = 35;
+
 
     /**
      * Constructor for the HealingVial class.
@@ -57,21 +57,42 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         return actionList;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> TASK_5_Branch
     public String purchase(Actor actor, Actor seller) {
         Random random = new Random();
         int purchasePrice = getPurchasePrice(seller);
         if (random.nextDouble() <= 0.25) {
             purchasePrice = (int) (getPurchasePrice(seller) * 1.5);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> TASK_5_Branch
         if (actor.getBalance() >= purchasePrice) {
             actor.deductBalance(purchasePrice);
             actor.addItemToInventory(this);
             return actor + " purchased " + this + " for " + purchasePrice + " Runes)";
+<<<<<<< HEAD
         }else{
             return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
         }
+=======
+        }else {
+            return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
+        }
+
+    }
+
+    @Override
+    public int getPurchasePrice(Actor seller) {
+        if (seller.hasCapability(Status.SUSPICIOUS)) {
+            return 100;
+        }
+        return 0;
+>>>>>>> TASK_5_Branch
     }
 
     @Override
@@ -90,11 +111,24 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.addBalance(luckyPrice);
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " at double its normal price (" + luckyPrice + " runes)";
+<<<<<<< HEAD
         } else{
+=======
+        }else {
+>>>>>>> TASK_5_Branch
             actor.addBalance(this.sellingPrice);
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
         }
+<<<<<<< HEAD
+=======
+
+    }
+
+    @Override
+    public int getSellingPrice() {
+        return this.sellingPrice;
+>>>>>>> TASK_5_Branch
     }
 
     @Override
@@ -110,5 +144,6 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         }
         return actionList;
     }
+
 }
 

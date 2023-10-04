@@ -10,9 +10,12 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
+<<<<<<< HEAD
 /**
  * A class representing the 'Stab and Step' action, a special skill using a weapon.
  */
+=======
+>>>>>>> TASK_5_Branch
 public class StabAndStepAction extends Action {
 
     private WeaponItem weapon;
@@ -21,6 +24,7 @@ public class StabAndStepAction extends Action {
 
     private String direction;
 
+<<<<<<< HEAD
     /**
      * Constructor for the StabAndStepAction class.
      *
@@ -28,12 +32,16 @@ public class StabAndStepAction extends Action {
      * @param target     The actor target of the action.
      * @param direction  The direction in which the action is performed (for display purposes).
      */
+=======
+
+>>>>>>> TASK_5_Branch
     public StabAndStepAction(WeaponItem weaponItem, Actor target, String direction) {
         this.weapon = weaponItem;
         this.target = target;
         this.direction = direction;
     }
 
+<<<<<<< HEAD
 //    @Override
 //    public String execute(Actor actor, GameMap map) {
 //        int staminaNeeded = (int) (actor.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.25);
@@ -72,6 +80,9 @@ public class StabAndStepAction extends Action {
      * @return A message describing the successful execution of the 'Stab and Step' skill or a message
      * indicating insufficient stamina.
      */
+=======
+
+>>>>>>> TASK_5_Branch
     public String execute(Actor actor, GameMap map) {
         int staminaNeeded = (int) (actor.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.25);
         String result = "";
@@ -94,12 +105,15 @@ public class StabAndStepAction extends Action {
 
     }
 
+<<<<<<< HEAD
     /**
      * Returns a description of the StabAndStepAction for use in menus.
      *
      * @param actor The actor for whom the description is generated.
      * @return A string describing the action for display in menus.
      */
+=======
+>>>>>>> TASK_5_Branch
     @Override
     public String menuDescription(Actor actor) {
 

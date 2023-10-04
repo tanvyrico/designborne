@@ -9,8 +9,18 @@ package game.capabilities;
 public enum Status {
     HOSTILE_TO_ENEMY,
     FRIENDLY_TO_ENEMY,
+<<<<<<< HEAD
     FOCUS_SKILL,
     TRADER,
     SUSPICIOUS
+=======
+
+    TRADER,
+    SUSPICIOUS,
+    NON_HOSTILE,
+    SUNNY,
+    RAINY
+
+>>>>>>> TASK_5_Branch
 
 }
