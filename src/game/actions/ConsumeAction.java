@@ -36,7 +36,7 @@ public class ConsumeAction extends Action {
     }
 
     /**
-     * Returns a description of the ConsumeAction for use in menus.
+     * Returns a description of the ConsumeAction for use in menus or UI.
      *
      * @param actor The actor for whom the description is generated.
      * @return A string describing the action for display in menus.

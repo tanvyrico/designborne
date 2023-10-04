@@ -18,16 +18,7 @@ import java.util.Random;
  * Class representing a Broadsword, a type of weapon that can perform a special "Focus" skill.
  */
 public class BroadSword extends WeaponItem implements Purchasable, Sellable, FocusActionCapable {
-<<<<<<< HEAD
-    private int sellingPrice = 100;
-    private int purchasePrice = 250;
-=======
     private final int sellingPrice = 100;
-
-    private int specialSkillTurn = 0;
-
-    private int initialHitRate;
->>>>>>> TASK_5_Branch
 
     private int specialSkillTurn = 0;
 
@@ -43,33 +34,7 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         this.addCapability(Ability.SELLABLE);
     }
 
-    public void setSkillTurn(int turn){
-        this.specialSkillTurn = turn;
-    }
 
-    public void increaseDamageMultiplierAndHitRate(float damageMultiplier,int hitRate){
-        this.increaseDamageMultiplier(damageMultiplier);
-        this.updateHitRate(hitRate);
-    }
-
-    public void decrementSkillTurn(){
-        this.specialSkillTurn -= 1;
-    }
-
-    public void resetWeaponStat(){
-        this.updateHitRate(initialHitRate);
-        this.updateDamageMultiplier(1f);
-    }
-
-
-
-
-    public void tick(Location currentLocation, Actor actor) {
-        decrementSkillTurn();
-        if ( this.specialSkillTurn == 0){
-            resetWeaponStat();
-        }
-    }
 
     /**
      * Generates a list of allowable actions for the owner of this BroadSword, which includes a "Focus" action.
@@ -96,35 +61,8 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         return actionList;
     }
 
-<<<<<<< HEAD
-    @Override
-    public String purchase(Actor actor,Actor seller) {
-        Random random = new Random();
-        int purchasePrice = getPurchasePrice(seller);
-
-        if (actor.getBalance() >= purchasePrice){
-            actor.deductBalance(purchasePrice);
-            if (random.nextDouble() <= 0.05){
-                return actor + " paid " + getPurchasePrice(seller) + " runes but did not receive " + this;
-            }else {
-                actor.addItemToInventory(this);
-                return actor + " purchased " + this + " for " + purchasePrice+" runes)";
-            }
-
-        }
-        return actor + " failed to purchase " + this + " due to insufficient runes!";
-    }
-
-    @Override
-    public int getPurchasePrice(Actor seller) {
-        if (seller.hasCapability(Status.SUSPICIOUS)) {
-            return  250;
-        }
-        return 0;
-=======
     public void setSkillTurn(int turn){
         this.specialSkillTurn = turn;
->>>>>>> TASK_5_Branch
     }
 
     public void increaseDamageMultiplierAndHitRate(float damageMultiplier,int hitRate){
@@ -178,21 +116,11 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         actor.addBalance(this.sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
-<<<<<<< HEAD
-    }
-
-    @Override
-    public int getSellingPrice() {
-        return this.sellingPrice;
-=======
->>>>>>> TASK_5_Branch
     }
 
     @Override
     public int getSellingPrice() {
         return this.sellingPrice;
     }
-
 
 }
-

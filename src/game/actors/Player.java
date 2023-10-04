@@ -10,13 +10,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-<<<<<<< HEAD
 import game.utility.FancyMessage;
 import game.capabilities.Status;
-=======
-import game.capabilities.Status;
-import game.utility.FancyMessage;
->>>>>>> TASK_5_Branch
 
 /**
  * Class representing the Player.
@@ -27,7 +22,7 @@ import game.utility.FancyMessage;
  */
 public class Player extends Actor {
 
-    private final int intrinsicDamage = 15000;
+    private final int intrinsicDamage = 15;
     private final int hitRate = 80;
 
 
@@ -62,10 +57,9 @@ public class Player extends Actor {
             this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, (int) (this.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.01));
         }
 
-        display.println(this.name);
-        display.println("HP: " + getAttribute(BaseActorAttributes.HEALTH) + "/" + this.getAttributeMaximum(BaseActorAttributes.HEALTH));
-        display.println("Stamina: " + getAttribute(BaseActorAttributes.STAMINA) + "/" + this.getAttributeMaximum(BaseActorAttributes.STAMINA));
-        display.println("Runes: " + this.getBalance());
+        display.println("Your health is: " + getAttribute(BaseActorAttributes.HEALTH));
+        display.println("Your stamina is: " + getAttribute(BaseActorAttributes.STAMINA));
+        display.println("Your balance is: " + this.getBalance());
 
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
@@ -126,8 +120,6 @@ public class Player extends Actor {
 //
 //        return actionList;
 //    }
-
-
 }
 
 

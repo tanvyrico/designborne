@@ -1,20 +1,5 @@
 package game.actors.npcs.enemies.bosses;
 
-<<<<<<< HEAD
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.capabilities.Ability;
-import game.actors.npcs.enemies.Enemy;
-import game.grounds.Gate;
-import game.items.consumables.Runes;
-
-/**
- * A class representing Abxervyer the Forest Watcher, a powerful enemy in the game.
- * This enemy has high health, an intrinsic weapon, and the ability to drop runes upon defeat.
- */
-=======
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -34,45 +19,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
->>>>>>> TASK_5_Branch
 public class AbxervyerForestWatcher extends Enemy {
 
     private int intrinsicDamage = 80;
 
     private int hitRate = 25;
 
-<<<<<<< HEAD
-    /**
-     * Constructor for the Enemy class.
-     */
-    public AbxervyerForestWatcher() {
-        super("Abxervyer the Forest Watcher", 'Y', 2000);
-        this.addCapability(Ability.VOID_INVINCIBILITY);
-    }
-
-    /**
-     * Gets the spawn rate for this enemy.
-     *
-     * @return The spawn rate of this enemy, which is always 0.
-     */
-    @Override
-    public double getSpawnRate(){
-        return 0.0;
-    }
-
-    /**
-     * Spawns a ForestKeeper.
-     *
-     * @return A new instance of the ForestKeeper enemy.
-     */
-    @Override
-    public Enemy spawnEnemy() {
-        return new AbxervyerForestWatcher();
-    }
-
-
-    /**
-=======
     private int turnCount = 0;
     private int targetTurn = 3;
 
@@ -98,7 +50,6 @@ public class AbxervyerForestWatcher extends Enemy {
     }
 
     /**
->>>>>>> TASK_5_Branch
      * Retrieves the intrinsic weapon used by the Forest Keeper.
      *
      * @return An IntrinsicWeapon representing the Forest Keeper's damage capability.
@@ -116,26 +67,14 @@ public class AbxervyerForestWatcher extends Enemy {
      * @return A message describing the outcome of the Forest Keeper's defeat.
      */
     public String unconscious(Actor actor, GameMap map) {
-<<<<<<< HEAD
-        Location location = map.locationOf(this);
-        Gate gate = new Gate(map, location, "Congrats You've Defeated The Abxervyer");
-=======
         Display display = new Display();
         Location location = map.locationOf(this);
         Gate gate = new Gate(map, location, "The Ancient Woods");
->>>>>>> TASK_5_Branch
         map.removeActor(this);
 
         location.setGround(gate);
 
         location.addItem(new Runes(this.getBalance()));
-<<<<<<< HEAD
-        return this + " met their demise at the hands of " + actor;
-    }
-
-
-}
-=======
         display.println(FancyMessage.BOSS_FELLED);
         return this + " met their demise at the hands of " + actor;
     }
@@ -157,4 +96,3 @@ public class AbxervyerForestWatcher extends Enemy {
         return null;
     }
 }
->>>>>>> TASK_5_Branch

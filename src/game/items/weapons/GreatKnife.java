@@ -12,17 +12,11 @@ import game.items.Sellable;
 import java.util.Random;
 
 
-<<<<<<< HEAD
-public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
-
-    private int sellingPrice = 175;
-=======
 public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
 
 
     private int sellingPrice = 175;
 
->>>>>>> TASK_5_Branch
     /**
      * Constructor for the SkilledWeapon class.
      */
@@ -41,15 +35,10 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
         }
         return actionList;
     }
-<<<<<<< HEAD
-    @Override
-    public String purchase(Actor actor,Actor seller) {
-=======
 
 
     @Override
     public String purchase(Actor actor, Actor seller) {
->>>>>>> TASK_5_Branch
         Random random = new Random();
 
         int purchasePrice = getPurchasePrice(seller);
@@ -93,10 +82,6 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
         return actor + " sold " + this;
     }
 
-<<<<<<< HEAD
-}
-=======
 
 }
 
->>>>>>> TASK_5_Branch

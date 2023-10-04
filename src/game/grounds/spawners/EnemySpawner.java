@@ -8,10 +8,6 @@ import java.util.Random;
 
 public abstract class EnemySpawner extends Ground {
     private Enemy enemy;
-<<<<<<< HEAD
-
-=======
->>>>>>> TASK_5_Branch
     public EnemySpawner(Enemy enemy){
         super('s');
         this.enemy = enemy;
@@ -21,11 +17,7 @@ public abstract class EnemySpawner extends Ground {
         Random random = new Random();
         if (!location.containsAnActor()) {
             double randomValue = random.nextDouble();
-<<<<<<< HEAD
-            if (randomValue <= enemy.getSpawnRate()) {
-=======
             if (randomValue <= this.enemy.getSpawnRate()) {
->>>>>>> TASK_5_Branch
                 location.addActor(enemy.spawnEnemy());
             }
         }

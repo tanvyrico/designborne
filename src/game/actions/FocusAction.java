@@ -6,10 +6,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.weapons.FocusActionCapable;
-<<<<<<< HEAD
-=======
 import game.items.weapons.SkilledWeapon;
->>>>>>> TASK_5_Branch
 
 /**
  * A class representing the 'Focus' action, the special skill of Broadsword.
@@ -59,7 +56,7 @@ public class FocusAction extends Action {
     }
 
     /**
-     * Returns a description of the FocusAction for use in menus.
+     * Returns a description of the FocusAction for use in menus or UI.
      *
      * @param actor The actor for whom the description is generated.
      * @return A string describing the action for display in menus.

@@ -1,11 +1,5 @@
 package game.actors.npcs.enemies;
 
-<<<<<<< HEAD
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-=======
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -15,7 +9,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.capabilities.Status;
->>>>>>> TASK_5_Branch
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
@@ -25,22 +18,9 @@ import game.weather.AffectedBySunnyWeather;
 
 import java.util.Random;
 
-<<<<<<< HEAD
-/**
- * A class representing the Forest Keeper enemy actor in the game.
- * The Forest Keeper is an enemy that can be defeated by other actors.
- * It has specific characteristics, such as a name, display character, hit points, and behaviors.
- * The Forest Keeper also has an intrinsic weapon for attacking, and it may drop items upon defeat.
- * The spawn rate of the Forest Keeper determines how frequently it appears in the game.
- */
-public class ForestKeeper extends Enemy {
-    private final int intrinsicDamage = 25;
-=======
 public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, AffectedByRainyWeather {
     private int intrinsicDamage = 25;
->>>>>>> TASK_5_Branch
 
-    private final double spawnRate = 0.15;
 
     /**
      * Constructor for the ForestKeeper class.
@@ -62,14 +42,6 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
     public Enemy spawnEnemy() {
         return new ForestKeeper();
     }
-
-    /**
-     * Retrieves the spawn rate of the Forest Keeper.
-     *
-     * @return The spawn rate of the Forest Keeper.
-     */
-    @Override
-    public double getSpawnRate(){return this.spawnRate;}
 
     /**
      * Retrieves the intrinsic weapon used by the Forest Keeper.
@@ -101,8 +73,6 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
         location.addItem(new Runes(this.getBalance()));
         return this + " met their demise at the hands of " + actor;
     }
-<<<<<<< HEAD
-=======
 
     public String sunnyWeatherModifications(){
         this.setSpawnRate(this.getSpawnRate() * 2);
@@ -127,8 +97,7 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
             display.println(rainyWeatherModifications());
         }
         return super.playTurn(actions,lastAction,map,display);
-}
+    }
 
 
->>>>>>> TASK_5_Branch
 }

@@ -7,15 +7,10 @@ package game.capabilities;
 public enum Ability {
     OPEN_GATE,
     INCREASE_BALANCE,
-    VOID_INVINCIBILITY,
     PURCHASABLE,
-<<<<<<< HEAD
-    SELLABLE
-=======
     SELLABLE,
     VOID_INVINCIBILITY,
     CHANGE_WEATHER
 
->>>>>>> TASK_5_Branch
 
 }

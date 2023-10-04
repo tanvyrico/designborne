@@ -1,11 +1,5 @@
 package game.actors.npcs.enemies;
 
-<<<<<<< HEAD
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-=======
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -14,7 +8,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.capabilities.Status;
->>>>>>> TASK_5_Branch
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
@@ -25,8 +18,6 @@ import java.util.Random;
 
 public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedByRainyWeather {
     private int intrinsicDamage = 30;
-
-    private final double spawnRate = 0.15;
 
     /**
      * Constructor for the RedWolf class.
@@ -45,18 +36,9 @@ public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedBy
      *
      * @return A new instance of the RedWolf enemy.
      */
-    @Override
     public RedWolf spawnEnemy() {
         return new RedWolf();
     }
-
-    /**
-     * Retrieves the spawn rate of the Red Wolf.
-     *
-     * @return The spawn rate of the Red Wolf.
-     */
-    @Override
-    public double getSpawnRate(){return this.spawnRate;}
 
     /**
      * Retrieves the intrinsic weapon used by the Red Wolf.
@@ -89,8 +71,6 @@ public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedBy
 
         return this + " met their demise at the hands of " + actor;
     }
-<<<<<<< HEAD
-=======
 
     public String sunnyWeatherModifications(){
         this.intrinsicDamage = this.intrinsicDamage * 3;
@@ -115,7 +95,6 @@ public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedBy
         return super.playTurn(actions,lastAction,map,display);
     }
 
->>>>>>> TASK_5_Branch
 }
 
 

@@ -65,24 +65,9 @@ public abstract class Enemy extends Actor {
         return new DoNothingAction();
     }
 
-    /**
-     * Adds a behavior with a specified priority to the enemy's list of behaviors.
-     *
-     * @param priority  The priority of the behavior (lower values have higher priority).
-     * @param behaviour The behavior to be added.
-     */
     public void addBehaviour(Integer priority,Behaviour behaviour){
         this.behaviours.put(priority,behaviour);
     }
-
-    /**
-     * Overrides the allowableActions method to specify actions that can be taken by other actors when interacting with this enemy.
-     *
-     * @param otherActor The actor interacting with this enemy.
-     * @param direction  The direction from which the interaction is happening.
-     * @param map        The GameMap containing the enemy.
-     * @return A list of allowable actions for the interaction.
-     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
@@ -107,21 +92,11 @@ public abstract class Enemy extends Actor {
      * @return A new instance of an enemy.
      */
     public abstract Enemy spawnEnemy();
-<<<<<<< HEAD
-
-    /**
-     * Abstract method to get the spawn rate of this enemy.
-     *
-     * @return The spawn rate of the enemy.
-     */
-    public abstract double getSpawnRate();
-=======
     public double getSpawnRate(){
         return this.spawnRate;
     }
     public void setSpawnRate(double spawnRate){
         this.spawnRate = spawnRate;
     }
->>>>>>> TASK_5_Branch
 
 }

@@ -11,10 +11,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.capabilities.Status;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-=======
->>>>>>> TASK_5_Branch
 import java.util.Random;
 
 /**
@@ -27,10 +23,6 @@ public class AOEAction extends Action {
     /**
      * An ArrayList that adds Actors that the Weapon User should attempt to hit.
      */
-<<<<<<< HEAD
-    private ArrayList<Actor> enemyActorsHitable = new ArrayList<>();
-=======
->>>>>>> TASK_5_Branch
 
     /**
      * A weapon that will theoretically perform an AOE Attack if possible.
@@ -58,15 +50,9 @@ public class AOEAction extends Action {
      */
 
     public AOEAction(WeaponItem weaponItem, Actor target, String direction) {
-<<<<<<< HEAD
-            this.weapon = weaponItem;
-            this.target = target;
-            this.direction = direction;
-=======
         this.weapon = weaponItem;
         this.target = target;
         this.direction = direction;
->>>>>>> TASK_5_Branch
 
     }
 
@@ -114,14 +100,5 @@ public class AOEAction extends Action {
     public String menuDescription(Actor actor) {
         return actor +" activates the skill of Giant Hammer on " +target + " at " + direction;
 
-<<<<<<< HEAD
-//        return actor + " attacks " + target + " and then other " +
-//                " enemies with their unique/weapon's special skill in the direction of " +
-//                direction + " first.";
     }
 }
-
-=======
-    }
-}
->>>>>>> TASK_5_Branch

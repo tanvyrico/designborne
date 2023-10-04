@@ -7,9 +7,6 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.Random;
 
-/**
- * An action representing an attack on a target Actor using a weapon.
- */
 public class AttackAction extends Action {
 
     /**
@@ -33,11 +30,10 @@ public class AttackAction extends Action {
     private Weapon weapon;
 
     /**
-     * Constructor for the AttackAction with a specified weapon.
+     * Constructor.
      *
-     * @param target     the Actor to attack
-     * @param direction  the direction where the attack should be performed (only used for display purposes)
-     * @param weapon     the weapon used for the attack
+     * @param target the Actor to attack
+     * @param direction the direction where the attack should be performed (only used for display purposes)
      */
     public AttackAction(Actor target, String direction, Weapon weapon) {
         this.target = target;
