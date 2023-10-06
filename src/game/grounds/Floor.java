@@ -6,10 +6,9 @@ import game.capabilities.Status;
 
 /**
  * A class that represents the floor inside a building.
- * Created by:
+ * Created by: Lim Hung Xuan
  * @author Riordan D. Alfredo
- * Modified by:
- * Lim Hung Xuan
+ * Modified by: Group6
  */
 public class Floor extends Ground {
 

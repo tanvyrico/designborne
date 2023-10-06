@@ -57,7 +57,7 @@ public class HollowSoldier extends Enemy {
 
     /**
      * Handles the outcome when the Hollow Soldier becomes unconscious.
-     * Drops healing vial and refreshing flask upon defeat with a random chance.
+     * Drops a healing vial and refreshing flask upon defeat with a random chance.
      *
      * @param actor The actor that defeated the Hollow Soldier.
      * @param map   The GameMap where the Hollow Soldier was defeated.

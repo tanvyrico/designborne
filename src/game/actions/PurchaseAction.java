@@ -6,7 +6,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Purchasable;
 
 /**
- * A class representing the action of purchasing a purchasable item by an actor.
+ * An Action representing the purchase of a purchasable item by an actor from a seller.
+ * This action allows an actor to purchase a purchasable item, updating their balance accordingly.
  */
 public class PurchaseAction extends Action {
     private Purchasable purchasable;
@@ -17,6 +18,7 @@ public class PurchaseAction extends Action {
      * Constructor for the PurchaseAction class.
      *
      * @param purchasable The purchasable item to be purchased.
+     * @param seller The actor who is selling the item.
      */
     public PurchaseAction(Purchasable purchasable, Actor seller){
         this.seller = seller;
@@ -24,10 +26,10 @@ public class PurchaseAction extends Action {
     }
 
     /**
-     * Executes the PurchaseAction, allowing the actor to purchase a purchasable item.
+     * Executes the PurchaseAction, allowing the actor to purchase the specified item from the seller.
      * The actor's balance is updated, and the purchase is performed through the purchasable object.
      *
-     * @param actor The actor performing the action.
+     * @param actor The actor performing the action (buyer).
      * @param map   The GameMap on which the action is performed.
      * @return A message describing the successful purchase and the updated balance.
      */
@@ -39,7 +41,7 @@ public class PurchaseAction extends Action {
     /**
      * Returns a description of the PurchaseAction for use in menus.
      *
-     * @param actor The actor for whom the description is generated.
+     * @param actor The actor for whom the description is generated (buyer).
      * @return A string describing the action for display in menus.
      */
     @Override

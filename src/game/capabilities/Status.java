@@ -9,7 +9,6 @@ package game.capabilities;
 public enum Status {
     HOSTILE_TO_ENEMY,
     FRIENDLY_TO_ENEMY,
-
     TRADER,
     SUSPICIOUS,
     NON_HOSTILE,

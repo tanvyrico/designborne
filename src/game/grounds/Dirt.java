@@ -4,10 +4,9 @@ import edu.monash.fit2099.engine.positions.Ground;
 
 /**
  * A class that represents bare dirt.
- * Created by:
+ * Created by: Lim Hung Xuan
  * @author Riordan D. Alfredo
- * Modified by:
- * Lim Hung Xuan
+ * Modified by: Group6
  */
 public class Dirt extends Ground {
 

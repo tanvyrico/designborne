@@ -16,7 +16,9 @@ import game.items.Sellable;
 import java.util.Random;
 
 /**
- * Class representing a healing vial item that can be consumed by an actor to restore health.
+ * Represents a Healing Vial item in the game, which is consumable, purchasable, and sellable.
+ * Consuming a Healing Vial restores an actor's health attribute by a certain percentage.
+ * It can be purchased from or sold to trader actors.
  */
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
@@ -24,8 +26,8 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
 
 
     /**
-     * Constructor for the HealingVial class.
-     *
+     * Constructs a Healing Vial item with the name "Healing vial" and a display character 'a'.
+     * It is both purchasable and sellable.
      */
     public HealingVial(){
         super("Healing vial", 'a', true);
@@ -33,13 +35,11 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         this.addCapability(Ability.SELLABLE);
     }
 
-
-
     /**
-     * Consumes the healing vial, increasing the actor's health and returning the amount of health restored.
+     * Consumes the Healing Vial, increasing the actor's health by a percentage of their maximum health.
      *
-     * @param actor The actor consuming the healing vial.
-     * @return An integer value representing the amount of health restored.
+     * @param actor The actor consuming the Healing Vial.
+     * @return A message describing the consumption and its effects.
      */
     @Override
     public String consume(Actor actor) {
@@ -50,6 +50,13 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
                 this.modifiedAttribute + " of " + actor + " by " + buffedPoints + " points.";
     }
 
+    /**
+     * Returns a list of allowable actions that an owner of this item can perform.
+     * In this case, it includes the ability to consume the Healing Vial.
+     *
+     * @param owner The actor who owns the Healing Vial.
+     * @return A list of allowable actions for the owner of the item.
+     */
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
         ConsumeAction consumeAction = new ConsumeAction(this);
@@ -57,6 +64,13 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         return actionList;
     }
 
+    /**
+     * Purchases the Healing Vial from a seller actor, deducting the purchase price from the buyer's balance.
+     *
+     * @param actor  The actor buying the Healing Vial.
+     * @param seller The actor selling the Healing Vial.
+     * @return A message describing the purchase and the updated balance of the buyer.
+     */
     public String purchase(Actor actor, Actor seller) {
         Random random = new Random();
         int purchasePrice = getPurchasePrice(seller);
@@ -70,9 +84,15 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         }else {
             return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
         }
-
     }
 
+    /**
+     * Calculates the purchase price of the Healing Vial.
+     * The price is higher if the seller actor has the SUSPICIOUS capability.
+     *
+     * @param seller The actor selling the Healing Vial.
+     * @return The purchase price of the Healing Vial.
+     */
     @Override
     public int getPurchasePrice(Actor seller) {
         if (seller.hasCapability(Status.SUSPICIOUS)) {
@@ -81,6 +101,13 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         return 0;
     }
 
+    /**
+     * Sells the Healing Vial to a trader actor, adding the selling price to the seller's balance.
+     * There is a chance for the item to be sold at double its normal price.
+     *
+     * @param actor The actor selling the Healing Vial.
+     * @return A message describing the sale and the updated balance of the seller.
+     */
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
@@ -93,14 +120,26 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
         }
-
     }
 
+    /**
+     * Retrieves the selling price of the Healing Vial item.
+     *
+     * @return The selling price of the Healing Vial item.
+     */
     @Override
     public int getSellingPrice() {
         return this.sellingPrice;
     }
 
+    /**
+     * Returns a list of allowable actions that a trader actor can perform with this item.
+     * In this case, it includes the ability to sell the Healing Vial to the trader.
+     *
+     * @param target   The trader actor interacting with the Healing Vial.
+     * @param location The location where the interaction takes place.
+     * @return A list of allowable actions for the trader actor.
+     */
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
@@ -108,5 +147,4 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         }
         return actionList;
     }
-
 }

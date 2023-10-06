@@ -20,7 +20,6 @@ public class WanderingUndead extends Enemy {
         this.setSpawnRate(0.25);
     }
 
-
     /**
      * Spawns a WanderingUndead.
      *
@@ -38,6 +37,7 @@ public class WanderingUndead extends Enemy {
      */
     @Override
     public double getSpawnRate(){return this.spawnRate;}
+
     /**
      * Retrieves the intrinsic weapon used by the Wandering Undead.
      *

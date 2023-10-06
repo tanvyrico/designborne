@@ -15,10 +15,9 @@ import game.capabilities.Status;
 
 /**
  * Class representing the Player.
- * Created by:
+ * Created by: Lim Hung Xuan
  * @author Adrian Kristanto
- * Modified by:
- * Lim Hung Xuan
+ * Modified by: Group6
  */
 public class Player extends Actor {
 

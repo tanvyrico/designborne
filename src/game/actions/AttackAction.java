@@ -7,6 +7,10 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.Random;
 
+/**
+ * An Action representing a basic attack action performed by an actor using a weapon.
+ * This action calculates the damage, checks for a hit, and updates the target's health accordingly.
+ */
 public class AttackAction extends Action {
 
     /**
@@ -30,10 +34,11 @@ public class AttackAction extends Action {
     private Weapon weapon;
 
     /**
-     * Constructor.
+     * Constructor for the AttackAction class with specified weapon.
      *
-     * @param target the Actor to attack
-     * @param direction the direction where the attack should be performed (only used for display purposes)
+     * @param target     The actor to attack.
+     * @param direction  The direction in which the attack is performed (for display).
+     * @param weapon     The weapon used for the attack.
      */
     public AttackAction(Actor target, String direction, Weapon weapon) {
         this.target = target;
@@ -42,10 +47,10 @@ public class AttackAction extends Action {
     }
 
     /**
-     * Constructor with intrinsic weapon as default
+     * Constructor for the AttackAction class with intrinsic weapon (default).
      *
-     * @param target the actor to attack
-     * @param direction the direction where the attack should be performed (only used for display purposes)
+     * @param target     The actor to attack.
+     * @param direction  The direction in which the attack is performed (for display).
      */
     public AttackAction(Actor target, String direction) {
         this.target = target;
@@ -55,9 +60,9 @@ public class AttackAction extends Action {
     /**
      * Executes the attack action, calculating damage, checking for a hit, and updating the target's health.
      *
-     * @param actor the actor performing the attack
-     * @param map   the GameMap where the attack takes place
-     * @return a description of the attack result
+     * @param actor The actor performing the attack.
+     * @param map   The GameMap where the attack takes place.
+     * @return A description of the attack result.
      */
     @Override
     public String execute(Actor actor, GameMap map) {
@@ -82,8 +87,8 @@ public class AttackAction extends Action {
     /**
      * Provides a menu description for the attack action.
      *
-     * @param actor the actor performing the attack
-     * @return a description of the menu option for this attack action
+     * @param actor The actor performing the attack.
+     * @return A description of the menu option for this attack action.
      */
     @Override
     public String menuDescription(Actor actor) {

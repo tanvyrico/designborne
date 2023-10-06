@@ -16,6 +16,10 @@ import game.weather.AffectedBySunnyWeather;
 
 import java.util.Random;
 
+/**
+ * A class representing a Red Wolf enemy in the game.
+ * Red Wolves are hostile enemies that can attack Player actors and drop items upon defeat.
+ */
 public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedByRainyWeather {
     private int intrinsicDamage = 30;
 
@@ -29,7 +33,6 @@ public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedBy
         this.addBalance(25);
         this.setSpawnRate(0.3);
     }
-
 
     /**
      * Spawns a RedWolf.
@@ -72,18 +75,37 @@ public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedBy
         return this + " met their demise at the hands of " + actor;
     }
 
+    /**
+     * Modifies the Red Wolf's behavior and attributes during sunny weather.
+     *
+     * @return A message describing the Red Wolf's modifications during sunny weather.
+     */
     public String sunnyWeatherModifications(){
         this.intrinsicDamage = this.intrinsicDamage * 3;
         this.setSpawnRate(this.getSpawnRate() / 1.5);
         return "The red wolves are becoming more active. \n The red wolves are becoming more aggressive.";
     }
 
+    /**
+     * Modifies the Red Wolf's behavior and attributes during rainy weather.
+     *
+     * @return A message describing the Red Wolf's modifications during rainy weather.
+     */
     @Override
     public String rainyWeatherModifications() {
         this.setSpawnRate(this.getSpawnRate() * 1.5);
         return "The red wolves are becoming more active.";
     }
 
+    /**
+     * Determines the action to be performed by the Red Wolf during its turn.
+     *
+     * @param actions    A collection of possible actions for the Red Wolf.
+     * @param lastAction The action the Red Wolf took last turn.
+     * @param map        The GameMap containing the Red Wolf.
+     * @param display    The I/O object to which messages may be written.
+     * @return The valid action to be performed during this turn.
+     */
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
 
         if (map.locationOf(this).getGround().hasCapability(Status.SUNNY)){

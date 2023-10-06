@@ -7,6 +7,11 @@ import game.actors.npcs.enemies.Enemy;
  */
 public class Graveyard extends EnemySpawner {
 
+    /**
+     * Constructor for the Graveyard class.
+     *
+     * @param enemy The type of enemy to be spawned in the graveyard.
+     */
     public Graveyard(Enemy enemy) {
         super(enemy);
         setDisplayChar('n');

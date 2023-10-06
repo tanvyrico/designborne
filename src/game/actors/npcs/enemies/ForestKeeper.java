@@ -18,6 +18,11 @@ import game.weather.AffectedBySunnyWeather;
 
 import java.util.Random;
 
+/**
+ * A class representing a Forest Keeper enemy actor in the game.
+ * Forest Keepers are hostile by default and can be attacked by actors with the HOSTILE_TO_ENEMY capability.
+ * They are affected by both sunny and rainy weather, with their behavior and spawn rate changing accordingly.
+ */
 public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, AffectedByRainyWeather {
     private int intrinsicDamage = 25;
 
@@ -54,7 +59,7 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
 
     /**
      * Handles the outcome when the Forest Keeper becomes unconscious.
-     * Drops healing vial upon defeat with a random chance.
+     * Drops a healing vial upon defeat with a random chance.
      *
      * @param actor The actor that defeated the Forest Keeper.
      * @param map   The GameMap where the Forest Keeper was defeated.
@@ -74,11 +79,21 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
         return this + " met their demise at the hands of " + actor;
     }
 
+    /**
+     * Modifies Forest Keeper behavior during sunny weather.
+     *
+     * @return A message describing the modifications due to sunny weather.
+     */
     public String sunnyWeatherModifications(){
         this.setSpawnRate(this.getSpawnRate() * 2);
         return "The forest keepers are becoming more active";
     }
 
+    /**
+     * Modifies Forest Keeper behavior during rainy weather.
+     *
+     * @return A message describing the modifications due to rainy weather.
+     */
     @Override
     public String rainyWeatherModifications() {
         String healedMessage = null;
@@ -90,6 +105,15 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
         return healedMessage + "The forest keepers are becoming less active.";
     }
 
+    /**
+     * Overrides the playTurn method to handle weather-related modifications to Forest Keeper behavior.
+     *
+     * @param actions    A collection of possible actions for the Forest Keeper.
+     * @param lastAction The action the Forest Keeper took last turn.
+     * @param map        The GameMap containing the Forest Keeper.
+     * @param display    The I/O object to which messages may be written.
+     * @return The valid action to be performed during this turn.
+     */
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
         if (map.locationOf(this).getGround().hasCapability(Status.SUNNY)){
             display.println(sunnyWeatherModifications());
@@ -98,6 +122,4 @@ public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, Affec
         }
         return super.playTurn(actions,lastAction,map,display);
     }
-
-
 }

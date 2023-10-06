@@ -18,21 +18,24 @@ import java.util.Random;
  */
 public class AOEAction extends Action {
 
-    private final float AREA_DAMAGE_MULTIPLIER = 0.5f;
-
     /**
-     * An ArrayList that adds Actors that the Weapon User should attempt to hit.
+     * The multiplier applied to the weapon's damage for the AOE attack.
      */
+    private final float AREA_DAMAGE_MULTIPLIER = 0.5f;
 
     /**
      * A weapon that will theoretically perform an AOE Attack if possible.
      */
     private WeaponItem weapon;
+
     /**
      * The direction where the weapon will attack first.
      */
     private String direction;
 
+    /**
+     * The target actor to attack.
+     */
     private Actor target;
 
     /**
@@ -42,8 +45,10 @@ public class AOEAction extends Action {
 
     /**
      * Constructor
-     * @param weaponItem for a Weapon that can do an Area of Effect Attack.
-     * @param direction The direction that the weapon will attack first.
+     *
+     * @param weaponItem The weapon capable of performing an AOE attack.
+     * @param target     The target actor to attack with the AOE.
+     * @param direction  The direction in which the AOE attack will be executed.
      *
      * The constructor will check if the Weapon is able to perform an AOE Attack by checking it's capabilities.
      * If it doesn't have, then an Area of Effect Action will not be performed.
@@ -53,14 +58,14 @@ public class AOEAction extends Action {
         this.weapon = weaponItem;
         this.target = target;
         this.direction = direction;
-
     }
 
     /**
      * The "execute()" method here performs the Area of Effect Attack if the weapon can perform it.
-     * @param actor The actor performing the action.
-     * @param map The map the actor is on.
-     * @return a String message indicating whether the AOE Attack was performed or not.
+     *
+     * @param actor The actor performing the AOE attack.
+     * @param map   The GameMap on which the action is performed.
+     * @return A message describing the outcome of the AOE attack.
      */
 
     @Override
@@ -93,8 +98,9 @@ public class AOEAction extends Action {
     /**
      * The "menuDescription()" method displays the option to the actor if they are in the vicinity of a hostile actor
      * and have capable weapon to perform the AOE Attack (depends on the circumstances and type of actor).
+     *
      * @param actor The actor performing the AOE action with their AOE-capable weapon.
-     * @return a description used for the menu UI
+     * @return A string describing the action for display in menus.
      */
     @Override
     public String menuDescription(Actor actor) {

@@ -5,12 +5,10 @@ import edu.monash.fit2099.engine.positions.Ground;
 
 /**
  * Class representing a wall ground on the game map that blocks actor movement.
- * Created by:
+ * Created by: Lim Hung Xuan
  * @author Riordan D. Alfredo
- * Modified by:
- * Lim Hung Xuan
+ * Modified by: Group6
  */
-
 public class Wall extends Ground {
 
     /**

@@ -7,8 +7,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.consumables.Consumable;
 
 /**
- * A class representing an action where an actor consumes a consumable item.
- * This action allows an actor to consume a consumable item and gain the specified benefits.
+ * An Action representing an actor consuming a consumable item to gain benefits.
+ * This action allows an actor to consume a consumable item and gain the specified effects.
  */
 public class ConsumeAction extends Action {
     private Consumable consumable;
