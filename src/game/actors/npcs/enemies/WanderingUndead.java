@@ -26,7 +26,7 @@ public class WanderingUndead extends Enemy {
         this.getIntrinsicWeapon();
         this.addBalance(50);
         this.setSpawnRate(0.25);
-    }
+    }//
 
     /**
      * Spawns a WanderingUndead.
