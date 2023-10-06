@@ -11,8 +11,7 @@ import game.capabilities.Status;
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
-import game.weather.AffectedByRainyWeather;
-import game.weather.AffectedBySunnyWeather;
+import game.weather.AffectedByWeather;
 
 import java.util.Random;
 
@@ -20,7 +19,7 @@ import java.util.Random;
  * A class representing a Red Wolf enemy in the game.
  * Red Wolves are hostile enemies that can attack Player actors and drop items upon defeat.
  */
-public class RedWolf extends Enemy implements AffectedBySunnyWeather, AffectedByRainyWeather {
+public class RedWolf extends Enemy implements AffectedByWeather {
     private int intrinsicDamage = 30;
 
     /**

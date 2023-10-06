@@ -12,8 +12,7 @@ import game.capabilities.Status;
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
 import game.items.consumables.HealingVial;
-import game.weather.AffectedByRainyWeather;
-import game.weather.AffectedBySunnyWeather;
+import game.weather.AffectedByWeather;
 
 
 import java.util.Random;
@@ -23,7 +22,7 @@ import java.util.Random;
  * Forest Keepers are hostile by default and can be attacked by actors with the HOSTILE_TO_ENEMY capability.
  * They are affected by both sunny and rainy weather, with their behavior and spawn rate changing accordingly.
  */
-public class ForestKeeper extends Enemy implements AffectedBySunnyWeather, AffectedByRainyWeather {
+public class ForestKeeper extends Enemy implements AffectedByWeather {
     private int intrinsicDamage = 25;
 
 
