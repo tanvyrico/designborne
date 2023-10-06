@@ -19,6 +19,7 @@ import game.grounds.Void;
 import game.grounds.spawners.Bush;
 import game.grounds.spawners.Graveyard;
 import game.grounds.spawners.Hut;
+import game.items.consumables.Bloodberry;
 import game.items.weapons.BroadSword;
 import game.items.weapons.GiantHammer;
 import game.utility.FancyMessage;
@@ -134,6 +135,7 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 1500000000, 200);
         IsolatedTraveller isolatedTraveller = new IsolatedTraveller();
         world.addPlayer(player, gameMap.at(29, 5));
+        gameMap.at(30,5).addItem(new Bloodberry());
         gameMap.at(28, 5).addActor(new IsolatedTraveller());
         ancientWoodsMap.at(20, 3).addActor(isolatedTraveller);
 
@@ -165,6 +167,10 @@ public class Application {
         ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf));
         ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf));
 
+        ancientWoodsMap.at(21, 10).addItem(new Bloodberry());
+        ancientWoodsMap.at(20, 5).addItem(new Bloodberry());
+        ancientWoodsMap.at(10,9).addItem(new Bloodberry());
+
         abxervyerMap.at(27, 8).setGround(new Hut(forestKeeper));
         abxervyerMap.at(35, 3).setGround(new Hut(forestKeeper));
         abxervyerMap.at(18, 7).setGround(new Hut(forestKeeper));
@@ -178,6 +184,7 @@ public class Application {
 
         AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap);
         abxervyerMap.at(29,3).addActor(abxervyerForestWatcher);
+
 
         world.run();
     }
