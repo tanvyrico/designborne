@@ -38,7 +38,7 @@ public class Player extends Actor {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
         this.getIntrinsicWeapon();
-        this.addBalance(9999999);
+        this.addBalance(0);
     }
 
     /**

@@ -70,12 +70,12 @@ public class WanderingUndead extends Enemy {
         Location location = map.locationOf(this);
         map.removeActor(this);
 
-        if (random.nextDouble() <= 1) {
+        if (random.nextDouble() <= 0.25) {
             OldKey oldKey = new OldKey();
             location.addItem(oldKey);
         }
 
-        if (random.nextDouble() <= 1) {
+        if (random.nextDouble() <= 0.2) {
             HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
         }

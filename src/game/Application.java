@@ -132,14 +132,12 @@ public class Application {
             }
         }
 
-        Player player = new Player("The Abstracted One", '@', 1500000000, 200);
+        Player player = new Player("The Abstracted One", '@', 150, 200);
         IsolatedTraveller isolatedTraveller = new IsolatedTraveller();
         world.addPlayer(player, gameMap.at(29, 5));
-        gameMap.at(30,5).addItem(new Bloodberry());
-        gameMap.at(28, 5).addActor(new IsolatedTraveller());
         ancientWoodsMap.at(20, 3).addActor(isolatedTraveller);
 
-        gameMap.at(30, 6).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
+        gameMap.at(35, 0).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
         burialGroundMap.at(31, 5).setGround(new Gate(ancientWoodsMap, gameMap.at(29,7), "The Ancient Woods"));
         ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap, abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
 
