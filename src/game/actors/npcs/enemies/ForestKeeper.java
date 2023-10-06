@@ -17,6 +17,9 @@ import game.weather.AffectedByWeather;
 
 import java.util.Random;
 
+import static game.weather.WeatherManager.addAffectedByWeather;
+import static game.weather.WeatherManager.removeAffectedByWeather;
+
 /**
  * A class representing a Forest Keeper enemy actor in the game.
  * Forest Keepers are hostile by default and can be attacked by actors with the HOSTILE_TO_ENEMY capability.
@@ -35,6 +38,7 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
         this.addBehaviour(100, new FollowBehaviour());
         this.addBalance(50);
         this.setSpawnRate(0.15);
+        addAffectedByWeather(this);
     }
 
     /**
@@ -68,7 +72,7 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
         Random random = new Random();
         Location location = map.locationOf(this);
         map.removeActor(this);
-
+        removeAffectedByWeather(this);
         if (random.nextDouble() <= 0.2) {
             HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
