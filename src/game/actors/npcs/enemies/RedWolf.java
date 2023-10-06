@@ -22,6 +22,7 @@ import java.util.Random;
 public class RedWolf extends Enemy implements AffectedByWeather {
     private int intrinsicDamage = 30;
 
+
     /**
      * Constructor for the RedWolf class.
      */
@@ -48,7 +49,7 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      * @return An IntrinsicWeapon representing the Red Wolf's damage capability.
      */
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(intrinsicDamage, "bites", 80);
+        return new IntrinsicWeapon((int)(intrinsicDamage * getIntrinsicDamageMultiplier()), "bites", 80);
     }
 
     /**
@@ -80,8 +81,9 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      * @return A message describing the Red Wolf's modifications during sunny weather.
      */
     public String sunnyWeatherModifications(){
+        this.setIntrinsicDamageMultiplier(3F);
+        this.setSpawnRateMultiplier(1f);
         this.intrinsicDamage = this.intrinsicDamage * 3;
-        this.setSpawnRate(this.getSpawnRate() / 1.5);
         return "The red wolves are becoming more active. \n The red wolves are becoming more aggressive.";
     }
 
@@ -92,7 +94,8 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      */
     @Override
     public String rainyWeatherModifications() {
-        this.setSpawnRate(this.getSpawnRate() * 1.5);
+        this.setIntrinsicDamageMultiplier(1f);
+        this.setSpawnRateMultiplier(1.5f);
         return "The red wolves are becoming more active.";
     }
 

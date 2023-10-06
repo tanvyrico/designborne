@@ -24,6 +24,9 @@ public abstract class Enemy extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private double spawnRate;
 
+    private float intrinsicDamageMultiplier =1f;
+    private float spawnRateMultiplier;
+
     /**
      * Constructor for the Enemy class.
      *
@@ -114,7 +117,7 @@ public abstract class Enemy extends Actor {
      * @return The spawn rate of this enemy.
      */
     public double getSpawnRate(){
-        return this.spawnRate;
+        return this.spawnRate * spawnRateMultiplier;
     }
 
     /**
@@ -125,4 +128,17 @@ public abstract class Enemy extends Actor {
     public void setSpawnRate(double spawnRate){
         this.spawnRate = spawnRate;
     }
+
+    public void setSpawnRateMultiplier(Float multiplier){
+        this.spawnRateMultiplier = multiplier;
+    }
+
+    public void setIntrinsicDamageMultiplier(Float multiplier){
+        this.intrinsicDamageMultiplier = multiplier;
+    }
+
+    public Float getIntrinsicDamageMultiplier(){
+        return this.intrinsicDamageMultiplier;
+    }
+
 }
