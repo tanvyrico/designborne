@@ -40,6 +40,11 @@ public class AbxervyerForestWatcher extends Enemy {
     private int weatherIndex = 0;
     private GameMap gameMap;
 
+    /**
+     * Constructs an AbxervyerForestWatcher object.
+     *
+     * @param gameMap The GameMap where the gate will be allocated to once its death.
+     */
     public AbxervyerForestWatcher(GameMap gameMap) {
         super("Abxervyer, The Forest Watcher", 'Y', 2000);
         weatherList = new ArrayList<>(Arrays.asList(Weather.RAINY, Weather.SUNNY));

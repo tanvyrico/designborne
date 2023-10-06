@@ -68,10 +68,7 @@ public class IsolatedTraveller extends Actor {
                     for (Purchasable purchasable : this.itemInventory) {
                         actionList.add(new PurchaseAction(purchasable,this));
                     }
-//                    for (Item item : otherActor.getItemInventory()) {
-//                        for (Action action : item.allowableActions(otherActor, destination)) {
-//                            actionList.add(action);
-//                        }
+
                 }
             }
         }

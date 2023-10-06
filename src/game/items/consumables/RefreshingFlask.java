@@ -31,6 +31,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         this.addCapability(Ability.SELLABLE);
     }
 
+    /**
+     * Consumes the RefreshingFlask and increases the actor's stamina attribute by a percentage of its maximum value.
+     *
+     * @param actor The actor consuming the flask.
+     * @return A message describing the consumption and its effects.
+     */
     @Override
     public String consume(Actor actor) {
         int buffedPoints = (int) (0.2 * actor.getAttributeMaximum(BaseActorAttributes.STAMINA));
@@ -40,6 +46,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
                 this.modifiedAttribute + " of " + actor + " by " + buffedPoints + " points.";
     }
 
+    /**
+     * Generates a list of allowable actions for an owner of this item. In this case, it includes a ConsumeAction.
+     *
+     * @param owner The actor who owns the item.
+     * @return An ActionList containing allowable actions for the owner.
+     */
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
         ConsumeAction consumeAction = new ConsumeAction(this);
@@ -47,6 +59,13 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         return actionList;
     }
 
+    /**
+     * Handles the purchase of the RefreshingFlask by an actor from a seller.
+     *
+     * @param actor  The actor purchasing the item.
+     * @param seller The actor selling the item.
+     * @return A message describing the purchase transaction.
+     */
     public String purchase(Actor actor, Actor seller) {
         int purchasePrice = getPurchasePrice(seller);
         Random random = new Random();
@@ -62,8 +81,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         }
 
     }
-
-
+    /**
+     * Gets the purchase price of the RefreshingFlask based on the seller's capabilities.
+     *
+     * @param seller The actor selling the item.
+     * @return The purchase price of the flask.
+     */
     @Override
     public int getPurchasePrice(Actor seller) {
         if (seller.hasCapability(Status.SUSPICIOUS)){
@@ -72,8 +95,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         return 0;
     }
 
-
-
+    /**
+     * Handles the sale of the RefreshingFlask by an actor.
+     *
+     * @param actor The actor selling the item.
+     * @return A message describing the sale transaction.
+     */
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.5) {
@@ -87,10 +114,23 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
 
     }
 
+    /**
+     * Gets the selling price of the RefreshingFlask.
+     *
+     * @return The selling price of the flask.
+     */
     public int getSellingPrice() {
         return this.sellingPrice;
     }
 
+    /**
+     * Generates a list of allowable actions for a target actor and location. In this case,
+     * it includes a SellAction if the target actor has the TRADER capability.
+     *
+     * @param target   The target actor.
+     * @param location The location where the actions are considered.
+     * @return An ActionList containing allowable actions for the target actor and location.
+     */
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
