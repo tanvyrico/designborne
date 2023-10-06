@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 /**
  * An abstract class representing a skilled weapon that extends the capabilities of a standard weapon.
  * Skilled weapons can have special skills and temporary effects when used.
+ * @author Lim Hung Xuan
+ * Modified by: Willson Louisse HV
  */
 public abstract class SkilledWeapon extends WeaponItem {
 

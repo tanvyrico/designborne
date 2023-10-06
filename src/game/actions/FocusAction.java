@@ -10,7 +10,8 @@ import game.items.weapons.SkilledWeapon;
 
 /**
  * A class representing the 'Focus' action, the special skill of Broadsword.
- *
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class FocusAction extends Action {
 

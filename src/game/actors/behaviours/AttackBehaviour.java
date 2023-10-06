@@ -11,6 +11,8 @@ import game.capabilities.Status;
 
 /**
  * A behavior representing an actor's ability to attack hostile actors in adjacent locations.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class AttackBehaviour implements Behaviour {
 

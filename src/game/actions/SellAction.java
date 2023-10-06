@@ -7,6 +7,8 @@ import game.items.Sellable;
 
 /**
  * A class representing the action of selling a sellable item by an actor.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class SellAction extends Action {
     private Sellable sellable;

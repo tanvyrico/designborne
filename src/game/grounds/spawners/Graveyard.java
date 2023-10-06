@@ -4,6 +4,8 @@ import game.actors.npcs.enemies.Enemy;
 
 /**
  * Class representing a graveyard ground on the game map, where enemies can spawn.
+ * @author Darin Park
+ * Modified by: Group6
  */
 public class Graveyard extends EnemySpawner {
 

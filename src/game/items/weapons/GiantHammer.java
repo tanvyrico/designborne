@@ -14,6 +14,8 @@ import game.items.Sellable;
  * A class representing a Giant Hammer weapon item in the game.
  * The Giant Hammer is a powerful melee weapon that can be used to attack and deal high damage to enemies.
  * It can also be sold by actors who possess the capability to trade.
+ * @author Willson Louisse HV
+ * Modified by: Enrico Tanvy
  */
 public class GiantHammer extends WeaponItem implements Sellable {
     private int sellingPrice = 250;

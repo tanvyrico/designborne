@@ -8,6 +8,8 @@ import game.actions.ConsumeAction;
 
 /**
  * Represents a Runes item in the game, which is consumable and can be used to increase an actor's balance.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class Runes extends Item implements Consumable {
     private int quantity;

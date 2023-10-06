@@ -8,6 +8,8 @@ import game.items.Purchasable;
 /**
  * An Action representing the purchase of a purchasable item by an actor from a seller.
  * This action allows an actor to purchase a purchasable item, updating their balance accordingly.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class PurchaseAction extends Action {
     private Purchasable purchasable;

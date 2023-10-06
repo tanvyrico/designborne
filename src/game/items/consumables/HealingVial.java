@@ -19,6 +19,8 @@ import java.util.Random;
  * Represents a Healing Vial item in the game, which is consumable, purchasable, and sellable.
  * Consuming a Healing Vial restores an actor's health attribute by a certain percentage.
  * It can be purchased from or sold to trader actors.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;

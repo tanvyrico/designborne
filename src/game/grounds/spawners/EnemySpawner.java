@@ -9,6 +9,8 @@ import java.util.Random;
 /**
  * An abstract class representing a ground element that can spawn enemies periodically.
  * Subclasses of this class should define the specific enemy type to spawn and the spawn rate.
+ * @author Willson Louisse HV
+ * Modified by: Group6
  */
 public abstract class EnemySpawner extends Ground {
     private Enemy enemy;

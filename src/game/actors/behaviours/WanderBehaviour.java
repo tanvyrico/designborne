@@ -12,6 +12,8 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 
 /**
  * A behavior representing an actor's ability to wander randomly to adjacent locations.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class WanderBehaviour implements Behaviour {
 

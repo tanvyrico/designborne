@@ -2,6 +2,8 @@ package game.weather;
 /**
  * The AffectedByWeather interface defines methods that entities can implement
  * to specify modifications that occur when affected by different weather conditions.
+ * @author Group6
+ * Modified by: Group6
  */
 public interface AffectedByWeather {
 

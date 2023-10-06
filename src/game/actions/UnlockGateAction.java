@@ -8,6 +8,7 @@ import game.grounds.Gate;
 
 /**
  * An action representing an actor unlocking a gate.
+ * @author Lim Hung Xuan
  */
 public class UnlockGateAction extends Action {
     private Gate gate;

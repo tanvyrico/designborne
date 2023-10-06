@@ -8,6 +8,8 @@ import game.capabilities.Ability;
 
 /**
  * Class representing the Void, a bottomless pit, on the game map that kills actors when stepped on.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class Void extends Ground {
 

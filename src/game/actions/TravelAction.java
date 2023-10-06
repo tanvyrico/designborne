@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 
 /**
  * A specialized action for an actor to travel to a specified destination on a game map.
+ * @author Lim Hung Xuan
  */
 public class TravelAction extends MoveActorAction {
     private String destination;

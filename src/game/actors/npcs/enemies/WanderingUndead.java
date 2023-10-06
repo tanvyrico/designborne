@@ -13,6 +13,8 @@ import java.util.Random;
 /**
  * A class representing a Wandering Undead enemy in the game.
  * Wandering Undead are hostile enemies that can attack Player actors and drop items upon defeat.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class WanderingUndead extends Enemy {
     private final int intrinsicDamage = 30;

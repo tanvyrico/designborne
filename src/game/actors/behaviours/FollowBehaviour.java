@@ -12,6 +12,8 @@ import game.capabilities.Status;
 /**
  * A behavior class representing the behavior of an actor following a target actor.
  * This behavior is typically used for hostile actors to pursue a target with a specific capability.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class FollowBehaviour implements Behaviour {
 

@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 
 /**
  * An interface representing a consumable item that can be used by an actor.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public interface Consumable {
 

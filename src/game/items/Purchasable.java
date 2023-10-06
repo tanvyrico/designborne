@@ -5,6 +5,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 /**
  * An interface representing items that can be purchased by actors in the game.
  * Classes implementing this interface should define the purchase logic and price calculation.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public interface Purchasable {
 

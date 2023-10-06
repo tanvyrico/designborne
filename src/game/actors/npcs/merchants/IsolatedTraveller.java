@@ -23,6 +23,8 @@ import java.util.List;
 /**
  * A class representing an Isolated Traveller actor in the game.
  * Isolated Travellers are friendly actors capable of trading with hostile actors.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class IsolatedTraveller extends Actor {
     private final List<Purchasable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword(), new GreatKnife()));

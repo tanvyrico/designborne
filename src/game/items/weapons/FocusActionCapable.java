@@ -3,6 +3,8 @@ package game.items.weapons;
 /**
  * An interface representing items or objects capable of focus actions, which allow the adjustment of weapon statistics
  * such as damage multiplier and hit rate.
+ * @author Lim Hung Xuan
+ * Modified by: Darin Park
  */
 public interface FocusActionCapable {
 

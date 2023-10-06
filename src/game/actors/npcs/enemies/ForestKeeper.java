@@ -24,6 +24,8 @@ import static game.weather.WeatherManager.removeAffectedByWeather;
  * A class representing a Forest Keeper enemy actor in the game.
  * Forest Keepers are hostile by default and can be attacked by actors with the HOSTILE_TO_ENEMY capability.
  * They are affected by both sunny and rainy weather, with their behavior and spawn rate changing accordingly.
+ * @author Willson Louisse HV
+ * Modified by: Group6
  */
 public class ForestKeeper extends Enemy implements AffectedByWeather {
     private int intrinsicDamage = 25;

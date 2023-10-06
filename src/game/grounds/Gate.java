@@ -12,6 +12,8 @@ import game.capabilities.Status;
 
 /**
  * Class representing a gate on the game map.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class Gate extends Ground {
     private GameMap gameMap;

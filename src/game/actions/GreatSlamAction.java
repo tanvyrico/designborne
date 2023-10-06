@@ -15,6 +15,8 @@ import java.util.Random;
 
 /**
  * An Action that allows the user of an allowed weapon to do an Area of Effect Attack.
+ * @author Willson Louisse HV
+ * Modified by: Group6
  */
 public class GreatSlamAction extends Action {
 

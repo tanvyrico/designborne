@@ -12,6 +12,8 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 /**
  * A class representing the 'Stab and Step' action, a special skill using a weapon.
+ * @author Willson Louisse HV
+ * Modified by: Group6
  */
 public class StabAndStepAction extends Action {
 

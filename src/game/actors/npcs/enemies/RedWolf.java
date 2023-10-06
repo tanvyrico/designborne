@@ -21,6 +21,8 @@ import static game.weather.WeatherManager.removeAffectedByWeather;
 /**
  * A class representing a Red Wolf enemy in the game.
  * Red Wolves are hostile enemies that can attack Player actors and drop items upon defeat.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class RedWolf extends Enemy implements AffectedByWeather {
     private int intrinsicDamage = 15;

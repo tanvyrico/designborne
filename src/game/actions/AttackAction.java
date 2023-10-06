@@ -10,6 +10,8 @@ import java.util.Random;
 /**
  * An Action representing a basic attack action performed by an actor using a weapon.
  * This action calculates the damage, checks for a hit, and updates the target's health accordingly.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class AttackAction extends Action {
 

@@ -13,6 +13,8 @@ import java.util.Random;
 /**
  * A class representing a Hollow Soldier enemy in the game.
  * Hollow Soldiers are hostile enemies that can attack Player actors and drop items upon defeat.
+ * @author Darin Park
+ * Modified by: Group6
  */
 public class HollowSoldier extends Enemy {
     private final int intrinsicDamage = 50;

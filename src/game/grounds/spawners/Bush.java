@@ -5,6 +5,8 @@ import game.actors.npcs.enemies.Enemy;
 /**
  * A specialized EnemySpawner representing a Bush.
  * Bushes can spawn enemies when interacted with.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class Bush extends EnemySpawner {
 

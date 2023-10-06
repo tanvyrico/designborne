@@ -29,7 +29,7 @@ import game.utility.FancyMessage;
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
- * Lim Hung Xuan
+ * Group6
  */
 public class Application {
 

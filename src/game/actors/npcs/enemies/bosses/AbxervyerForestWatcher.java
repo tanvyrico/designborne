@@ -25,6 +25,8 @@ import static game.weather.WeatherManager.setWeather;
  * A boss-level enemy class representing Abxervyer, The Forest Watcher.
  * Abxervyer is a powerful enemy with the ability to manipulate weather in affected maps. It also has invincibility and follows the player.
  * When defeated, Abxervyer drops runes and opens a gate to the Ancient Woods.
+ * @author Willson Louisse HV
+ * Modified by: Group6
  */
 public class AbxervyerForestWatcher extends Enemy {
 

@@ -4,6 +4,8 @@ import game.actors.npcs.enemies.Enemy;
 
 /**
  * Class representing a hut ground on the game map, where enemies can spawn.
+ * @author Willson Louisse HV
+ * Modified by: Group6
  */
 public class Hut extends EnemySpawner{
 

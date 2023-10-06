@@ -17,6 +17,8 @@ import java.util.Random;
 
 /**
  * Class representing a refreshing flask item that can be consumed by an actor to restore stamina.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;

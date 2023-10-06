@@ -9,6 +9,8 @@ import game.items.consumables.Consumable;
 /**
  * An Action representing an actor consuming a consumable item to gain benefits.
  * This action allows an actor to consume a consumable item and gain the specified effects.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public class ConsumeAction extends Action {
     private Consumable consumable;

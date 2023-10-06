@@ -19,6 +19,8 @@ import java.util.Map;
 /**
  * An abstract class representing an enemy actor in the game.
  * Enemy actors are hostile by default and can be attacked by actors with the HOSTILE_TO_ENEMY capability, but are friendly to other enemies.
+ * @author Lim Hung Xuan
+ * Modified by: Group6
  */
 public abstract class Enemy extends Actor {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 /**
  * The WeatherManager class manages the current weather conditions in the game and
  * applies weather-related effects to entities affected by weather changes.
+ * @author Group6
+ * Modified by: Group6
  */
 public class WeatherManager {
 

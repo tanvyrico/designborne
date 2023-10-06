@@ -12,6 +12,8 @@ import game.items.consumables.Consumable;
 
 /**
  * Class representing a puddle ground on the game map.
+ * @author Riordan D. Alfredo
+ * Modified by: Group6
  */
 public class Puddle extends Ground implements Consumable {
 

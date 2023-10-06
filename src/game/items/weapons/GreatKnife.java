@@ -15,6 +15,8 @@ import java.util.Random;
  * A class representing a Great Knife weapon item in the game.
  * The Great Knife is a powerful melee weapon that can be used to attack and deal damage to enemies.
  * It can also be purchased and sold by actors who possess the capability to trade.
+ * @author Willson Louisse Hansen Villery
+ * Modified by: Darin Park
  */
 public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
 

@@ -15,6 +15,8 @@ import game.items.Sellable;
  * Represents a Bloodberry item in the game, which is both consumable and sellable.
  * Consuming a Bloodberry restores an actor's health attribute by a fixed amount.
  * It can also be sold to a trader for a specific selling price.
+ * @author Enrico Tanvy
+ * Modified by: Group6
  */
 public class Bloodberry extends Item implements Consumable, Sellable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
