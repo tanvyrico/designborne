@@ -129,16 +129,5 @@ public abstract class Enemy extends Actor {
         this.spawnRate = spawnRate;
     }
 
-    public void setSpawnRateMultiplier(Float multiplier){
-        this.spawnRateMultiplier = multiplier;
-    }
-
-    public void setIntrinsicDamageMultiplier(Float multiplier){
-        this.intrinsicDamageMultiplier = multiplier;
-    }
-
-    public Float getIntrinsicDamageMultiplier(){
-        return this.intrinsicDamageMultiplier;
-    }
 
 }

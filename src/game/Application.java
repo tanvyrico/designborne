@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.npcs.enemies.bosses.AbxervyerForestWatcher;
 import game.actors.npcs.merchants.IsolatedTraveller;
 import game.actors.npcs.enemies.ForestKeeper;
 import game.actors.npcs.enemies.HollowSoldier;
@@ -94,7 +95,7 @@ public class Application {
         GameMap ancientWoodsMap = new GameMap(groundFactory, ancientWoods);
         world.addGameMap(ancientWoodsMap);
 
-        List<String> Abxervyer = Arrays.asList(
+        List<String> abxervyerBossRoom = Arrays.asList(
                 "~~~~.......+++......~+++++..............",
                 "~~~~.......+++.......+++++..............",
                 "~~~++......+++........++++..............",
@@ -116,8 +117,8 @@ public class Application {
                 "..........~~+++++......................~",
                 ".........~~~~++++..................~~..~");
 
-        GameMap AbxervyerMap = new GameMap(groundFactory, Abxervyer);
-        world.addGameMap(AbxervyerMap);
+        GameMap abxervyerMap = new GameMap(groundFactory, abxervyerBossRoom);
+        world.addGameMap(abxervyerMap);
 
 
 
@@ -138,7 +139,7 @@ public class Application {
 
         gameMap.at(30, 6).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
         burialGroundMap.at(31, 5).setGround(new Gate(ancientWoodsMap, gameMap.at(29,7), "The Ancient Woods"));
-        ancientWoodsMap.at(30, 0).setGround(new Gate(gameMap, gameMap.at(28,6), "The Abandoned Village"));
+        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap, abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
 
         BroadSword broadSword = new BroadSword();
         gameMap.at(29,6).addItem(broadSword);
@@ -164,18 +165,19 @@ public class Application {
         ancientWoodsMap.at(37, 5).setGround(new Bush(redWolf));
         ancientWoodsMap.at(20, 9).setGround(new Bush(redWolf));
 
-        AbxervyerMap.at(27, 8).setGround(new Hut(forestKeeper));
-        AbxervyerMap.at(35, 3).setGround(new Hut(forestKeeper));
-        AbxervyerMap.at(18, 7).setGround(new Hut(forestKeeper));
+        abxervyerMap.at(27, 8).setGround(new Hut(forestKeeper));
+        abxervyerMap.at(35, 3).setGround(new Hut(forestKeeper));
+        abxervyerMap.at(18, 7).setGround(new Hut(forestKeeper));
 
-        AbxervyerMap.at(29, 10).setGround(new Bush(redWolf));
-        AbxervyerMap.at(37, 5).setGround(new Bush(redWolf));
-        AbxervyerMap.at(20, 9).setGround(new Bush(redWolf));
+        abxervyerMap.at(29, 10).setGround(new Bush(redWolf));
+        abxervyerMap.at(37, 5).setGround(new Bush(redWolf));
+        abxervyerMap.at(20, 9).setGround(new Bush(redWolf));
 
         GiantHammer giantHammer = new GiantHammer();
-        gameMap.at(20,10).addItem(giantHammer);
+        abxervyerMap.at(29, 2).addItem(giantHammer);
 
-
+        AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap);
+        abxervyerMap.at(29,3).addActor(abxervyerForestWatcher);
 
         world.run();
     }

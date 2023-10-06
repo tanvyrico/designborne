@@ -23,7 +23,7 @@ import static game.weather.WeatherManager.removeAffectedByWeather;
  * Red Wolves are hostile enemies that can attack Player actors and drop items upon defeat.
  */
 public class RedWolf extends Enemy implements AffectedByWeather {
-    private int intrinsicDamage = 30;
+    private int intrinsicDamage = 15;
 
 
     /**
@@ -53,7 +53,7 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      * @return An IntrinsicWeapon representing the Red Wolf's damage capability.
      */
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon((int)(intrinsicDamage * getIntrinsicDamageMultiplier()), "bites", 80);
+        return new IntrinsicWeapon(intrinsicDamage, "bites", 80);
     }
 
     /**
@@ -85,9 +85,8 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      * @return A message describing the Red Wolf's modifications during sunny weather.
      */
     public String sunnyWeatherModifications(){
-        this.setIntrinsicDamageMultiplier(3F);
-        this.setSpawnRateMultiplier(1f);
-        this.intrinsicDamage = this.intrinsicDamage * 3;
+        this.intrinsicDamage = 45;
+        this.setSpawnRate(0.3);
         return "The red wolves are becoming less active. \n" +
                 "The red wolves are becoming more aggressive.";
     }
@@ -99,8 +98,8 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      */
     @Override
     public String rainyWeatherModifications() {
-        this.setIntrinsicDamageMultiplier(1f);
-        this.setSpawnRateMultiplier(1.5f);
+        this.intrinsicDamage = 15;
+        this.setSpawnRate(0.45);
         return "The red wolves are becoming more active.";
     }
 

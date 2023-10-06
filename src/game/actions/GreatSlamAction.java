@@ -16,7 +16,7 @@ import java.util.Random;
 /**
  * An Action that allows the user of an allowed weapon to do an Area of Effect Attack.
  */
-public class AOEAction extends Action {
+public class GreatSlamAction extends Action {
 
     /**
      * The multiplier applied to the weapon's damage for the AOE attack.
@@ -54,7 +54,7 @@ public class AOEAction extends Action {
      * If it doesn't have, then an Area of Effect Action will not be performed.
      */
 
-    public AOEAction(WeaponItem weaponItem, Actor target, String direction) {
+    public GreatSlamAction(WeaponItem weaponItem, Actor target, String direction) {
         this.weapon = weaponItem;
         this.target = target;
         this.direction = direction;

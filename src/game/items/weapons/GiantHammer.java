@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.capabilities.Status;
-import game.actions.AOEAction;
+import game.actions.GreatSlamAction;
 import game.actions.AttackAction;
 import game.actions.SellAction;
 import game.items.Sellable;
@@ -61,7 +61,7 @@ public class GiantHammer extends WeaponItem implements Sellable {
         ActionList actionList = new ActionList();
         if (!target.hasCapability(Status.HOSTILE_TO_ENEMY) && (target.hasCapability(Status.FRIENDLY_TO_ENEMY))){
             actionList.add(new AttackAction(target, location.toString(), this));
-            actionList.add(new AOEAction(this,target,location.toString()));
+            actionList.add(new GreatSlamAction(this,target,location.toString()));
         }
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));

@@ -38,19 +38,15 @@ public class AbxervyerForestWatcher extends Enemy {
     private ArrayList<Weather> weatherList;
 
     private int weatherIndex = 0;
+    private GameMap gameMap;
 
-
-    /**
-     * Constructor for the AbxervyerForestWatcher class.
-     *
-     * @param affectedMap An ArrayList of WeatherMaps that are affected by Abxervyer's weather manipulation.
-     */
-    public AbxervyerForestWatcher() {
+    public AbxervyerForestWatcher(GameMap gameMap) {
         super("Abxervyer, The Forest Watcher", 'Y', 2000);
         weatherList = new ArrayList<>(Arrays.asList(Weather.RAINY, Weather.SUNNY));
         this.addBalance(5000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
         this.addBehaviour(100, new FollowBehaviour());
+        this.gameMap = gameMap;
     }
 
     /**
@@ -59,7 +55,7 @@ public class AbxervyerForestWatcher extends Enemy {
      * @return An IntrinsicWeapon representing Abxervyer's damage capability.
      */
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(intrinsicDamage, "WHACK", hitRate);
+        return new IntrinsicWeapon(intrinsicDamage, "pummels", hitRate);
     }
 
     /**
@@ -72,7 +68,7 @@ public class AbxervyerForestWatcher extends Enemy {
     public String unconscious(Actor actor, GameMap map) {
         Display display = new Display();
         Location location = map.locationOf(this);
-        Gate gate = new Gate(map, location, "The Ancient Woods");
+        Gate gate = new Gate(this.gameMap, gameMap.locationOf(this), "The Ancient Woods");
         map.removeActor(this);
 
         location.setGround(gate);

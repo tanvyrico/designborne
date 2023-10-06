@@ -3,10 +3,8 @@ package game.items.consumables;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.items.PickUpAction;
 import game.capabilities.Ability;
 import game.actions.ConsumeAction;
-import game.actions.PickUpRunesAction;
 
 /**
  * Represents a Runes item in the game, which is consumable and can be used to increase an actor's balance.
@@ -20,7 +18,7 @@ public class Runes extends Item implements Consumable {
      * @param quantity The quantity of runes in this item.
      */
     public Runes(int quantity) {
-        super("Runes", '$', true);
+        super(quantity + " Runes", '$', true);
         this.quantity = quantity;
         this.addCapability(Ability.INCREASE_BALANCE);
     }
@@ -34,17 +32,6 @@ public class Runes extends Item implements Consumable {
         return this.quantity;
     }
 
-    /**
-     * Returns a PickUpAction to allow an actor to pick up this item if it is portable.
-     *
-     * @param actor The actor attempting to pick up the item.
-     * @return A PickUpAction for picking up the Runes item, or null if it's not portable.
-     */
-    public PickUpAction getPickUpAction(Actor actor) {
-        if(portable)
-            return new PickUpRunesAction(this);
-        return null;
-    }
 
     /**
      * Consumes the Runes, increasing the actor's balance by the quantity of runes in this item.
@@ -68,6 +55,7 @@ public class Runes extends Item implements Consumable {
      */
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
+
         ConsumeAction consumeAction = new ConsumeAction(this);
         actionList.add(consumeAction);
         return actionList;

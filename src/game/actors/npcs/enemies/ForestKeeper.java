@@ -88,7 +88,7 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
      * @return A message describing the modifications due to sunny weather.
      */
     public String sunnyWeatherModifications(){
-        this.setSpawnRateMultiplier(2F);
+        this.setSpawnRate(0.3);
         return "The forest keepers are becoming more active";
     }
 
@@ -99,8 +99,8 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
      */
     @Override
     public String rainyWeatherModifications() {
-        String healedMessage = null;
-        this.setSpawnRateMultiplier(1F);
+        String healedMessage = "";
+        this.setSpawnRate(0.15);
         if(getAttribute(BaseActorAttributes.HEALTH) < this.getAttributeMaximum(BaseActorAttributes.HEALTH)){
             this.heal(10);
             healedMessage = this + " feels rejuvenated. \n";
