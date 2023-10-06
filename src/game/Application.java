@@ -185,7 +185,6 @@ public class Application {
         AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap);
         abxervyerMap.at(29,3).addActor(abxervyerForestWatcher);
 
-
         world.run();
     }
 }
