@@ -5,9 +5,9 @@ package game.utility;
  * Fancy messages used to print the game title
  * Font obtained from: <a href="https://patorjk.com/software/taag/#p=display&f=Georgia11&t=">link</a>
  * Font: Georgia11
- * Created by:
+ * Created by: Group6
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Group6
  */
 public class FancyMessage {
     public static String TITLE =

@@ -10,15 +10,28 @@ import game.actions.AttackAction;
 import game.actions.SellAction;
 import game.items.Sellable;
 
+/**
+ * A class representing a Giant Hammer weapon item in the game.
+ * The Giant Hammer is a powerful melee weapon that can be used to attack and deal high damage to enemies.
+ * It can also be sold by actors who possess the capability to trade.
+ */
 public class GiantHammer extends WeaponItem implements Sellable {
     private int sellingPrice = 250;
+
     /**
-     * Constructor for the SkilledWeapon class.
+     * Constructor for the GiantHammer class.
+     * Initializes the Giant Hammer with a name, display character, damage points, verb for attack, and hit rate.
      */
     public GiantHammer() {
         super("Giant Hammer",'P', 160, "slams",90);
     }
 
+    /**
+     * Sells the Giant Hammer to an actor, adding its selling price to the actor's balance and removing it from their inventory.
+     *
+     * @param actor The actor selling the Giant Hammer.
+     * @return A message indicating that the Giant Hammer has been sold.
+     */
     @Override
     public String sell(Actor actor) {
         actor.addBalance(sellingPrice);
@@ -26,20 +39,23 @@ public class GiantHammer extends WeaponItem implements Sellable {
         return actor + " sold " + this;
     }
 
+    /**
+     * Retrieves the selling price of the Giant Hammer.
+     *
+     * @return The selling price of the Giant Hammer.
+     */
     @Override
     public int getSellingPrice() {
         return sellingPrice;
     }
 
     /**
-     * List of allowable actions that the item allows its owner do to other actor.
-     * Example #1: a weapon can return an attacking action to the other actor.
-     * Example #2: if the weapon has a special ability, it can return an action to use the special ability.
-     * Example #3: a food can return an action to feed the other actor.
+     * Returns a list of allowable actions that the Giant Hammer allows its owner to perform on other actors.
+     * These actions may include attacking, performing area-of-effect attacks, and selling the Giant Hammer.
      *
-     * @param otherActor the other actor
-     * @param location the location of the other actor
-     * @return an unmodifiable list of Actions
+     * @param target   The target actor on which the actions can be performed.
+     * @param location The location of the target actor.
+     * @return An ActionList containing the allowable actions for the Giant Hammer.
      */
     public ActionList allowableActions(Actor target, Location location){
         ActionList actionList = new ActionList();
@@ -50,7 +66,6 @@ public class GiantHammer extends WeaponItem implements Sellable {
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
         }
-
         return actionList;
     }
 

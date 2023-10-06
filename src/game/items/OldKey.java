@@ -12,6 +12,7 @@ public class OldKey extends Item{
     /**
      * Constructor for the OldKey class.
      *
+     * Initializes the OldKey with a name, display character, and the ability to open gates.
      */
     public OldKey() {
         super("Old key", '-', true);

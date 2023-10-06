@@ -108,7 +108,6 @@ public abstract class SkilledWeapon extends WeaponItem {
         }
     }
 
-
 }
 
 
