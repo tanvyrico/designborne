@@ -8,7 +8,6 @@ public class WeatherManager {
 
     private static ArrayList<AffectedByWeather> affectedByWeatherEntities = new ArrayList<>();
 
-
     public static void addAffectedByWeather(AffectedByWeather affectedByWeather){
         affectedByWeatherEntities.add(affectedByWeather);
     }

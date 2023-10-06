@@ -12,8 +12,6 @@ public enum Status {
     TRADER,
     SUSPICIOUS,
     NON_HOSTILE,
-    SUNNY,
-    RAINY
 
 
 }

@@ -9,14 +9,17 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.npcs.enemies.Enemy;
 import game.capabilities.Ability;
-import game.capabilities.Status;
 import game.actors.behaviours.FollowBehaviour;
 import game.grounds.Gate;
-import game.grounds.maps.WeatherMaps;
 import game.items.consumables.Runes;
 import game.utility.FancyMessage;
+import game.weather.Weather;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static game.weather.WeatherManager.run;
+import static game.weather.WeatherManager.setWeather;
 
 /**
  * A boss-level enemy class representing Abxervyer, The Forest Watcher.
@@ -32,9 +35,7 @@ public class AbxervyerForestWatcher extends Enemy {
     private int turnCount = 0;
     private int targetTurn = 3;
 
-    private ArrayList<WeatherMaps> affectedWeatherMap;
-
-    private ArrayList<Enum<Status>> weatherList;
+    private ArrayList<Weather> weatherList;
 
     private int weatherIndex = 0;
 
@@ -44,14 +45,12 @@ public class AbxervyerForestWatcher extends Enemy {
      *
      * @param affectedMap An ArrayList of WeatherMaps that are affected by Abxervyer's weather manipulation.
      */
-    public AbxervyerForestWatcher(ArrayList<WeatherMaps> affectedMap ) {
+    public AbxervyerForestWatcher() {
         super("Abxervyer, The Forest Watcher", 'Y', 2000);
-        affectedWeatherMap = affectedMap;
-        weatherList = new ArrayList<>(Arrays.asList(Status.RAINY, Status.SUNNY));
+        weatherList = new ArrayList<>(Arrays.asList(Weather.RAINY, Weather.SUNNY));
         this.addBalance(5000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
         this.addBehaviour(100, new FollowBehaviour());
-        this.addCapability(Ability.CHANGE_WEATHER);
     }
 
     /**
@@ -96,11 +95,11 @@ public class AbxervyerForestWatcher extends Enemy {
         turnCount++;
         if (turnCount == targetTurn) {
             turnCount = 0;
-            for (WeatherMaps weatherMap : affectedWeatherMap) {
-                Enum<Status> weather = weatherList.get(weatherIndex % weatherList.size());
-                weatherMap.setWeather(weather);
-            }
+            weatherIndex++;
+            Weather newWeather = weatherList.get(weatherIndex % weatherList.size());
+            display.println(setWeather(newWeather));
         }
+        display.println(run());
         return super.playTurn(actions, lastAction, map, display);
     }
 
