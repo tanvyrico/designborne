@@ -88,7 +88,8 @@ public class RedWolf extends Enemy implements AffectedByWeather {
         this.setIntrinsicDamageMultiplier(3F);
         this.setSpawnRateMultiplier(1f);
         this.intrinsicDamage = this.intrinsicDamage * 3;
-        return "The red wolves are becoming more active. \n The red wolves are becoming more aggressive.";
+        return "The red wolves are becoming less active. \n" +
+                "The red wolves are becoming more aggressive.";
     }
 
     /**
@@ -102,16 +103,6 @@ public class RedWolf extends Enemy implements AffectedByWeather {
         this.setSpawnRateMultiplier(1.5f);
         return "The red wolves are becoming more active.";
     }
-
-    /**
-     * Determines the action to be performed by the Red Wolf during its turn.
-     *
-     * @param actions    A collection of possible actions for the Red Wolf.
-     * @param lastAction The action the Red Wolf took last turn.
-     * @param map        The GameMap containing the Red Wolf.
-     * @param display    The I/O object to which messages may be written.
-     * @return The valid action to be performed during this turn.
-     */
 
 
 }

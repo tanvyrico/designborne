@@ -60,9 +60,6 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         }else{
             return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
         }
-<<<<<<< HEAD
-        return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
-=======
 
     }
 
@@ -73,16 +70,8 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
             return 75;
         }
         return 0;
->>>>>>> TASK_5_Branch
     }
 
-    @Override
-    public int getPurchasePrice(Actor seller) {
-        if (seller.hasCapability(Status.SUSPICIOUS)){
-            return 75;
-        }
-        return 0;
-    }
 
 
     public String sell(Actor actor){
@@ -90,13 +79,6 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         if (random.nextDouble() <= 0.5) {
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " without being paid!";
-<<<<<<< HEAD
-        }
-        actor.addBalance(this.sellingPrice);
-        actor.removeItemFromInventory(this);
-        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
-        }
-=======
         }else {
             actor.addBalance(this.sellingPrice);
             actor.removeItemFromInventory(this);
@@ -104,13 +86,10 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         }
 
     }
->>>>>>> TASK_5_Branch
 
-    @Override
     public int getSellingPrice() {
         return this.sellingPrice;
     }
-
 
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();

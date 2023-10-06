@@ -108,14 +108,5 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
         return healedMessage + "The forest keepers are becoming less active.";
     }
 
-    /**
-     * Overrides the playTurn method to handle weather-related modifications to Forest Keeper behavior.
-     *
-     * @param actions    A collection of possible actions for the Forest Keeper.
-     * @param lastAction The action the Forest Keeper took last turn.
-     * @param map        The GameMap containing the Forest Keeper.
-     * @param display    The I/O object to which messages may be written.
-     * @return The valid action to be performed during this turn.
-     */
 
 }
