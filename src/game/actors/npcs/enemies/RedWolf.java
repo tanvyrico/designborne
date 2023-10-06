@@ -73,9 +73,7 @@ public class RedWolf extends Enemy implements AffectedByWeather {
             HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
         }
-
         location.addItem(new Runes(this.getBalance()));
-
         return this + " met their demise at the hands of " + actor;
     }
 
@@ -87,7 +85,7 @@ public class RedWolf extends Enemy implements AffectedByWeather {
     public String sunnyWeatherModifications(){
         this.intrinsicDamage = 45;
         this.setSpawnRate(0.3);
-        return "The red wolves are becoming less active. \n" +
+        return "The red wolves are becoming less active.\n" +
                 "The red wolves are becoming more aggressive.";
     }
 
