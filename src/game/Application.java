@@ -122,7 +122,6 @@ public class Application {
         world.addGameMap(abxervyerMap);
 
 
-
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
