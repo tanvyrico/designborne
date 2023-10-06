@@ -21,7 +21,10 @@ import game.capabilities.Status;
  */
 public class Player extends Actor {
 
-    private final int intrinsicDamage = 15;
+//    private final int intrinsicDamage = 15;
+
+
+    private final int intrinsicDamage = 150;
     private final int hitRate = 80;
 
 

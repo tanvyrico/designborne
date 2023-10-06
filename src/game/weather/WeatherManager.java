@@ -36,7 +36,7 @@ public class WeatherManager {
      *
      * @return A string containing the modifications applied to affected entities.
      */
-    public static String run(){
+    public static String executeWeatherModifications(){
         String result = "";
         if (weather == Weather.SUNNY) {
             for (AffectedByWeather affectedByWeather : affectedByWeatherEntities) {

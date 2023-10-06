@@ -18,7 +18,7 @@ import game.weather.Weather;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static game.weather.WeatherManager.run;
+import static game.weather.WeatherManager.executeWeatherModifications;
 import static game.weather.WeatherManager.setWeather;
 
 /**
@@ -102,7 +102,7 @@ public class AbxervyerForestWatcher extends Enemy {
             Weather newWeather = weatherList.get(weatherIndex % weatherList.size());
             display.println(setWeather(newWeather));
         }
-        display.println(run());
+        display.println(executeWeatherModifications());
         return super.playTurn(actions, lastAction, map, display);
     }
 

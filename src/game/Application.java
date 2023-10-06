@@ -19,6 +19,7 @@ import game.grounds.Void;
 import game.grounds.spawners.Bush;
 import game.grounds.spawners.Graveyard;
 import game.grounds.spawners.Hut;
+import game.items.OldKey;
 import game.items.consumables.Bloodberry;
 import game.items.weapons.BroadSword;
 import game.items.weapons.GiantHammer;
@@ -142,6 +143,10 @@ public class Application {
 
         BroadSword broadSword = new BroadSword();
         gameMap.at(29,6).addItem(broadSword);
+
+        ////
+        gameMap.at(29,6).addItem(new OldKey());
+        ////
 
         WanderingUndead wanderingUndead = new WanderingUndead();
         HollowSoldier hollowSoldier = new HollowSoldier();
