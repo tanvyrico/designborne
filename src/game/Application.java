@@ -183,7 +183,7 @@ public class Application {
         abxervyerMap.at(29, 2).addItem(giantHammer);
 
         AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap);
-        abxervyerMap.at(29,3).addActor(abxervyerForestWatcher);
+        abxervyerMap.at(14,8).addActor(abxervyerForestWatcher);
 
         world.run();
     }

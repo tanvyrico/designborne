@@ -77,7 +77,7 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
         }else{
-            return actor + " fail to purchase Refreshing Flask for "+ purchasePrice + " Runes";
+            return actor + " failed to purchase " + this + " due to insufficient runes!";
         }
 
     }

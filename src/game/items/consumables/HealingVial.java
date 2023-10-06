@@ -82,7 +82,7 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.addItemToInventory(this);
             return actor + " purchased " + this + " for " + purchasePrice + " Runes)";
         }else {
-            return actor + " failed to purchase " + this + " for " + purchasePrice +" Runes";
+            return actor + " failed to purchase " + this + " due to insufficient runes!";
         }
     }
 

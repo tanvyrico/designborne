@@ -69,7 +69,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
             actor.addItemToInventory(this);
             return actor + " purchased " + this;
         }
-        return actor + " fail to buy GreatKnife for " + purchasePrice + " Runes";
+        return actor + " failed to purchase " + this + " due to insufficient runes!";
     }
 
     /**
