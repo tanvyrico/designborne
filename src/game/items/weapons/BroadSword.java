@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.UpgradeAction;
 import game.capabilities.Ability;
 import game.actions.AttackAction;
 import game.actions.FocusAction;
@@ -11,6 +12,7 @@ import game.capabilities.Status;
 import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
+import game.items.Upgradeable;
 
 import java.util.Random;
 
@@ -19,12 +21,14 @@ import java.util.Random;
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
-public class BroadSword extends WeaponItem implements Purchasable, Sellable, FocusActionCapable {
+public class BroadSword extends WeaponItem implements Purchasable, Sellable, FocusActionCapable, Upgradeable {
     private final int sellingPrice = 100;
 
     private int specialSkillTurn = 0;
 
     private int initialHitRate;
+    private int upgradeCount = 0;
+    private final int upgradingPrice = 1000;
 
     /**
      * Constructor for the BroadSword class.
@@ -59,6 +63,9 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
         }
+        if (target.hasCapability(Status.UPGRADE_ITEMS_WEAPONS)) {
+            actionList.add(new UpgradeAction(this));
+        }
 
         return actionList;
     }
@@ -87,6 +94,7 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
             resetWeaponStat();
         }
     }
+
     @Override
     public String purchase(Actor actor, Actor seller) {
         Random random = new Random();
@@ -103,6 +111,34 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         }else {
             return actor + " failed to purchase " + this + " due to insufficient runes!";
         }
+    }
+
+    @Override
+    public String upgrade(Actor actor){
+        int upgradePrice = this.getUpgradingPrice();
+        if (actor.getBalance() >= upgradePrice) {
+            actor.deductBalance(upgradePrice);
+            this.upgradeCount += 10;
+            return "Success! " + actor + "'s " + this + " has been successfully upgraded for " + this.getUpgradingPrice() + " runes.";
+        }else {
+            return actor + " failed to upgrade " + this + " due to insufficient runes!";
+        }
+    }
+
+    @Override
+    public int damage() {
+        return (super.damage()+this.upgradeCount);
+
+    }
+
+    @Override
+    public int getUpgradingPrice(){
+        return this.upgradingPrice;
+    }
+
+    @Override
+    public boolean ableToUpgrade(){
+        return true;
     }
 
     @Override

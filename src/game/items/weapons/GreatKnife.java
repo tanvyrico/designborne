@@ -49,6 +49,9 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
         }
+        if (target.hasCapability(Status.UPGRADE_ITEMS_WEAPONS)) {
+            actionList.add(new UpgradeAction(this));
+        }
         return actionList;
     }
 
