@@ -13,6 +13,6 @@ public enum Status {
     TRADER,
     SUSPICIOUS,
     NON_HOSTILE,
-
+    UPGRADE_ITEMS_WEAPONS,
 
 }
