@@ -6,12 +6,14 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.UpgradeAction;
 import game.capabilities.Ability;
 import game.capabilities.Status;
 import game.actions.ConsumeAction;
 import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
+import game.items.Upgradeable;
 
 import java.util.Random;
 
@@ -22,10 +24,13 @@ import java.util.Random;
  * @author Enrico Tanvy
  * Modified by: Group6
  */
-public class HealingVial extends Item implements Consumable, Purchasable, Sellable {
+public class HealingVial extends Item implements Consumable, Purchasable, Sellable, Upgradeable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.HEALTH;
     private final int sellingPrice = 35;
-
+    private final int upgradingPrice = 250;
+    private int maxUpgradeTimes = 1;
+    private int upgradeTimes = 0;
+    private double percentageIncrease;
 
     /**
      * Constructs a Healing Vial item with the name "Healing vial" and a display character 'a'.
@@ -35,8 +40,16 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         super("Healing vial", 'a', true);
         this.addCapability(Ability.PURCHASABLE);
         this.addCapability(Ability.SELLABLE);
+        this.percentageIncrease = 0.1;
     }
 
+    public double getPercentageIncrease(){
+        return this.percentageIncrease;
+    }
+
+    public void setPercentageIncrease(double givenPercentage){
+        this.percentageIncrease = givenPercentage;
+    }
     /**
      * Consumes the Healing Vial, increasing the actor's health by a percentage of their maximum health.
      *
@@ -45,7 +58,7 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
      */
     @Override
     public String consume(Actor actor) {
-        int buffedPoints = (int) (0.1 * actor.getAttributeMaximum(BaseActorAttributes.HEALTH));
+        int buffedPoints = (int) (getPercentageIncrease() * actor.getAttributeMaximum(BaseActorAttributes.HEALTH));
         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, buffedPoints);
         actor.removeItemFromInventory(this);
         return actor + " consumes " + this + " and " + this + " restores the " +
@@ -110,6 +123,7 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
      * @param actor The actor selling the Healing Vial.
      * @return A message describing the sale and the updated balance of the seller.
      */
+    @Override
     public String sell(Actor actor){
         Random random = new Random();
         if (random.nextDouble() <= 0.1) {
@@ -121,6 +135,33 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.addBalance(this.sellingPrice);
             actor.removeItemFromInventory(this);
             return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+        }
+    }
+
+    @Override
+    public String upgrade(Actor actor){
+        int upgradePrice = this.getUpgradingPrice();
+        if (actor.getBalance() >= upgradePrice) {
+            actor.deductBalance(upgradePrice);
+            this.setPercentageIncrease(0.8);
+            this.upgradeTimes++;
+            return "Success! " + actor + "'s healing vial has been successfully upgraded for " + this.getUpgradingPrice() + " runes.";
+        }else {
+            return actor + " failed to upgrade " + this + " due to insufficient runes!";
+        }
+    }
+
+    @Override
+    public int getUpgradingPrice(){
+        return this.upgradingPrice;
+    }
+
+    @Override
+    public boolean ableToUpgrade(){
+        if (this.upgradeTimes < this.maxUpgradeTimes){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -146,6 +187,9 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
+        }
+        if (target.hasCapability(Status.UPGRADE_ITEMS_WEAPONS)) {
+            actionList.add(new UpgradeAction(this));
         }
         return actionList;
     }
