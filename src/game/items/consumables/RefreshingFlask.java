@@ -6,12 +6,14 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.UpgradeAction;
 import game.capabilities.Ability;
 import game.capabilities.Status;
 import game.actions.ConsumeAction;
 import game.actions.SellAction;
 import game.items.Purchasable;
 import game.items.Sellable;
+import game.items.Upgradeable;
 
 import java.util.Random;
 
@@ -20,9 +22,14 @@ import java.util.Random;
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
-public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable {
+public class RefreshingFlask extends Item implements Consumable, Purchasable, Sellable, Upgradeable {
     private final BaseActorAttributes modifiedAttribute = BaseActorAttributes.STAMINA;
     private final int sellingPrice = 25;
+
+    private final int upgradingPrice = 175;
+    private int maxUpgradeTimes = 1;
+    private int upgradeTimes = 0;
+    private double percentageIncrease;
 
     /**
      * Constructor for the RefreshingFlask class.
@@ -31,6 +38,15 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         super("Refreshing flask", 'u', true);
         this.addCapability(Ability.PURCHASABLE);
         this.addCapability(Ability.SELLABLE);
+        this.percentageIncrease = 0.2;
+    }
+
+    public double getPercentageIncrease(){
+        return this.percentageIncrease;
+    }
+
+    public void setPercentageIncrease(double givenPercentage){
+        this.percentageIncrease = givenPercentage;
     }
 
     /**
@@ -41,7 +57,7 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
      */
     @Override
     public String consume(Actor actor) {
-        int buffedPoints = (int) (0.2 * actor.getAttributeMaximum(BaseActorAttributes.STAMINA));
+        int buffedPoints = (int) (getPercentageIncrease() * actor.getAttributeMaximum(BaseActorAttributes.STAMINA));
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, buffedPoints);
         actor.removeItemFromInventory(this);
         return actor + " consumes " + this + " and " + this + " restores the " +
@@ -116,6 +132,33 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
 
     }
 
+    @Override
+    public String upgrade(Actor actor){
+        int upgradePrice = this.getUpgradingPrice();
+        if (actor.getBalance() >= upgradePrice) {
+            actor.deductBalance(upgradePrice);
+            this.setPercentageIncrease(1.0);
+            this.upgradeTimes++;
+            return "Success! " + actor + "'s " + this + " has been successfully upgraded for " + this.getUpgradingPrice() + " runes.";
+        }else {
+            return actor + " failed to upgrade " + this + " due to insufficient runes!";
+        }
+    }
+
+    @Override
+    public int getUpgradingPrice(){
+        return this.upgradingPrice;
+    }
+
+    @Override
+    public boolean ableToUpgrade(){
+        if (this.upgradeTimes < this.maxUpgradeTimes){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Gets the selling price of the RefreshingFlask.
      *
@@ -137,6 +180,9 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
+        }
+        if (target.hasCapability(Status.UPGRADE_ITEMS_WEAPONS)) {
+            actionList.add(new UpgradeAction(this));
         }
         return actionList;
     }

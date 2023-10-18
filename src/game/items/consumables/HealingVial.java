@@ -145,7 +145,7 @@ public class HealingVial extends Item implements Consumable, Purchasable, Sellab
             actor.deductBalance(upgradePrice);
             this.setPercentageIncrease(0.8);
             this.upgradeTimes++;
-            return "Success! " + actor + "'s healing vial has been successfully upgraded for " + this.getUpgradingPrice() + " runes.";
+            return "Success! " + actor + "'s " + this + " has been successfully upgraded for " + this.getUpgradingPrice() + " runes.";
         }else {
             return actor + " failed to upgrade " + this + " due to insufficient runes!";
         }
