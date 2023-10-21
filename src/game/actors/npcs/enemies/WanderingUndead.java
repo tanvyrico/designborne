@@ -23,8 +23,8 @@ public class WanderingUndead extends Enemy {
     /**
      * Constructor for the WanderingUndead class.
      */
-    public WanderingUndead() {
-        super("Wandering Undead", 't', 100);
+    public WanderingUndead(GameMap gameMap) {
+        super("Wandering Undead", 't', 100, gameMap);
         this.getIntrinsicWeapon();
         this.addBalance(50);
         this.setSpawnRate(0.25);
@@ -36,8 +36,8 @@ public class WanderingUndead extends Enemy {
      * @return A new instance of the WanderingUndead enemy.
      */
     @Override
-    public WanderingUndead spawnEnemy() {
-        return new WanderingUndead();
+    public WanderingUndead spawnEnemy(GameMap gameMap) {
+        return new WanderingUndead(gameMap);
     }
 
     /**

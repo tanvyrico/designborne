@@ -23,8 +23,8 @@ public class HollowSoldier extends Enemy {
     /**
      * Constructor for the HollowSoldier class.
      */
-    public HollowSoldier() {
-        super("Hollow Soldier", '&', 200);
+    public HollowSoldier(GameMap gameMap) {
+        super("Hollow Soldier", '&', 200, gameMap);
         this.getIntrinsicWeapon();
         this.addBalance(100);
         this.setSpawnRate(0.1);
@@ -36,8 +36,8 @@ public class HollowSoldier extends Enemy {
      * @return A new instance of the HollowSoldier enemy.
      */
     @Override
-    public HollowSoldier spawnEnemy() {
-        return new HollowSoldier();
+    public HollowSoldier spawnEnemy(GameMap gameMap) {
+        return new HollowSoldier(gameMap);
     }
 
     /**

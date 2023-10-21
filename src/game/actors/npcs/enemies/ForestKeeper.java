@@ -34,8 +34,8 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
     /**
      * Constructor for the ForestKeeper class.
      */
-    public ForestKeeper() {
-        super("Forest Keeper", '8', 125);
+    public ForestKeeper(GameMap gameMap) {
+        super("Forest Keeper", '8', 125, gameMap);
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
         this.addBalance(50);
@@ -49,8 +49,8 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
      * @return A new instance of the ForestKeeper enemy.
      */
     @Override
-    public Enemy spawnEnemy() {
-        return new ForestKeeper();
+    public Enemy spawnEnemy(GameMap gameMap) {
+        return new ForestKeeper(gameMap);
     }
 
     /**
@@ -110,5 +110,10 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
         return healedMessage + "The forest keepers are becoming less active.";
     }
 
+    public String unconscious(GameMap map) {
+        removeAffectedByWeather(this);
+        map.removeActor(this);
+        return this + " ceased to exist.";
+    }
 
 }

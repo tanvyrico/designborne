@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public abstract class EnemySpawner extends Ground {
     private Enemy enemy;
+    private Location location;
 
     /**
      * Constructor for the EnemySpawner class.
@@ -31,12 +32,18 @@ public abstract class EnemySpawner extends Ground {
      * @param location The location where the enemy may be spawned.
      */
     public void tick(Location location) {
+        this.location = location;
         Random random = new Random();
         if (!location.containsAnActor()) {
             double randomValue = random.nextDouble();
             if (randomValue <= this.enemy.getSpawnRate()) {
-                location.addActor(enemy.spawnEnemy());
+                location.addActor(enemy.spawnEnemy(location.map()));
             }
         }
     }
+
+    public Location getLocation(){
+        return this.location;
+    }
+
 }
