@@ -1,39 +1,42 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Resettables;
 import game.actions.TravelAction;
 import game.actions.UnlockGateAction;
 import game.capabilities.Status;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static game.ResettableManager.addResettable;
 
 /**
  * Class representing a gate on the game map.
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
-public class Gate extends Ground {
-    private GameMap gameMap;
-    private Location location;
-    private String destination;
+public class Gate extends Ground implements Resettables {
+    private ArrayList<GameMap> gameMaps;
+    private ArrayList<Location> locations;
+    private ArrayList<String> destinations;
     private boolean isUnlocked;
 
-    /**
-     * Constructor for the Gate class.
-     *
-     * @param gameMap    The GameMap where the gate is located.
-     * @param location   The Location of the gate on the game map.
-     * @param destination The destination of the gate, typically another location or area.
-     */
-    public Gate(GameMap gameMap, Location location, String destination) {
+
+    public Gate(ArrayList<GameMap> gameMaps, ArrayList<Location> locations, ArrayList<String> destinations) {
         super('=');
-        this.gameMap = gameMap;
-        this.location = location;
-        this.destination = destination;
+        this.gameMaps = gameMaps;
+        this.locations = locations;
+        this.destinations = destinations;
         this.isUnlocked = false;
+        addResettable(this);
     }
 
     /**
@@ -74,8 +77,16 @@ public class Gate extends Ground {
         if (!this.isUnlocked) {
             actionList.add(new UnlockGateAction(this));
         } else {
-            actionList.add(new TravelAction(gameMap.at(location.x(), location.y()), this.destination));
+            for (int index = 0; index < this.locations.size(); index++) {
+                actionList.add(new TravelAction(gameMaps.get(index).at(locations.get(index).x(), locations.get(index).y()), destinations.get(index)));
+            }
         }
         return actionList;
     }
+
+    @Override
+    public void reset() {
+        this.isUnlocked = false;
+    }
 }
+
