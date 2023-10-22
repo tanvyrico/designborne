@@ -8,6 +8,7 @@ import game.capabilities.Status;
 import game.actions.*;
 import game.items.Purchasable;
 import game.items.Sellable;
+import game.items.Upgradeable;
 
 import java.util.Random;
 
@@ -18,9 +19,10 @@ import java.util.Random;
  * @author Willson Louisse Hansen Villery
  * Modified by: Darin Park
  */
-public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
+public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upgradeable {
 
     private int sellingPrice = 175;
+    private final int upgradingPrice = 2000;
 
     /**
      * Constructor for the GreatKnife class.
@@ -46,6 +48,9 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
         }
         if (target.hasCapability(Status.TRADER)) {
             actionList.add(new SellAction(this));
+        }
+        if (target.hasCapability(Status.UPGRADE_ITEMS_WEAPONS)) {
+            actionList.add(new UpgradeAction(this));
         }
         return actionList;
     }
@@ -121,6 +126,28 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable{
         actor.addBalance(sellingPrice);
         actor.removeItemFromInventory(this);
         return actor + " sold " + this;
+    }
+
+    @Override
+    public String upgrade(Actor actor){
+        int upgradePrice = this.getUpgradingPrice();
+        if (actor.getBalance() >= upgradePrice) {
+            actor.deductBalance(upgradePrice);
+            this.increaseHitRate(1);
+            return "Success! " + actor + "'s " + this + " has been successfully upgraded for " + this.getUpgradingPrice() + " runes.";
+        }else {
+            return actor + " failed to upgrade " + this + " due to insufficient runes!";
+        }
+    }
+
+    @Override
+    public int getUpgradingPrice(){
+        return this.upgradingPrice;
+    }
+
+    @Override
+    public boolean ableToUpgrade(){
+        return true;
     }
 }
 

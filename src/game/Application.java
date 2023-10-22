@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.npcs.enemies.*;
 import game.actors.npcs.enemies.bosses.AbxervyerForestWatcher;
+import game.actors.npcs.merchants.Blacksmith;
 import game.actors.npcs.merchants.IsolatedTraveller;
 import game.actors.Player;
 import game.grounds.*;
@@ -18,6 +19,7 @@ import game.grounds.spawners.Graveyard;
 import game.grounds.spawners.Hut;
 import game.items.OldKey;
 import game.items.consumables.Bloodberry;
+import game.items.consumables.HealingVial;
 import game.items.weapons.BroadSword;
 import game.items.weapons.GiantHammer;
 import game.utility.FancyMessage;
@@ -154,14 +156,13 @@ public class Application {
         world.addPlayer(player, abxervyerMap.at(1, 1));
         ancientWoodsMap.at(20, 3).addActor(isolatedTraveller);
 
+        Blacksmith blacksmith = new Blacksmith();
+        gameMap.at(34,8).addActor(blacksmith);
+        gameMap.at(30,8).addItem(new HealingVial());
 
-        gameMap.at(28, 6).setGround(new Gate(burialGroundMap.at(29,7), "The Burial Ground"));
-        burialGroundMap.at(31, 5).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
-        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
-
-//        gameMap.at(28, 6).setGround(new Gate(burialGroundMap.at(29,7), "The Burial Ground"));
-//        burialGroundMap.at(31, 5).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
-//        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
+        gameMap.at(35, 0).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
+        burialGroundMap.at(31, 5).setGround(new Gate(ancientWoodsMap, gameMap.at(29,7), "The Ancient Woods"));
+        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap, abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
 
         BroadSword broadSword = new BroadSword();
         gameMap.at(29,6).addItem(broadSword);
@@ -213,6 +214,7 @@ public class Application {
 
         AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap.at(0,0), OvergrownSanctuaryMap.at(5,1));
         abxervyerMap.at(14,8).addActor(abxervyerForestWatcher);
+
 
         world.run();
     }
