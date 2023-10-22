@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.npcs.enemies.Enemy;
 import game.capabilities.Ability;
 import game.actors.behaviours.FollowBehaviour;
+import game.capabilities.Status;
 import game.grounds.Gate;
 import game.items.consumables.Runes;
 import game.utility.FancyMessage;
@@ -50,8 +51,8 @@ public class AbxervyerForestWatcher extends Enemy {
      *
      * @param gameMap The GameMap where the gate will be allocated to once its death.
      */
-    public AbxervyerForestWatcher(Location firstLocation, Location secondLocation) {
-        super("Abxervyer, The Forest Watcher", 'Y', 2);
+    public AbxervyerForestWatcher(GameMap gameMap, Location firstLocation, Location secondLocation) {
+        super("Abxervyer, The Forest Watcher", 'Y', 2000, gameMap);
         weatherList = new ArrayList<>(Arrays.asList(Weather.RAINY, Weather.SUNNY));
         this.addBalance(5000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
@@ -89,6 +90,7 @@ public class AbxervyerForestWatcher extends Enemy {
         location.setGround(new Gate(this.gateHash));
         location.addItem(new Runes(this.getBalance()));
         display.println(FancyMessage.BOSS_FELLED);
+        actor.addCapability(Status.DEFEATED_ABXERVYER);
         return this + " met their demise at the hands of " + actor;
     }
 
@@ -119,7 +121,9 @@ public class AbxervyerForestWatcher extends Enemy {
      * @return Null, as Abxervyer should not respawn.
      */
     @Override
-    public Enemy spawnEnemy() {
+    public Enemy spawnEnemy(GameMap gameMap) {
         return null;
     }
+
+
 }

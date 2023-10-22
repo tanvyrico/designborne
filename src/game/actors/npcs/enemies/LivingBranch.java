@@ -24,8 +24,8 @@ public class LivingBranch extends Enemy{
     /**
      * Constructor for the Enemy class.
      */
-    public LivingBranch() {
-        super("Living Branch", '?', 75);
+    public LivingBranch(GameMap gameMap) {
+        super("Living Branch", '?', 75, gameMap);
         this.getIntrinsicWeapon();
         this.addBalance(250);
         this.setSpawnRate(0.9);
@@ -33,8 +33,8 @@ public class LivingBranch extends Enemy{
     }
 
     @Override
-    public Enemy spawnEnemy() {
-        return new LivingBranch();
+    public Enemy spawnEnemy(GameMap gameMap) {
+        return new LivingBranch(gameMap);
     }
 
     @Override

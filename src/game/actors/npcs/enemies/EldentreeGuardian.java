@@ -20,8 +20,8 @@ public class EldentreeGuardian extends Enemy{
     /**
      * Constructor for the Eldentree Guardian class.
      */
-    public EldentreeGuardian() {
-        super("Eldentree Guardian", 'e', 250);
+    public EldentreeGuardian(GameMap gameMap) {
+        super("Eldentree Guardian", 'e', 250, gameMap);
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
         this.addBalance(250);
@@ -30,8 +30,8 @@ public class EldentreeGuardian extends Enemy{
     }
 
     @Override
-    public Enemy spawnEnemy() {
-        return new EldentreeGuardian();
+    public Enemy spawnEnemy(GameMap gameMap) {
+        return new EldentreeGuardian(gameMap);
     }
 
     @Override
@@ -65,4 +65,6 @@ public class EldentreeGuardian extends Enemy{
         location.addItem(new Runes(this.getBalance()));
         return this + " met their demise at the hands of " + actor;
     }
+
+
 }
