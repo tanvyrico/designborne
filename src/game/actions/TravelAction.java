@@ -2,6 +2,8 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
@@ -9,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
  * @author Lim Hung Xuan
  */
 public class TravelAction extends MoveActorAction {
+    private Location moveToLocation;
     private String destination;
 
     /**
@@ -19,7 +22,24 @@ public class TravelAction extends MoveActorAction {
      */
     public TravelAction(Location moveToLocation, String destination) {
         super(moveToLocation, destination);
+        this.moveToLocation = moveToLocation;
         this.destination = destination;
+    }
+
+    @Override
+    public String execute(Actor actor, GameMap map) {
+        if(moveToLocation.containsAnActor()){
+            for (Exit exit : moveToLocation.getExits()){
+                Location destination = exit.getDestination();
+                if(!destination.containsAnActor() && destination.canActorEnter(actor)){
+                    map.moveActor(actor, destination);
+                    return menuDescription(actor);
+                }
+            }
+            return "Failed to travel, no empty spots found!";
+        }
+        map.moveActor(actor, moveToLocation);
+        return menuDescription(actor);
     }
 
     /**

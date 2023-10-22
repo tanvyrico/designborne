@@ -1,11 +1,8 @@
 package game.grounds;
 
-import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Resettables;
@@ -21,39 +18,27 @@ import java.util.Map;
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
+
 public class Gate extends Ground implements Resettables {
-    private ArrayList<GameMap> gameMaps;
-    private ArrayList<Location> locations;
-    private ArrayList<String> destinations;
     private boolean isUnlocked;
-    private String firstDestination;
-    private String secondDestination;
-    private Location location1;
     private HashMap<String, Location> teleportLocation;
+
+
     /**
      * Constructor for the Gate class.
      *
-     * @param gameMap    The GameMap where the gate is located.
      * @param location   The Location of the gate on the game map.
      * @param destination The destination of the gate, typically another location or area.
      */
     public Gate(Location location, String destination) {
         super('=');
-//        this.gameMap = gameMap;
-//        this.location = location;
-//        this.destination = destination;
         this.teleportLocation = new HashMap<>();
         this.teleportLocation.put(destination, location);
         this.isUnlocked = false;
-        addResettable(this);
     }
 
     public Gate(HashMap<String, Location> teleportLocation) {
         super('=');
-//        this.location = location;
-//        this.location1 = location1;
-//        this.firstDestination = firstDestination;
-//        this.secondDestination = secondDestination;
         this.isUnlocked = false;
         this.teleportLocation = new HashMap<>();
         for (Map.Entry<String, Location> entry : teleportLocation.entrySet()){
@@ -100,23 +85,19 @@ public class Gate extends Ground implements Resettables {
         }
         if (!this.isUnlocked) {
             actionList.add(new UnlockGateAction(this));
-//        } else if (location != null & location1 != null){
-//            actionList.add(new TravelAction(this.location, this.firstDestination));
-//            actionList.add(new TravelAction(this.location1, this.secondDestination));
         } else {
             for (Map.Entry<String, Location> entry : teleportLocation.entrySet()) {
                 String destination = entry.getKey();
                 Location teleportLocation = entry.getValue();
-                actionList.add(new TravelAction(teleportLocation,destination));
+                actionList.add(new TravelAction(teleportLocation, destination));
             }
-//            actionList.add(new TravelAction(this.location, this.destination));
         }
         return actionList;
     }
+
 
     @Override
     public void reset() {
         this.isUnlocked = false;
     }
 }
-
