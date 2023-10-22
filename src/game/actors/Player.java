@@ -2,16 +2,27 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Resettables;
+import game.items.consumables.Runes;
 import game.utility.FancyMessage;
 import game.capabilities.Status;
+
+import java.util.List;
+
+import static game.ResettableManager.*;
+import static game.utility.FancyMessage.TITLE;
+import static game.utility.FancyMessage.YOU_DIED;
 
 /**
  * Class representing the Player.
@@ -19,13 +30,12 @@ import game.capabilities.Status;
  * @author Adrian Kristanto
  * Modified by: Group6
  */
-public class Player extends Actor {
+public class Player extends Actor implements Resettables {
 
-//    private final int intrinsicDamage = 15;
-
-
-    private final int intrinsicDamage = 150;
+    private final int intrinsicDamage = 150000;
     private final int hitRate = 80;
+    private Location spawnPoint;
+    private GameMap currentMap;
 
 
     /**
@@ -36,12 +46,14 @@ public class Player extends Actor {
      * @param hitPoints   Player's starting number of hit points.
      * @param stamina     Player's starting stamina points.
      */
-    public Player(String name, char displayChar, int hitPoints, int stamina) {
+    public Player(String name, char displayChar, int hitPoints, int stamina, Location spawnPoint) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
         this.getIntrinsicWeapon();
         this.addBalance(0);
+        this.spawnPoint = spawnPoint;
+        addResettable(this);
     }
 
     /**
@@ -55,6 +67,7 @@ public class Player extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        this.currentMap = map;
         if (getAttribute(BaseActorAttributes.STAMINA) < this.getAttributeMaximum(BaseActorAttributes.STAMINA)) {
             this.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, (int) (this.getAttributeMaximum(BaseActorAttributes.STAMINA) * 0.01));
         }
@@ -79,11 +92,12 @@ public class Player extends Actor {
      * @return A message describing the outcome of the player character falling into the void.
      */
     public String unconscious(GameMap map) {
+        this.hurt(this.getAttribute(BaseActorAttributes.HEALTH));
+        executeReset();
         Display display = new Display();
-        map.removeActor(this);
-        display.println(this + " fell into the void.");
-        display.println(FancyMessage.YOU_DIED);
+        display.println(YOU_DIED);
         return this + " fell into the void.";
+
     }
 
     /**
@@ -94,9 +108,10 @@ public class Player extends Actor {
      * @return A message describing the outcome of the player character's defeat.
      */
     public String unconscious(Actor actor, GameMap map) {
+        this.hurt(this.getAttribute(BaseActorAttributes.HEALTH));
+        executeReset();
         Display display = new Display();
-        map.removeActor(this);
-        display.println(FancyMessage.YOU_DIED);
+        display.println(YOU_DIED);
         return this + " met their demise at the hands of " + actor;
     }
 
@@ -107,6 +122,16 @@ public class Player extends Actor {
      */
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(intrinsicDamage, "bonks", hitRate);
+    }
+
+    @Override
+    public void reset() {
+
+        currentMap.locationOf(this).addItem(new Runes(this.getBalance()));
+        this.deductBalance(this.getBalance());
+
+        currentMap.moveActor(this, spawnPoint);
+        this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, this.getAttributeMaximum(BaseActorAttributes.HEALTH));
     }
 
 //    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {

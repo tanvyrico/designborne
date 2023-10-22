@@ -1,3 +1,4 @@
+
 package game.actors.npcs.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
@@ -5,8 +6,12 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.Resettables;
 import game.actions.AttackAction;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.WanderBehaviour;
@@ -16,15 +21,19 @@ import game.capabilities.Status;
 import java.util.HashMap;
 import java.util.Map;
 
+import static game.ResettableManager.addResettable;
+import static game.ResettableManager.removeResettable;
+
 /**
  * An abstract class representing an enemy actor in the game.
  * Enemy actors are hostile by default and can be attacked by actors with the HOSTILE_TO_ENEMY capability, but are friendly to other enemies.
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor implements Resettables {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private double spawnRate;
+    private GameMap currentMap;
 
 
     /**
@@ -34,11 +43,13 @@ public abstract class Enemy extends Actor {
      * @param displayChar The character used to display the enemy on the game map.
      * @param hitPoints   The initial hit points of the enemy.
      */
-    public Enemy(String name, char displayChar, int hitPoints) {
+    public Enemy(String name, char displayChar, int hitPoints, GameMap gameMap) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.FRIENDLY_TO_ENEMY);
         this.behaviours.put(1, new AttackBehaviour());
         this.behaviours.put(999, new WanderBehaviour());
+        addResettable(this);
+        this.currentMap = gameMap;
     }
 
     /**
@@ -51,11 +62,10 @@ public abstract class Enemy extends Actor {
      * @return The valid action to be performed during this turn.
      */
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-
         int currentPriority = Integer.MAX_VALUE;
         Action currentAction = null ;
         for (Integer key : getBehaviours().keySet()) {
-            Action action = getBehaviours().get(key).getAction(this,map);
+            Action action = getBehaviours().get(key).getAction(this, map);
             if (key < currentPriority & action != null){
                 currentPriority = key;
                 currentAction = action;
@@ -109,7 +119,7 @@ public abstract class Enemy extends Actor {
      *
      * @return A new instance of an enemy.
      */
-    public abstract Enemy spawnEnemy();
+    public abstract Enemy spawnEnemy(GameMap gameMap);
 
     /**
      * Gets the spawn rate of this enemy.
@@ -128,6 +138,19 @@ public abstract class Enemy extends Actor {
     public void setSpawnRate(double spawnRate){
         this.spawnRate = spawnRate;
     }
+
+    public void reset() {
+        if (this.hasCapability(Status.BOSS)) {
+            this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, this.getAttributeMaximum(BaseActorAttributes.HEALTH) - this.getAttribute(BaseActorAttributes.HEALTH));
+        }
+        else{
+            this.hurt(this.getAttribute(BaseActorAttributes.HEALTH));
+            this.unconscious(currentMap);
+            removeResettable(this);
+        }
+
+    }
+
 
 
 }

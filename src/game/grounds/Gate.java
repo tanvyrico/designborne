@@ -1,5 +1,6 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -7,6 +8,7 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Resettables;
 import game.actions.TravelAction;
 import game.actions.UnlockGateAction;
 import game.capabilities.Status;
@@ -19,10 +21,10 @@ import java.util.Map;
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
-public class Gate extends Ground {
-    private GameMap gameMap;
-    private Location location;
-    private String destination;
+public class Gate extends Ground implements Resettables {
+    private ArrayList<GameMap> gameMaps;
+    private ArrayList<Location> locations;
+    private ArrayList<String> destinations;
     private boolean isUnlocked;
     private String firstDestination;
     private String secondDestination;
@@ -43,6 +45,7 @@ public class Gate extends Ground {
         this.teleportLocation = new HashMap<>();
         this.teleportLocation.put(destination, location);
         this.isUnlocked = false;
+        addResettable(this);
     }
 
     public Gate(HashMap<String, Location> teleportLocation) {
@@ -110,4 +113,10 @@ public class Gate extends Ground {
         }
         return actionList;
     }
+
+    @Override
+    public void reset() {
+        this.isUnlocked = false;
+    }
 }
+

@@ -31,8 +31,8 @@ public class RedWolf extends Enemy implements AffectedByWeather {
     /**
      * Constructor for the RedWolf class.
      */
-    public RedWolf() {
-        super("Red Wolf", 'r', 25);
+    public RedWolf(GameMap gameMap) {
+        super("Red Wolf", 'r', 25, gameMap);
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
         this.addBalance(25);
@@ -45,8 +45,8 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      *
      * @return A new instance of the RedWolf enemy.
      */
-    public RedWolf spawnEnemy() {
-        return new RedWolf();
+    public RedWolf spawnEnemy(GameMap gameMap) {
+        return new RedWolf(gameMap);
     }
 
     /**
@@ -103,7 +103,11 @@ public class RedWolf extends Enemy implements AffectedByWeather {
         return "The red wolves are becoming more active.";
     }
 
-
+    public String unconscious(GameMap map) {
+        removeAffectedByWeather(this);
+        map.removeActor(this);
+        return this + " ceased to exist.";
+    }
 }
 
 
