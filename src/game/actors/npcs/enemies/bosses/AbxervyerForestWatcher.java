@@ -17,6 +17,7 @@ import game.weather.Weather;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static game.weather.WeatherManager.executeWeatherModifications;
 import static game.weather.WeatherManager.setWeather;
@@ -40,20 +41,25 @@ public class AbxervyerForestWatcher extends Enemy {
     private ArrayList<Weather> weatherList;
 
     private int weatherIndex = 0;
-    private GameMap gameMap;
+    private Location firstLocation;
+    private Location secondLocation;
+    private HashMap gateHash;
 
     /**
      * Constructs an AbxervyerForestWatcher object.
      *
      * @param gameMap The GameMap where the gate will be allocated to once its death.
      */
-    public AbxervyerForestWatcher(GameMap gameMap) {
-        super("Abxervyer, The Forest Watcher", 'Y', 2000);
+    public AbxervyerForestWatcher(Location firstLocation, Location secondLocation) {
+        super("Abxervyer, The Forest Watcher", 'Y', 2);
         weatherList = new ArrayList<>(Arrays.asList(Weather.RAINY, Weather.SUNNY));
         this.addBalance(5000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
         this.addBehaviour(100, new FollowBehaviour());
-        this.gameMap = gameMap;
+        this.firstLocation = firstLocation;
+        this.secondLocation = secondLocation;
+        this.gateHash = new HashMap<>();
+
     }
 
     /**
@@ -75,11 +81,12 @@ public class AbxervyerForestWatcher extends Enemy {
     public String unconscious(Actor actor, GameMap map) {
         Display display = new Display();
         Location location = map.locationOf(this);
-        Gate gate = new Gate(this.gameMap, gameMap.locationOf(this), "The Ancient Woods");
         map.removeActor(this);
 
-        location.setGround(gate);
+        this.gateHash.put("Ancient Woods", this.firstLocation);
+        this.gateHash.put("Overgrown Sanctuary", this.secondLocation);
 
+        location.setGround(new Gate(this.gateHash));
         location.addItem(new Runes(this.getBalance()));
         display.println(FancyMessage.BOSS_FELLED);
         return this + " met their demise at the hands of " + actor;
