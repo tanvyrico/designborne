@@ -7,13 +7,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.npcs.enemies.*;
 import game.actors.npcs.enemies.bosses.AbxervyerForestWatcher;
 import game.actors.npcs.merchants.IsolatedTraveller;
-import game.actors.npcs.enemies.ForestKeeper;
-import game.actors.npcs.enemies.HollowSoldier;
 import game.actors.Player;
-import game.actors.npcs.enemies.RedWolf;
-import game.actors.npcs.enemies.WanderingUndead;
 import game.grounds.*;
 import game.grounds.Void;
 import game.grounds.spawners.Bush;
@@ -122,6 +119,25 @@ public class Application {
         GameMap abxervyerMap = new GameMap(groundFactory, abxervyerBossRoom);
         world.addGameMap(abxervyerMap);
 
+        List<String> OvergrownSanctuary = Arrays.asList(
+                "++++.....++++........++++~~~~~.......~~~..........",
+                "++++......++.........++++~~~~.........~...........",
+                "+++..................+++++~~.......+++............",
+                "....................++++++......++++++............",
+                "...................++++........++++++~~...........",
+                "...................+++.........+++..~~~...........",
+                "..................+++..........++...~~~...........",
+                "~~~...........................~~~..~~~~...........",
+                "~~~~............+++..........~~~~~~~~~~...........",
+                "~~~~............+++.........~~~~~~~~~~~~..........",
+                "++~..............+++.......+~~........~~..........",
+                "+++..............+++......+++..........~~.........",
+                "+++..............+++......+++..........~~.........",
+                "~~~..............+++......+++..........~~~........",
+                "~~~~.............+++......+++..........~~~........");
+
+        GameMap OvergrownSanctuaryMap = new GameMap(groundFactory, OvergrownSanctuary);
+        world.addGameMap(OvergrownSanctuaryMap);
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -134,12 +150,18 @@ public class Application {
 
         Player player = new Player("The Abstracted One", '@', 150, 200);
         IsolatedTraveller isolatedTraveller = new IsolatedTraveller();
-        world.addPlayer(player, gameMap.at(29, 5));
+//        world.addPlayer(player, gameMap.at(29, 5));
+        world.addPlayer(player, abxervyerMap.at(1, 1));
         ancientWoodsMap.at(20, 3).addActor(isolatedTraveller);
 
-        gameMap.at(35, 0).setGround(new Gate(burialGroundMap, burialGroundMap.at(29,7), "The Burial Ground"));
-        burialGroundMap.at(31, 5).setGround(new Gate(ancientWoodsMap, gameMap.at(29,7), "The Ancient Woods"));
-        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap, abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
+
+        gameMap.at(28, 6).setGround(new Gate(burialGroundMap.at(29,7), "The Burial Ground"));
+        burialGroundMap.at(31, 5).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
+        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
+
+//        gameMap.at(28, 6).setGround(new Gate(burialGroundMap.at(29,7), "The Burial Ground"));
+//        burialGroundMap.at(31, 5).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
+//        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
 
         BroadSword broadSword = new BroadSword();
         gameMap.at(29,6).addItem(broadSword);
@@ -152,6 +174,8 @@ public class Application {
         HollowSoldier hollowSoldier = new HollowSoldier();
         ForestKeeper forestKeeper = new ForestKeeper();
         RedWolf redWolf = new RedWolf();
+        EldentreeGuardian eldentreeGuardian = new EldentreeGuardian();
+        LivingBranch livingBranch = new LivingBranch();
 
         gameMap.at(27, 8).setGround(new Graveyard(wanderingUndead));
         gameMap.at(35, 3).setGround(new Graveyard(wanderingUndead));
@@ -181,10 +205,13 @@ public class Application {
         abxervyerMap.at(37, 5).setGround(new Bush(redWolf));
         abxervyerMap.at(20, 9).setGround(new Bush(redWolf));
 
+        OvergrownSanctuaryMap.at(18, 7).setGround(new Hut(eldentreeGuardian));
+        OvergrownSanctuaryMap.at(15,5).setGround(new Bush(livingBranch));
+
         GiantHammer giantHammer = new GiantHammer();
         abxervyerMap.at(29, 2).addItem(giantHammer);
 
-        AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap);
+        AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap.at(0,0), OvergrownSanctuaryMap.at(5,1));
         abxervyerMap.at(14,8).addActor(abxervyerForestWatcher);
 
         world.run();
