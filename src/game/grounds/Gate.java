@@ -3,12 +3,16 @@ package game.grounds;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TravelAction;
 import game.actions.UnlockGateAction;
 import game.capabilities.Status;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class representing a gate on the game map.
@@ -20,7 +24,10 @@ public class Gate extends Ground {
     private Location location;
     private String destination;
     private boolean isUnlocked;
-
+    private String firstDestination;
+    private String secondDestination;
+    private Location location1;
+    private HashMap<String, Location> teleportLocation;
     /**
      * Constructor for the Gate class.
      *
@@ -28,12 +35,29 @@ public class Gate extends Ground {
      * @param location   The Location of the gate on the game map.
      * @param destination The destination of the gate, typically another location or area.
      */
-    public Gate(GameMap gameMap, Location location, String destination) {
+    public Gate(Location location, String destination) {
         super('=');
-        this.gameMap = gameMap;
-        this.location = location;
-        this.destination = destination;
+//        this.gameMap = gameMap;
+//        this.location = location;
+//        this.destination = destination;
+        this.teleportLocation = new HashMap<>();
+        this.teleportLocation.put(destination, location);
         this.isUnlocked = false;
+    }
+
+    public Gate(HashMap<String, Location> teleportLocation) {
+        super('=');
+//        this.location = location;
+//        this.location1 = location1;
+//        this.firstDestination = firstDestination;
+//        this.secondDestination = secondDestination;
+        this.isUnlocked = false;
+        this.teleportLocation = new HashMap<>();
+        for (Map.Entry<String, Location> entry : teleportLocation.entrySet()){
+            String destination = entry.getKey();
+            Location locationOfTeleport = entry.getValue();
+            this.teleportLocation.put(destination, locationOfTeleport);
+        }
     }
 
     /**
@@ -73,8 +97,16 @@ public class Gate extends Ground {
         }
         if (!this.isUnlocked) {
             actionList.add(new UnlockGateAction(this));
+//        } else if (location != null & location1 != null){
+//            actionList.add(new TravelAction(this.location, this.firstDestination));
+//            actionList.add(new TravelAction(this.location1, this.secondDestination));
         } else {
-            actionList.add(new TravelAction(gameMap.at(location.x(), location.y()), this.destination));
+            for (Map.Entry<String, Location> entry : teleportLocation.entrySet()) {
+                String destination = entry.getKey();
+                Location teleportLocation = entry.getValue();
+                actionList.add(new TravelAction(teleportLocation,destination));
+            }
+//            actionList.add(new TravelAction(this.location, this.destination));
         }
         return actionList;
     }
