@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class Gate extends Ground implements Resettable {
     private boolean isUnlocked;
-    private HashMap<String, Location> teleportLocation;
+    private HashMap<Location, String> teleportLocation;
 
 
     /**
@@ -33,18 +33,18 @@ public class Gate extends Ground implements Resettable {
     public Gate(Location location, String destination) {
         super('=');
         this.teleportLocation = new HashMap<>();
-        this.teleportLocation.put(destination, location);
+        this.teleportLocation.put(location, destination);
         this.isUnlocked = false;
     }
 
-    public Gate(HashMap<String, Location> teleportLocation) {
+    public Gate(HashMap<Location, String> teleportLocation) {
         super('=');
         this.isUnlocked = false;
         this.teleportLocation = new HashMap<>();
-        for (Map.Entry<String, Location> entry : teleportLocation.entrySet()){
-            String destination = entry.getKey();
-            Location locationOfTeleport = entry.getValue();
-            this.teleportLocation.put(destination, locationOfTeleport);
+        for (Map.Entry<Location, String> entry : teleportLocation.entrySet()){
+            Location locationOfTeleport = entry.getKey();
+            String destination = entry.getValue();
+            this.teleportLocation.put(locationOfTeleport, destination);
         }
     }
 
@@ -86,9 +86,9 @@ public class Gate extends Ground implements Resettable {
         if (!this.isUnlocked) {
             actionList.add(new UnlockGateAction(this));
         } else {
-            for (Map.Entry<String, Location> entry : teleportLocation.entrySet()) {
-                String destination = entry.getKey();
-                Location teleportLocation = entry.getValue();
+            for (Map.Entry<Location, String> entry : teleportLocation.entrySet()) {
+                Location teleportLocation = entry.getKey();
+                String destination = entry.getValue();
                 actionList.add(new TravelAction(teleportLocation, destination));
             }
         }
