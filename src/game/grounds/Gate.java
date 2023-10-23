@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Resettables;
+import game.Resettable;
 import game.actions.TravelAction;
 import game.actions.UnlockGateAction;
 import game.capabilities.Status;
@@ -19,7 +19,7 @@ import java.util.Map;
  * Modified by: Group6
  */
 
-public class Gate extends Ground implements Resettables {
+public class Gate extends Ground implements Resettable {
     private boolean isUnlocked;
     private HashMap<String, Location> teleportLocation;
 

@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Resettables;
+import game.Resettable;
 import game.capabilities.Ability;
 import game.actions.ConsumeAction;
 
@@ -17,7 +17,7 @@ import static game.ResettableManager.removeResettable;
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
-public class Runes extends Item implements Consumable, Resettables{
+public class Runes extends Item implements Consumable, Resettable {
     private int quantity;
     private Location location;
     private boolean isInResettables;

@@ -1,6 +1,6 @@
 package game;
 
 
-public interface Resettables {
+public interface Resettable {
     void reset();
 }

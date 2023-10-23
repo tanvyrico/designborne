@@ -10,8 +10,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.Resettables;
+import game.Resettable;
 import game.actions.AttackAction;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.WanderBehaviour;
@@ -30,7 +29,7 @@ import static game.ResettableManager.removeResettable;
  * @author Lim Hung Xuan
  * Modified by: Group6
  */
-public abstract class Enemy extends Actor implements Resettables {
+public abstract class Enemy extends Actor implements Resettable {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private double spawnRate;
     private GameMap currentMap;

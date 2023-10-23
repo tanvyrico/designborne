@@ -2,26 +2,20 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.Resettables;
+import game.Resettable;
 import game.items.consumables.Runes;
-import game.utility.FancyMessage;
 import game.capabilities.Status;
 
-import java.util.List;
-
 import static game.ResettableManager.*;
-import static game.utility.FancyMessage.TITLE;
 import static game.utility.FancyMessage.YOU_DIED;
 
 /**
@@ -30,7 +24,7 @@ import static game.utility.FancyMessage.YOU_DIED;
  * @author Adrian Kristanto
  * Modified by: Group6
  */
-public class Player extends Actor implements Resettables {
+public class Player extends Actor implements Resettable {
 
     private final int intrinsicDamage = 150000;
     private final int hitRate = 80;

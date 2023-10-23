@@ -3,18 +3,18 @@ package game;
 import java.util.ArrayList;
 
 public class ResettableManager {
-    private static ArrayList<Resettables> resettableList = new ArrayList<>();
+    private static ArrayList<Resettable> resettableList = new ArrayList<>();
 
-    public static void addResettable(Resettables resettable){
+    public static void addResettable(Resettable resettable){
         resettableList.add(resettable);
     }
 
-    public static void removeResettable(Resettables resettable){
+    public static void removeResettable(Resettable resettable){
         resettableList.remove(resettable);
     }
     public static void executeReset(){
-        ArrayList<Resettables> resettableListCopy = new ArrayList<>(resettableList);
-        for(Resettables resettable : resettableListCopy){
+        ArrayList<Resettable> resettableListCopy = new ArrayList<>(resettableList);
+        for(Resettable resettable : resettableListCopy){
             resettable.reset();
         }
     }
