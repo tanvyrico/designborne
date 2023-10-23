@@ -6,14 +6,14 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Monologist;
+import game.MonologueCapable;
 import game.capabilities.Status;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Blacksmith extends Actor implements Monologist {
+public class Blacksmith extends Actor implements MonologueCapable {
 
     private ArrayList<String> monologueOptions = new ArrayList<>(Arrays.asList("I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.",
             "It’s dangerous to go alone. Take my creation with you on your adventure!",

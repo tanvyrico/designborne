@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Monologist;
+import game.MonologueCapable;
 import game.capabilities.Status;
 import game.actions.PurchaseAction;
 import game.items.Purchasable;
@@ -28,7 +28,7 @@ import java.util.Random;
  * @author Enrico Tanvy
  * Modified by: Group6
  */
-public class IsolatedTraveller extends Actor implements Monologist {
+public class IsolatedTraveller extends Actor implements MonologueCapable {
     private final List<Purchasable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword(), new GreatKnife()));
 
     private ArrayList<String> monologueOptions = new ArrayList<>(Arrays.asList("I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.",
