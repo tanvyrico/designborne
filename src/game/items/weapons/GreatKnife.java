@@ -30,6 +30,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
      */
     public GreatKnife() {
         super("GreatKnife", '>', 75, "Stab", 70);
+        this.addCapability(Status.HAS_GREAT_KNIFE);
     }
 
     /**

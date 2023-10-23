@@ -26,6 +26,7 @@ public class GiantHammer extends WeaponItem implements Sellable {
      */
     public GiantHammer() {
         super("Giant Hammer",'P', 160, "slams",90);
+        this.addCapability(Status.HAS_GIANT_HAMMER);
     }
 
     /**
