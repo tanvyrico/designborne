@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Monologist;
 import game.capabilities.Status;
 import game.actions.PurchaseAction;
 import game.items.Purchasable;
@@ -19,6 +20,7 @@ import game.items.weapons.GreatKnife;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A class representing an Isolated Traveller actor in the game.
@@ -26,8 +28,14 @@ import java.util.List;
  * @author Enrico Tanvy
  * Modified by: Group6
  */
-public class IsolatedTraveller extends Actor {
+public class IsolatedTraveller extends Actor implements Monologist {
     private final List<Purchasable> itemInventory = new ArrayList<>(Arrays.asList(new HealingVial(), new RefreshingFlask(), new BroadSword(), new GreatKnife()));
+
+    private ArrayList<String> monologueOptions = new ArrayList<>(Arrays.asList("I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.",
+            "It’s dangerous to go alone. Take my creation with you on your adventure!",
+            "Ah, it’s you. Let’s get back to make your weapons stronger.",
+            "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. Use my creation to slay them and proceed further!"));
+
 
     /**
      * Constructor for the IsolatedTraveller class.
@@ -52,6 +60,19 @@ public class IsolatedTraveller extends Actor {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         return new DoNothingAction();
     }
+
+    public String generateMonologue(Actor player){
+        if(player.hasCapability(Status.DEFEATED_ABXERVYER)){
+            this.monologueOptions.remove("Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. Use my creation to slay them and proceed further!");
+            this.monologueOptions.add("Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.");
+        }
+        if(player.hasCapability(Status.HAS_GREAT_KNIFE)){
+            this.monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.");
+        }
+        Random random = new Random();
+        return monologueOptions.get(random.nextInt(monologueOptions.size()));
+    }
+
 
     /**
      * Retrieves the list of allowable actions for the Isolated Traveller.
