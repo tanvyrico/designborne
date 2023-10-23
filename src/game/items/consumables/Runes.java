@@ -5,12 +5,12 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Resettable;
+import game.resettables.Resettable;
 import game.capabilities.Ability;
 import game.actions.ConsumeAction;
 
-import static game.ResettableManager.addResettable;
-import static game.ResettableManager.removeResettable;
+import static game.resettables.ResettableManager.addResettable;
+import static game.resettables.ResettableManager.removeResettable;
 
 /**
  * Represents a Runes item in the game, which is consumable and can be used to increase an actor's balance.

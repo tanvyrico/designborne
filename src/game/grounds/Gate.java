@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Resettable;
+import game.resettables.Resettable;
 import game.actions.TravelAction;
 import game.actions.UnlockGateAction;
 import game.capabilities.Status;

@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.MonologueCapable;
+import game.monologues.MonologueCapable;
 import game.capabilities.Status;
 import game.actions.PurchaseAction;
 import game.items.Purchasable;

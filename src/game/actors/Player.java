@@ -11,11 +11,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.Resettable;
+import game.resettables.Resettable;
 import game.items.consumables.Runes;
 import game.capabilities.Status;
 
-import static game.ResettableManager.*;
+import static game.resettables.ResettableManager.*;
 import static game.utility.FancyMessage.YOU_DIED;
 
 /**

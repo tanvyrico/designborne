@@ -1,4 +1,6 @@
-package game;
+package game.resettables;
+
+import game.resettables.Resettable;
 
 import java.util.ArrayList;
 

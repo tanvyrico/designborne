@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Resettable;
+import game.resettables.Resettable;
 import game.actions.AttackAction;
 import game.actors.behaviours.AttackBehaviour;
 import game.actors.behaviours.WanderBehaviour;
@@ -20,8 +20,8 @@ import game.capabilities.Status;
 import java.util.HashMap;
 import java.util.Map;
 
-import static game.ResettableManager.addResettable;
-import static game.ResettableManager.removeResettable;
+import static game.resettables.ResettableManager.addResettable;
+import static game.resettables.ResettableManager.removeResettable;
 
 /**
  * An abstract class representing an enemy actor in the game.
