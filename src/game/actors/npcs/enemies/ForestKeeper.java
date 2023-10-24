@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actors.behaviours.WanderBehaviour;
 import game.capabilities.Status;
 import game.actors.behaviours.FollowBehaviour;
 import game.items.consumables.Runes;
@@ -38,6 +39,7 @@ public class ForestKeeper extends Enemy implements AffectedByWeather {
         super("Forest Keeper", '8', 125, gameMap);
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
+        this.addBehaviour(999,new WanderBehaviour());
         this.addBalance(50);
         this.setSpawnRate(0.15);
         addAffectedByWeather(this);

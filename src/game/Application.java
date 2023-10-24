@@ -69,10 +69,11 @@ public class Application {
             }
         }
 
-        Player player = new Player("The Abstracted One", '@', 150, 200, gameMap.at(27,5 ));
+        Player player = new Player("The Abstracted One", '@', 150, 200, gameMap.at(29,5 ));
         world.addPlayer(player, gameMap.at(29, 5));
         IsolatedTraveller isolatedTraveller = new IsolatedTraveller();
         gameMap.at(30, 5).addActor(isolatedTraveller);
+        gameMap.at(30,8).addActor(new LivingBranch(gameMap));
         Blacksmith blacksmith = new Blacksmith();
         gameMap.at(28,5).addActor(blacksmith);
 

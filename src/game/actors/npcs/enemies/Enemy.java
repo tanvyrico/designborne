@@ -46,7 +46,6 @@ public abstract class Enemy extends Actor implements Resettable {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.FRIENDLY_TO_ENEMY);
         this.behaviours.put(1, new AttackBehaviour());
-        this.behaviours.put(999, new WanderBehaviour());
         addResettable(this);
         this.currentMap = gameMap;
     }
@@ -147,9 +146,5 @@ public abstract class Enemy extends Actor implements Resettable {
             this.unconscious(currentMap);
             removeResettable(this);
         }
-
     }
-
-
-
 }

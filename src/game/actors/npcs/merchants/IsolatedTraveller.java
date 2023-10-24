@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.MonologueAction;
 import game.monologues.MonologueCapable;
 import game.capabilities.Status;
 import game.actions.PurchaseAction;
@@ -61,16 +62,25 @@ public class IsolatedTraveller extends Actor implements MonologueCapable {
         return new DoNothingAction();
     }
 
+    public void addMonologue(String newMonologue){
+        this.monologueOptions.add(newMonologue);
+    }
+
+    public void removeMonologue(String removedMonologue){
+        this.monologueOptions.remove(removedMonologue);
+    }
+
     public String generateMonologue(Actor player){
-        if(player.hasCapability(Status.DEFEATED_ABXERVYER)){
-            this.monologueOptions.remove("Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. Use my creation to slay them and proceed further!");
-            this.monologueOptions.add("Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.");
-        }
-        if(player.hasCapability(Status.HAS_GREAT_KNIFE)){
-            this.monologueOptions.add("Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.");
+        if(player.hasCapability(Status.HAS_GIANT_HAMMER)){
+            addMonologue("Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.");
+            if(player.hasCapability(Status.DEFEATED_ABXERVYER)){
+                removeMonologue("You know the rules of this world, and so do I. Each area is ruled by a lord. Defeat the lord of this area, Abxervyer, and you may proceed to the next area.");
+                addMonologue("Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.");
+            }
         }
         Random random = new Random();
-        return monologueOptions.get(random.nextInt(monologueOptions.size()));
+        String randomizeMonologue = monologueOptions.get(random.nextInt(monologueOptions.size()));
+        return randomizeMonologue;
     }
 
 
@@ -84,16 +94,9 @@ public class IsolatedTraveller extends Actor implements MonologueCapable {
      */
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actionList = new ActionList();
-        for (Exit exit : map.locationOf(this).getExits()) {
-            Location destination = exit.getDestination();
-            if (destination.containsAnActor()) {
-                if (destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                    for (Purchasable purchasable : this.itemInventory) {
-                        actionList.add(new PurchaseAction(purchasable,this));
-                    }
-
-                }
-            }
+        actionList.add(new MonologueAction(this));
+        for (Purchasable purchasable : this.itemInventory) {
+            actionList.add(new PurchaseAction(purchasable,this));
         }
         return actionList;
     }

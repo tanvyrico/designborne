@@ -18,7 +18,7 @@ import game.items.consumables.Runes;
 
 import java.util.Random;
 
-public class LivingBranch extends Enemy{
+public class LivingBranch extends Enemy {
     private int intrinsicDamage = 250;
 
     /**
@@ -69,17 +69,5 @@ public class LivingBranch extends Enemy{
         return this + " met their demise at the hands of " + actor;
     }
 
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        Location location = map.locationOf(this);
-        for(Exit exit : location.getExits()){
-            Location destination = exit.getDestination();
-
-            if (destination.containsAnActor() && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
-                return new AttackAction(destination.getActor(), exit.getName());
-            }
-        }
-
-        return new DoNothingAction();
-    }
 }
+

@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.behaviours.FollowBehaviour;
+import game.actors.behaviours.WanderBehaviour;
 import game.capabilities.Ability;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
@@ -24,6 +25,7 @@ public class EldentreeGuardian extends Enemy{
         super("Eldentree Guardian", 'e', 250, gameMap);
         this.getIntrinsicWeapon();
         this.addBehaviour(100, new FollowBehaviour());
+        this.addBehaviour(999,new WanderBehaviour());
         this.addBalance(250);
         this.setSpawnRate(0.2);
         this.addCapability(Ability.VOID_INVINCIBILITY);
