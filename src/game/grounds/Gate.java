@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class Gate extends Ground implements Resettable {
     private boolean isUnlocked;
-    private HashMap<Location, String> teleportLocation;
+    private HashMap<Location, String> travelLocations;
 
 
 
@@ -34,16 +34,15 @@ public class Gate extends Ground implements Resettable {
      */
     public Gate(Location location, String destination) {
         super('=');
-        this.teleportLocation = new HashMap<>();
-        this.teleportLocation.put(location, destination);
+        this.travelLocations = new HashMap<>();
+        this.travelLocations.put(location, destination);
         this.isUnlocked = false;
     }
 
-    public Gate(HashMap<Location, String> teleportLocation) {
+    public Gate(HashMap<Location, String> travelLocations) {
         super('=');
         this.isUnlocked = false;
-        this.teleportLocation = teleportLocation ;
-
+        this.travelLocations = travelLocations ;
     }
 
     /**
@@ -80,8 +79,8 @@ public class Gate extends Ground implements Resettable {
         if (!this.isUnlocked) {
             actionList.add(new UnlockGateAction(this));
         } else {
-            for (Location travelLocation : teleportLocation.keySet()) {
-                actionList.add(new TravelAction(travelLocation, teleportLocation.get(travelLocation)));
+            for (Location travelLocation : travelLocations.keySet()) {
+                actionList.add(new TravelAction(travelLocation, travelLocations.get(travelLocation)));
             }
         }
         return actionList;
