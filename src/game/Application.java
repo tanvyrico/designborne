@@ -75,13 +75,29 @@ public class Application {
         world.addPlayer(player, gameMap.at(29, 5));
 
 // testing gate to ancient wood
-        gameMap.at(28, 5).setGround(new Gate(ancientWoodsMap.at(20,3), "The Burial Ground"));
+        gameMap.at(28, 5).setGround(new Gate(burialGroundMap.at(20,3), "The Burial Ground"));
+        burialGroundMap.at(19,3).setGround(new Gate(gameMap.at(29,5), "The Abandoned Village"));
+        burialGroundMap.at(21,3).setGround(new Gate(ancientWoodsMap.at(29,5), "The Ancient Woods"));
+        ancientWoodsMap.at(28,5).setGround(new Gate(burialGroundMap.at(20,3), "The Burial Ground"));
+        ancientWoodsMap.at(30,5).setGround(new Gate(abxervyerMap.at(2,8), "Abxervyer, The Forest Watcher's Battle Room"));
+        overgrownSanctuaryMap.at(0,4).setGround(new Gate(abxervyerMap.at(2,8), "Abxervyer, The Forest Watcher's Battle Room"));
+
+
+        HashMap<Location, String> abxervyerTravelLocations = new HashMap<>();
+        abxervyerTravelLocations.put(ancientWoodsMap.at(29,5), "The Ancient Woods");
+        abxervyerTravelLocations.put(overgrownSanctuaryMap.at(1,4), "The Overgrown Sanctuary");
+
+        AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap, abxervyerTravelLocations);
+        abxervyerMap.at(14,8).addActor(abxervyerForestWatcher);
+
+
+        ancientWoodsMap.at(21,3).addActor(new IsolatedTraveller());
 
 
 
 
-        // gameMap.at(28, 5).setGround(new Gate(burialGroundMap.at(39,14), "The Burial Ground"));
-        burialGroundMap.at(39, 14).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
+//        gameMap.at(28, 5).setGround(new Gate(burialGroundMap.at(39,14), "The Burial Ground"));
+//        burialGroundMap.at(39, 14).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
 
         // ancient wood to abxervyer
         ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
@@ -122,14 +138,23 @@ public class Application {
         abxervyerMap.at(37, 5).setGround(new Bush(new RedWolf(abxervyerMap)));
         abxervyerMap.at(20, 9).setGround(new Bush(new RedWolf(abxervyerMap)));
 
+        overgrownSanctuaryMap.at(27, 8).setGround(new Hut(new EldentreeGuardian(overgrownSanctuaryMap)));
+        overgrownSanctuaryMap.at(35, 3).setGround(new Hut(new EldentreeGuardian(overgrownSanctuaryMap)));
         overgrownSanctuaryMap.at(18, 7).setGround(new Hut(new EldentreeGuardian(overgrownSanctuaryMap)));
+
+        overgrownSanctuaryMap.at(29, 10).setGround(new Bush(new LivingBranch(overgrownSanctuaryMap)));
+        overgrownSanctuaryMap.at(37, 5).setGround(new Bush(new LivingBranch(overgrownSanctuaryMap)));
+        overgrownSanctuaryMap.at(20, 9).setGround(new Bush(new LivingBranch(overgrownSanctuaryMap)));
+
+        overgrownSanctuaryMap.at(25, 2).setGround(new Graveyard(new HollowSoldier(overgrownSanctuaryMap)));
+        overgrownSanctuaryMap.at(33, 4).setGround(new Graveyard(new HollowSoldier(overgrownSanctuaryMap)));
+        overgrownSanctuaryMap.at(16, 6).setGround(new Graveyard(new HollowSoldier(overgrownSanctuaryMap)));
 
 
         GiantHammer giantHammer = new GiantHammer();
         abxervyerMap.at(29, 2).addItem(giantHammer);
 
-        AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap, ancientWoodsMap.at(0,0), overgrownSanctuaryMap.at(5,1));
-        abxervyerMap.at(14,8).addActor(abxervyerForestWatcher);
+
 
         world.run();
     }

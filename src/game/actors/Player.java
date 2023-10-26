@@ -26,7 +26,7 @@ import static game.utility.FancyMessage.YOU_DIED;
  */
 public class Player extends Actor implements Resettable {
 
-    private final int intrinsicDamage = 150000;
+    private final int intrinsicDamage = 15;
     private final int hitRate = 80;
     private Location spawnPoint;
     private GameMap currentMap;

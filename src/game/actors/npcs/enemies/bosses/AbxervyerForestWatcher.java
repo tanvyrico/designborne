@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actors.behaviours.WanderBehaviour;
 import game.actors.npcs.enemies.Enemy;
 import game.capabilities.Ability;
 import game.actors.behaviours.FollowBehaviour;
@@ -42,25 +43,21 @@ public class AbxervyerForestWatcher extends Enemy {
     private ArrayList<Weather> weatherList;
 
     private int weatherIndex = 0;
-    private Location firstLocation;
-    private Location secondLocation;
-    private HashMap gateHash;
+    private HashMap gateLocations;
 
     /**
      * Constructs an AbxervyerForestWatcher object.
      *
      * @param gameMap The GameMap where the gate will be allocated to once its death.
      */
-    public AbxervyerForestWatcher(GameMap gameMap, Location firstLocation, Location secondLocation) {
+    public AbxervyerForestWatcher(GameMap gameMap, HashMap<Location, String> travelLocations) {
         super("Abxervyer, The Forest Watcher", 'Y', 2000, gameMap);
         weatherList = new ArrayList<>(Arrays.asList(Weather.RAINY, Weather.SUNNY));
         this.addBalance(5000);
         this.addCapability(Ability.VOID_INVINCIBILITY);
+        this.addBehaviour(999,new WanderBehaviour());
         this.addBehaviour(100, new FollowBehaviour());
-        this.firstLocation = firstLocation;
-        this.secondLocation = secondLocation;
-        this.gateHash = new HashMap<>();
-
+        this.gateLocations = travelLocations;
     }
 
     /**
@@ -84,10 +81,7 @@ public class AbxervyerForestWatcher extends Enemy {
         Location location = map.locationOf(this);
         map.removeActor(this);
 
-        this.gateHash.put("Ancient Woods", this.firstLocation);
-        this.gateHash.put("Overgrown Sanctuary", this.secondLocation);
-
-        location.setGround(new Gate(this.gateHash));
+        location.setGround(new Gate(this.gateLocations));
         location.addItem(new Runes(this.getBalance()));
         display.println(FancyMessage.BOSS_FELLED);
         actor.addCapability(Status.DEFEATED_ABXERVYER);
