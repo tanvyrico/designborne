@@ -74,8 +74,9 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 150, 200, gameMap.at(29,5 ));
         world.addPlayer(player, gameMap.at(29, 5));
 
-// testing gate to ancient wood
-        gameMap.at(28, 5).setGround(new Gate(burialGroundMap.at(20,3), "The Burial Ground"));
+
+
+        gameMap.at(28, 0).setGround(new Gate(burialGroundMap.at(20,3), "The Burial Ground"));
         burialGroundMap.at(19,3).setGround(new Gate(gameMap.at(29,5), "The Abandoned Village"));
         burialGroundMap.at(21,3).setGround(new Gate(ancientWoodsMap.at(29,5), "The Ancient Woods"));
         ancientWoodsMap.at(28,5).setGround(new Gate(burialGroundMap.at(20,3), "The Burial Ground"));
@@ -95,16 +96,10 @@ public class Application {
 
 
 
-
-//        gameMap.at(28, 5).setGround(new Gate(burialGroundMap.at(39,14), "The Burial Ground"));
-//        burialGroundMap.at(39, 14).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
-
-        // ancient wood to abxervyer
         ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
 
 
         gameMap.at(43,10).addActor(new Blacksmith());
-        gameMap.at(29,5).addItem(new OldKey());
         gameMap.at(27,6).addItem(new BroadSword());
         gameMap.at(30,11).setGround(new Graveyard(new WanderingUndead(gameMap)));
         gameMap.at(50,1).setGround(new Graveyard(new WanderingUndead(gameMap)));
