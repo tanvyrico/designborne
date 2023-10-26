@@ -3,6 +3,7 @@ package game;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import edu.monash.fit2099.engine.displays.Display;
@@ -26,6 +27,7 @@ import game.items.consumables.HealingVial;
 import game.items.consumables.Runes;
 import game.items.weapons.BroadSword;
 import game.items.weapons.GiantHammer;
+import game.items.weapons.GreatKnife;
 import game.utility.FancyMessage;
 import game.utility.Map;
 
@@ -71,58 +73,46 @@ public class Application {
 
         Player player = new Player("The Abstracted One", '@', 150, 200, gameMap.at(29,5 ));
         world.addPlayer(player, gameMap.at(29, 5));
-        IsolatedTraveller isolatedTraveller = new IsolatedTraveller();
-        gameMap.at(30, 5).addActor(isolatedTraveller);
-        gameMap.at(30,8).addActor(new LivingBranch(gameMap));
-        Blacksmith blacksmith = new Blacksmith();
-        gameMap.at(28,5).addActor(blacksmith);
 
-        gameMap.at(28,5).addItem(new Runes(1000));
-        gameMap.at(27,5).addItem(new Runes(5000));
-        gameMap.at(28,6).addItem(new Runes(8000));
-
-        gameMap.at(31,5).setGround(new Void());
+// testing gate to ancient wood
+        gameMap.at(28, 5).setGround(new Gate(ancientWoodsMap.at(20,3), "The Burial Ground"));
 
 
 
-        gameMap.at(30,8).addItem(new HealingVial());
 
+        // gameMap.at(28, 5).setGround(new Gate(burialGroundMap.at(39,14), "The Burial Ground"));
+        burialGroundMap.at(39, 14).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
 
-        gameMap.at(28, 6).setGround(new Gate(burialGroundMap.at(29,7), "The Burial Ground"));
-        burialGroundMap.at(31, 5).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
+        // ancient wood to abxervyer
         ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
 
-//        gameMap.at(28, 6).setGround(new Gate(burialGroundMap.at(29,7), "The Burial Ground"));
-//        burialGroundMap.at(31, 5).setGround(new Gate(gameMap.at(29,7), "The Ancient Woods"));
-//        ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
 
-        BroadSword broadSword = new BroadSword();
-        gameMap.at(29,6).addItem(broadSword);
+        gameMap.at(43,10).addActor(new Blacksmith());
+        gameMap.at(29,5).addItem(new OldKey());
+        gameMap.at(27,6).addItem(new BroadSword());
+        gameMap.at(30,11).setGround(new Graveyard(new WanderingUndead(gameMap)));
+        gameMap.at(50,1).setGround(new Graveyard(new WanderingUndead(gameMap)));
 
-        ////
-        gameMap.at(29,6).addItem(new OldKey());
-        ////
+        burialGroundMap.at(2,14).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
+        burialGroundMap.at(6,0).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
+        burialGroundMap.at(23,2).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
+        burialGroundMap.at(38,12).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
+        burialGroundMap.at(36,1).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
 
 
-        gameMap.at(27, 8).setGround(new Graveyard(new WanderingUndead(gameMap)));
-        gameMap.at(35, 3).setGround(new Graveyard(new WanderingUndead(gameMap)));
-        gameMap.at(18, 7).setGround(new Graveyard(new WanderingUndead(gameMap)));
+        ancientWoodsMap.at(12,11).addItem(new Bloodberry());
+        ancientWoodsMap.at(14,11).setGround(new Bush(new RedWolf(ancientWoodsMap)));
+        ancientWoodsMap.at(11,9).setGround(new Bush(new RedWolf(ancientWoodsMap)));
+        ancientWoodsMap.at(27,0).setGround(new Hut(new ForestKeeper(ancientWoodsMap)));
+        ancientWoodsMap.at(20,1).addItem(new Bloodberry());
+        ancientWoodsMap.at(22,6).addItem(new Bloodberry());
+        ancientWoodsMap.at(35,11).addItem(new Bloodberry());
+        ancientWoodsMap.at(34,10).setGround(new Hut(new ForestKeeper(ancientWoodsMap)));
+        ancientWoodsMap.at(46,5).setGround(new Bush(new RedWolf(ancientWoodsMap)));
+        ancientWoodsMap.at(56,8).addItem(new Bloodberry());
+        ancientWoodsMap.at(57,3).setGround(new Hut(new ForestKeeper(ancientWoodsMap)));
 
-        burialGroundMap.at(27, 8).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
-        burialGroundMap.at(35, 3).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
-        burialGroundMap.at(18, 7).setGround(new Graveyard(new HollowSoldier(burialGroundMap)));
 
-        ancientWoodsMap.at(27, 8).setGround(new Hut(new ForestKeeper(ancientWoodsMap)));
-        ancientWoodsMap.at(35, 3).setGround(new Hut(new ForestKeeper(ancientWoodsMap)));
-        ancientWoodsMap.at(18, 7).setGround(new Hut(new ForestKeeper(ancientWoodsMap)));
-
-        ancientWoodsMap.at(29, 10).setGround(new Bush(new RedWolf(ancientWoodsMap)));
-        ancientWoodsMap.at(37, 5).setGround(new Bush(new RedWolf(ancientWoodsMap)));
-        ancientWoodsMap.at(20, 9).setGround(new Bush(new RedWolf(ancientWoodsMap)));
-
-        ancientWoodsMap.at(21, 10).addItem(new Bloodberry());
-        ancientWoodsMap.at(20, 5).addItem(new Bloodberry());
-        ancientWoodsMap.at(10,9).addItem(new Bloodberry());
 
         abxervyerMap.at(27, 8).setGround(new Hut(new ForestKeeper(abxervyerMap)));
         abxervyerMap.at(35, 3).setGround(new Hut(new ForestKeeper(abxervyerMap)));

@@ -30,7 +30,7 @@ public class WanderingUndead extends Enemy {
         this.addBalance(50);
         this.addBehaviour(999,new WanderBehaviour());
         this.setSpawnRate(0.25);
-    }//
+    }
 
     /**
      * Spawns a WanderingUndead.

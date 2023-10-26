@@ -24,6 +24,8 @@ public class Gate extends Ground implements Resettable {
     private HashMap<Location, String> teleportLocation;
 
 
+
+
     /**
      * Constructor for the Gate class.
      *
@@ -40,12 +42,8 @@ public class Gate extends Ground implements Resettable {
     public Gate(HashMap<Location, String> teleportLocation) {
         super('=');
         this.isUnlocked = false;
-        this.teleportLocation = new HashMap<>();
-        for (Map.Entry<Location, String> entry : teleportLocation.entrySet()){
-            Location locationOfTeleport = entry.getKey();
-            String destination = entry.getValue();
-            this.teleportLocation.put(locationOfTeleport, destination);
-        }
+        this.teleportLocation = teleportLocation ;
+
     }
 
     /**
@@ -79,22 +77,15 @@ public class Gate extends Ground implements Resettable {
      */
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actionList = new ActionList();
-        if (!(actor.hasCapability(Status.HOSTILE_TO_ENEMY))) {
-            actionList.add(new DoNothingAction());
-            return actionList;
-        }
         if (!this.isUnlocked) {
             actionList.add(new UnlockGateAction(this));
         } else {
-            for (Map.Entry<Location, String> entry : teleportLocation.entrySet()) {
-                Location teleportLocation = entry.getKey();
-                String destination = entry.getValue();
-                actionList.add(new TravelAction(teleportLocation, destination));
+            for (Location travelLocation : teleportLocation.keySet()) {
+                actionList.add(new TravelAction(travelLocation, teleportLocation.get(travelLocation)));
             }
         }
         return actionList;
     }
-
 
     @Override
     public void reset() {
