@@ -74,6 +74,7 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 150, 200, gameMap.at(29,5 ));
         world.addPlayer(player, gameMap.at(29, 5));
 
+        gameMap.at(29,6).addItem(new BroadSword());
 
 
         gameMap.at(28, 0).setGround(new Gate(burialGroundMap.at(20,3), "The Burial Ground"));
@@ -101,7 +102,6 @@ public class Application {
 
 
         gameMap.at(43,10).addActor(new Blacksmith());
-        gameMap.at(27,6).addItem(new BroadSword());
         gameMap.at(30,11).setGround(new Graveyard(new WanderingUndead(gameMap)));
         gameMap.at(50,1).setGround(new Graveyard(new WanderingUndead(gameMap)));
 
