@@ -137,6 +137,10 @@ public abstract class Enemy extends Actor implements Resettable {
         this.spawnRate = spawnRate;
     }
 
+    /**
+     * Remove enemy from the map, if it is boss, reset the HP
+     * This method is part of the Resettable interface implementation.
+     */
     public void reset() {
         if (this.hasCapability(Status.BOSS)) {
             this.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, this.getAttributeMaximum(BaseActorAttributes.HEALTH) - this.getAttribute(BaseActorAttributes.HEALTH));

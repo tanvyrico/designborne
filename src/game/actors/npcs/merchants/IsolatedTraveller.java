@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * A class representing an Isolated Traveller actor in the game.
- * Isolated Travellers are friendly actors capable of trading with hostile actors.
+ * A class representing an Isolated Traveller actor in the game that can buy and sell item
  * @author Enrico Tanvy
  * Modified by: Group6
  */
@@ -62,14 +61,31 @@ public class IsolatedTraveller extends Actor implements MonologueCapable {
         return new DoNothingAction();
     }
 
+    /**
+     * Adds a new monologue option for the blacksmith.
+     *
+     * @param newMonologue the new monologue string to be added
+     */
     public void addMonologue(String newMonologue){
         this.monologueOptions.add(newMonologue);
     }
 
+    /**
+     * Removes a monologue option for the blacksmith.
+     *
+     * @param removedMonologue the monologue string to be removed
+     */
     public void removeMonologue(String removedMonologue){
         this.monologueOptions.remove(removedMonologue);
     }
 
+
+    /**
+     * Generates a monologue for the player based on certain conditions.
+     *
+     * @param player the player (Actor) for whom the monologue is generated
+     * @return a string representing the generated monologue
+     */
     public String generateMonologue(Actor player){
         if(player.hasCapability(Status.HAS_GIANT_HAMMER)){
             addMonologue("Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.");

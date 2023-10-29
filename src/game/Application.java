@@ -94,6 +94,7 @@ public class Application {
 
         ancientWoodsMap.at(21,3).addActor(new IsolatedTraveller());
 
+        gameMap.at(35,11).addActor(new WanderingUndead(gameMap));
 
 
         ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));

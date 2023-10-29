@@ -132,6 +132,12 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
 
     }
 
+    /**
+     * Handles the upgrade of the RefreshingFlask by an actor.
+     *
+     * @param actor The actor upgrading the flask.
+     * @return A message describing the upgrade transaction.
+     */
     @Override
     public String upgrade(Actor actor){
         int upgradePrice = this.getUpgradingPrice();
@@ -145,11 +151,21 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
         }
     }
 
+    /**
+     * Checks if the RefreshingFlask is able to be upgraded based on the number of upgrades already performed.
+     *
+     * @return true if the flask is upgradable, false otherwise.
+     */
     @Override
     public int getUpgradingPrice(){
         return this.upgradingPrice;
     }
 
+    /**
+     * Retrieves the selling price of the RefreshingFlask.
+     *
+     * @return The selling price of the flask.
+     */
     @Override
     public boolean ableToUpgrade(){
         if (this.upgradeTimes < this.maxUpgradeTimes){
@@ -176,6 +192,7 @@ public class RefreshingFlask extends Item implements Consumable, Purchasable, Se
      * @param location The location where the actions are considered.
      * @return An ActionList containing allowable actions for the target actor and location.
      */
+    @Override
     public ActionList allowableActions(Actor target, Location location) {
         ActionList actionList = new ActionList();
         if (target.hasCapability(Status.TRADER)) {

@@ -47,6 +47,7 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      *
      * @return A new instance of the RedWolf enemy.
      */
+    @Override
     public RedWolf spawnEnemy(GameMap gameMap) {
         return new RedWolf(gameMap);
     }
@@ -68,6 +69,7 @@ public class RedWolf extends Enemy implements AffectedByWeather {
      * @param map   The GameMap where the Red Wolf was defeated.
      * @return A message describing the outcome of the Red Wolf's defeat.
      */
+    @Override
     public String unconscious(Actor actor, GameMap map) {
         Random random = new Random();
         Location location = map.locationOf(this);

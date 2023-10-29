@@ -24,8 +24,6 @@ public class Gate extends Ground implements Resettable {
     private HashMap<Location, String> travelLocations;
 
 
-
-
     /**
      * Constructor for the Gate class.
      *

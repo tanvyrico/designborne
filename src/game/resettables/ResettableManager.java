@@ -20,7 +20,5 @@ public class ResettableManager {
             resettable.reset();
         }
     }
-
-
-
+    
 }

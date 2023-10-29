@@ -35,8 +35,6 @@ public class Runes extends Item implements Consumable, Resettable {
         isInResettables = true;
     }
 
-
-
     /**
      * Consumes the Runes, increasing the actor's balance by the quantity of runes in this item.
      *
@@ -57,6 +55,7 @@ public class Runes extends Item implements Consumable, Resettable {
      * @param owner The actor who owns the Runes item.
      * @return A list of allowable actions for the owner of the item.
      */
+    @Override
     public ActionList allowableActions(Actor owner) {
         ActionList actionList = new ActionList();
 
@@ -65,13 +64,18 @@ public class Runes extends Item implements Consumable, Resettable {
         return actionList;
     }
 
-
+    @Override
     public PickUpAction getPickUpAction(Actor actor) {
         if(portable)
             return new PickUpAction(this);
         return null;
     }
 
+    /**
+     * Called once per turn, so that Locations can experience the passage time. If that's
+     * important to them.
+     */
+    @Override
     public void tick(Location currentLocation) {
         if(!isInResettables) {
             addResettable(this);
@@ -94,6 +98,9 @@ public class Runes extends Item implements Consumable, Resettable {
         }
     }
 
+    /**
+     * remove rune from the map when restarted
+     */
     @Override
     public void reset() {
         this.location.removeItem(this);
