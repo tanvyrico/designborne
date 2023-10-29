@@ -22,13 +22,16 @@ import java.util.Random;
  * Modified by: Group6
  */
 public class BroadSword extends WeaponItem implements Purchasable, Sellable, FocusActionCapable, Upgradeable {
-    private final int sellingPrice = 100;
+
+    private final int UPGRADE_POINT = 10;
+    private final int SELLING_PRICE= 100;
+    private final int UPGRADE_PRICE = 1000;
 
     private int specialSkillTurn = 0;
 
     private int initialHitRate;
     private int upgradeCount = 0;
-    private final int upgradingPrice = 1000;
+
 
     /**
      * Constructor for the BroadSword class.
@@ -118,7 +121,7 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
         int upgradePrice = this.getUpgradingPrice();
         if (actor.getBalance() >= upgradePrice) {
             actor.deductBalance(upgradePrice);
-            this.upgradeCount += 10;
+            this.upgradeCount += UPGRADE_POINT;
             return "Success! " + actor + "'s " + this + " has been successfully upgraded for " + this.getUpgradingPrice() + " runes.";
         }else {
             return actor + " failed to upgrade " + this + " due to insufficient runes!";
@@ -133,7 +136,7 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
 
     @Override
     public int getUpgradingPrice(){
-        return this.upgradingPrice;
+        return this.UPGRADE_PRICE;
     }
 
     @Override
@@ -144,21 +147,21 @@ public class BroadSword extends WeaponItem implements Purchasable, Sellable, Foc
     @Override
     public int getPurchasePrice(Actor seller) {
         if (seller.hasCapability(Status.SUSPICIOUS)) {
-            return  250;
+            return 250;
         }
         return 0;
     }
 
     @Override
     public String sell(Actor actor) {
-        actor.addBalance(this.sellingPrice);
+        actor.addBalance(this.SELLING_PRICE);
         actor.removeItemFromInventory(this);
-        return actor + " sold " + this + " at its normal price (" + this.sellingPrice +" runes)";
+        return actor + " sold " + this + " at its normal price (" + this.SELLING_PRICE +" runes)";
     }
 
     @Override
     public int getSellingPrice() {
-        return this.sellingPrice;
+        return this.SELLING_PRICE;
     }
 
 }

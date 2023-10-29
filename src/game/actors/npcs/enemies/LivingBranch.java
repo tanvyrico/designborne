@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.capabilities.Ability;
 import game.capabilities.Status;
+import game.items.consumables.Bloodberry;
 import game.items.consumables.HealingVial;
 import game.items.consumables.RefreshingFlask;
 import game.items.consumables.Runes;
@@ -21,13 +22,15 @@ import java.util.Random;
 public class LivingBranch extends Enemy {
     private int intrinsicDamage = 250;
 
+    private float DROP_BERRY_CHANCE = 0.5f;
+
     /**
      * Constructor for the Enemy class.
      */
     public LivingBranch(GameMap gameMap) {
         super("Living Branch", '?', 75, gameMap);
         this.getIntrinsicWeapon();
-        this.addBalance(250);
+        this.addBalance(500);
         this.setSpawnRate(0.9);
         this.addCapability(Ability.VOID_INVINCIBILITY);
     }
@@ -56,15 +59,9 @@ public class LivingBranch extends Enemy {
         Random random = new Random();
         Location location = map.locationOf(this);
         map.removeActor(this);
-        if (random.nextDouble() <= 0.25) {
-            HealingVial healingVial = new HealingVial();
-            location.addItem(healingVial);
+        if (random.nextDouble() <= DROP_BERRY_CHANCE) {
+            location.addItem(new Bloodberry());
         }
-        if (random.nextDouble() <= 0.15) {
-            RefreshingFlask refreshingFlask = new RefreshingFlask();
-            location.addItem(refreshingFlask);
-        }
-
         location.addItem(new Runes(this.getBalance()));
         return this + " met their demise at the hands of " + actor;
     }
