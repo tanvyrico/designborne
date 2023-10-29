@@ -80,7 +80,6 @@ public class AbxervyerForestWatcher extends Enemy {
         Display display = new Display();
         Location location = map.locationOf(this);
         map.removeActor(this);
-
         location.setGround(new Gate(this.gateLocations));
         location.addItem(new Runes(this.getBalance()));
         display.println(FancyMessage.BOSS_FELLED);

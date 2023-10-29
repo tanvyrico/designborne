@@ -89,13 +89,13 @@ public class Application {
         abxervyerTravelLocations.put(ancientWoodsMap.at(29,5), "The Ancient Woods");
         abxervyerTravelLocations.put(overgrownSanctuaryMap.at(1,4), "The Overgrown Sanctuary");
 
-        AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(ancientWoodsMap, abxervyerTravelLocations);
+        AbxervyerForestWatcher abxervyerForestWatcher = new AbxervyerForestWatcher(abxervyerMap, abxervyerTravelLocations);
+
         abxervyerMap.at(14,8).addActor(abxervyerForestWatcher);
 
 
         ancientWoodsMap.at(21,3).addActor(new IsolatedTraveller());
 
-        gameMap.at(35,11).addActor(new WanderingUndead(gameMap));
 
 
         ancientWoodsMap.at(30, 0).setGround(new Gate(abxervyerMap.at(0,0), "Abxervyer, The Forest Watcher's Battle Room"));
