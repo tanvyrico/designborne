@@ -17,6 +17,10 @@ import static game.weather.WeatherManager.removeAffectedByWeather;
 
 public class EldentreeGuardian extends Enemy{
 
+    private final float DROP_VIAL_CHANCE = 0.25F;
+
+    private final float DROP_FLASK_CHANCE = 0.15f;
+
     private int intrinsicDamage = 50;
     /**
      * Constructor for the Eldentree Guardian class.
@@ -55,11 +59,11 @@ public class EldentreeGuardian extends Enemy{
         Random random = new Random();
         Location location = map.locationOf(this);
         map.removeActor(this);
-        if (random.nextDouble() <= 0.25) {
+        if (random.nextDouble() <= DROP_VIAL_CHANCE) {
             HealingVial healingVial = new HealingVial();
             location.addItem(healingVial);
         }
-        if (random.nextDouble() <= 0.15) {
+        if (random.nextDouble() <= DROP_FLASK_CHANCE) {
             RefreshingFlask refreshingFlask = new RefreshingFlask();
             location.addItem(refreshingFlask);
         }
